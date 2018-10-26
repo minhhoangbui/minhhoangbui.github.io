@@ -106,7 +106,7 @@ url-pretty: "minhhoangbui.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 #gtag: ""
 
 # Fill in your Google Analytics ID to track your website using GA
-#google_analytics: ""
+google_analytics: "UA-128069477-1"
 
 # Google Tag Manager ID
 #gtm: ""
@@ -123,7 +123,7 @@ url-pretty: "minhhoangbui.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 # --- Comments --- #
 
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
-# disqus: ""
+disqus: minhhoangbui
 
 # To use Facebook Comments, fill in a Facebook App ID
 # fb_comment_id: ""
