@@ -31,7 +31,7 @@ navbar-links:
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/img/avatar-icon.png"
+avatar: "/img/avatar.jpg"
 
 # If you want to have an image logo in the top-left corner instead of the title text,
 # then specify the following parameter
@@ -54,9 +54,9 @@ footer-link-col: "#404040"
 # Alternatively, the navbar, footer, and page background can be set to use background images
 # instead of colour
 
-# navbar-img: "/img/bgimage.png"
-# footer-img: "/img/bgimage.png"
-# page-img: "/img/bgimage.png"
+# navbar-img: "img/427053-1920x300.jpg"
+# footer-img: "img/427053-1920x300.jpg"
+page-img: "/img/bgimage.png"
 
 # --- Footer options --- #
 
@@ -74,17 +74,17 @@ social-network-links:
   email: minhhoangbui.vn@gmail.com
   facebook: bmhoang.0602
   github: minhhoangbui
-  twitter: daattali
+# twitter: daattali
 #  reddit: yourname
 #  google-plus: +DeanAttali
-#  linkedin: daattali
+  linkedin: minh-hoang-bui-vn
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
-#  instagram: deanat78
+  instagram: minhhoang.bui
 #  youtube: user/deanat78
 #  spotify: yourname
-#  telephone: +14159998888
+  telephone: +840704886700
 #  steam: deanat78
 #  twitch: yourname
 #  yelp: yourname
@@ -98,7 +98,7 @@ share-links-active:
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "MyWebsite.com"  # eg. "deanattali.com/beautiful-jekyll"
+url-pretty: "minhhoangbui.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Web Statistics Section --- #
 
