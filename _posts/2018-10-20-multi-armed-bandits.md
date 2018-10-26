@@ -26,7 +26,7 @@ Based on the previous observation, some brightest minds in Data Science look for
 The name comes from the One-Armed Bandits machines in the casino. This machine has a lever for you to try your luck to win the reward (in fact, it is tuned to lighten your pocket). 
 
 <p align="center">
- <img src="img/multi-armed-bandits/download.jpeg" alt="" align="middle">
+ <img src="/img/multi-armed-bandits/download.jpeg" alt="" align="middle">
  <div align="center">One-Armed Bandits machine</div>
 </p>  
 
@@ -37,7 +37,7 @@ Imagine you enter a room with many slot machines like that. The strategy to win 
 - Exploitation phase: You will stick to the machine with the best stats obtained from the exploration phase.
 
 <p align="center">
- <img src="img/multi-armed-bandits/downladfoad.jpeg" alt="" align="middle">
+ <img src="/img/multi-armed-bandits/downladfoad.jpeg" alt="" align="middle">
  <div align="center">Multi-Armed Bandits problems</div>
 </p>  
 
@@ -116,7 +116,7 @@ Surely, the majority goes with the Bandit approach. There are still some ones wh
 
 
 <p align="center">
- <img src="img/multi-armed-bandits/1_GKW9dgYJTaqaTTQg551ArA.jpeg" alt="" align="middle">
+ <img src="/img/multi-armed-bandits/1_GKW9dgYJTaqaTTQg551ArA.jpeg" alt="" align="middle">
  <div align="center">Comparision between 2 method</div>
 </p> 
 
@@ -126,7 +126,7 @@ Surely, the majority goes with the Bandit approach. There are still some ones wh
 Contextual Bandits ameliorates MAB by incorporating the context information when making the choice of model (exploration phase). In MAB, the choice is made uniformly. Corporating state information will reduce the variance of the testing model. It will helps us to raise the efficiency during the exploration step, thus makes the testing more dynamically.
 
 <p align="center">
- <img src="img/multi-armed-bandits/1_3NziBtrANN6UVltplxwaGA.png" alt="" align="middle">
+ <img src="/img/multi-armed-bandits/1_3NziBtrANN6UVltplxwaGA.png" alt="" align="middle">
  <div align="center">Relationship between MAB, Contextual Bandit and Reinforcement Learning</div>
 </p> 
 
