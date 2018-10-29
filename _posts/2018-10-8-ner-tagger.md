@@ -95,7 +95,6 @@ class BiLSTM(object):
 
 Please note that we have to save crf_params in the model. It plays an important role during the prediction.
 
-
 # II. Bi-LSTM with slot tagging
 
 In this architecture, we empower Bi-LSTM by adding a fully-connected layer followed by softmax layer. This architecture works pretty well with CoNLL2003, in fact, I still don't understand why exists this tremendous superiority.

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Amazon SageMaker Tutorial
-author: hoangbm
+image: img/sagemaker_tut/eyecatch_sagemaker.png
 ---
 
 Nowadays, deployment plays a major role in applying Deep Learning in daily life. We could build an algorithm and develop a demo in our development machine. However, to put these algorithm in production at large scale, using Deep Learning frameword offered by large corporation is a requirement. Today, I will introduce AWS SageMaker from Amazon.

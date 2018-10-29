@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Compute similarity score with Deep Learning
-author: hoangbm
 ---
 
 In [OtoNhanh.vn](https://www.otonhanh.vn/), there is a section which allows the users to compare one model versus another 

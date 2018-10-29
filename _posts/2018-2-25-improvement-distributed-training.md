@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Improvement in Distributed Training
-author: hoangbm
+# image: img/distributed-improvement/images.png
 ---
 
 In the last blog about [Distributed TensorFlow](/distributed-tensorflow), we have provided some  
@@ -26,7 +26,7 @@ advantage: it acts as a regularizer in training process: more accurate gradient 
 and to some extent, means a worse generalization.  
 
 > While distributed synchronous SGD is now commonplace, no existing results show that validation accuracy can be
-maintained with minibatches as large as 8192 or that such high-accuracy models can be trained in such short time.  
+maintained with mini-batches as large as 8192 or that such high-accuracy models can be trained in such short time.  
 
 Nonetheless, limiting the batch size is really a waste since the hardwares are more and more powerful and distributed
 computing is available. In this circumstance, Facebook tries to *demonstrate the feasibility of and to communicate
@@ -37,16 +37,16 @@ small batch-size.
 
 ## Linear Scaling Rule  
 
-> When the minibatch size is multiplied by k, multiply the learning rate by k.  
+> When the mini-batch size is multiplied by k, multiply the learning rate by k.  
 
 To interpret this rule, we come back to the fundamental expression of *Gradient Descent*:  
-Consider a network at iteration $$t$$ with weight $$w_t$$, and a sequence of $$k$$ minibatches $$\beta_j$$ for $$0 \le j <
-k$$ each of size $$n$$. We want to compare the effect of executing $$k$$ SGD iterations with small minibatches $$\beta_j$$
-and learning rate $$\eta$$ versus a single iteration with large minibatch $$\cup_j\beta_j$$ of size $$kn$$ and learning rate
+Consider a network at iteration $$t$$ with weight $$w_t$$, and a sequence of $$k$$ mini-batches $$\beta_j$$ for $$0 \le j <
+k$$ each of size $$n$$. We want to compare the effect of executing $$k$$ SGD iterations with small mini-batches $$\beta_j$$
+and learning rate $$\eta$$ versus a single iteration with large mini-batch $$\cup_j\beta_j$$ of size $$kn$$ and learning rate
 $$\hat\eta$$. In the first case, after $$k$$ iterations of SGD, we have:
 
 <center> $$w_{t+k} = w_t - \eta\frac{1}{n} \sum_{j<k} \sum_{x\in\beta_j} \bigtriangledown l(x, w_t+j)$$ </center>  
-On the other hand, taking a single step with a large minibatch and learning rate $$\hat\eta$$ will result in:  
+On the other hand, taking a single step with a large mini-batch and learning rate $$\hat\eta$$ will result in:  
 <center> $$ \hat w_{t+1} = w_t - \hat\eta\frac{1}{kn} \sum_{j<k} \sum_{x\in\beta_j} \bigtriangledown l(x, w_t)$$ </center>  
 
 
@@ -56,7 +56,7 @@ $$w_{t+k} \approx \hat w_{t+1}$$.
 The assumption that $$ \bigtriangledown l(x, w_t+j) \approx  \bigtriangledown l(x, w_t) $$ is strong and often does not
 hold, however, according to *Facebook*, this works really well in practice: not only the final accuracies stay similar,
 the learning curve match closely. There are two cases that we may not apply this rule: the initial training epochs when
-the network changes rapidly (we could use *warmup* strategy to address this issue) and $$k$$ becomes enormous. The minibatch
+the network changes rapidly (we could use *warmup* strategy to address this issue) and $$k$$ becomes enormous. The mini-batch
 size limit, according to *Facebook*, is $$~8k$$ in ImageNet experiment.  
 
 ## Warmup
@@ -74,9 +74,9 @@ the training error to spike. So they propose the following gradual warmup.
 - Gradual warmup:
 
 In this setting, we gradually ramp up the learning rate from a small to large value. In practice, we
-start the learning rate from a value $$\eta$$ and inscrease it by a constant amount at each iteration so that the 
+start the learning rate from a value $$\eta$$ and increase it by a constant amount at each iteration so that the 
 learning rate could reach $$\hat\eta = k\eta$$ after a number of epochs(normally 5 epochs). This setting avoids a 
-sudden inscrease in the value of learning rate, allows a healthy convergence at the beginning of learning. After the 
+sudden increase in the value of learning rate, allows a healthy convergence at the beginning of learning. After the 
 warmup phase, we could go back to the original learning rate schedule.  
 
 # II) Uber's framework for Distributed Training
@@ -92,12 +92,12 @@ So we are in need of a simpler wrapper.
 Another issue is, the standard *Distributed Tensorflow* cannot exploit fully the hardware power.  
 <p align="center">
  <img src="/img/distributed-improvement/image4-1.png" alt="" align="middle">
- <div align="center">Comparision between Distributed Tensorflow and ideal computation <a href="http://eng.uber.com/wp-content/uploads/2017/10/image4-1.png">Source</a></div>
+ <div align="center">Comparison between Distributed Tensorflow and ideal computation <a href="http://eng.uber.com/wp-content/uploads/2017/10/image4-1.png">Source</a></div>
 </p>  
 
 Obviously, we cannot expect that the real performance can reach the theoretical one. However, according to the above 
 illustration, we can't ignore the fact that the conventional mechanism is wasting the hardware capacity. Motivated by 
-Facebook's paper, Uber opensourced their distributed framework named Horovod in Tensorflow.  
+Facebook's paper, Uber open-sourced their distributed framework named Horovod in Tensorflow.  
 
 ## Message Passing Interface (MPI)
 
