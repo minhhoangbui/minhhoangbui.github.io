@@ -43,7 +43,7 @@ Las Vegas uses randomization as a way to initialize the parameter for the proble
             done = False
 
             while not done:
-                while a_list[left] <= pivot_value and left <= right:
+                while left <= right and a_list[left] <= pivot_value:
                     left += 1
                 while a_list[right] >= pivot_value and left <= right:
                     right -= 1
