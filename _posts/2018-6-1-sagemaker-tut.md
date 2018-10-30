@@ -4,7 +4,7 @@ title: Amazon SageMaker Tutorial
 image: img/sagemaker_tut/eyecatch_sagemaker.png
 ---
 
-Nowadays, deployment plays a major role in applying Deep Learning in daily life. We could build an algorithm and develop a demo in our development machine. However, to put these algorithm in production at large scale, using Deep Learning frameword offered by large corporation is a requirement. Today, I will introduce AWS SageMaker from Amazon.
+Nowadays, deployment plays a major role in applying Deep Learning in daily life. We could build an algorithm and develop a demo in our development machine. However, to put these algorithm in production at large scale, using Deep Learning framework offered by large corporation is a requirement. Today, I will introduce AWS SageMaker from Amazon.
 
 # I. What is SageMaker
 
@@ -12,7 +12,7 @@ According to *Amazon Web Service(AWS)*:
 
 > Amazon SageMaker is a fully managed machine learning service. With Amazon SageMaker, data scientists and developers can quickly and easily build and train machine learning models, and then directly deploy them into a production-ready hosted environment.
 
-We can imagine this way: SageMaker, alongside with S3 and Elastic Container Service(ECS), form an ecosystem for Machine Learning practioners to store their dataset, build and package algorithms, train and store the model, maybe run the inference if necessary.
+We can imagine this way: SageMaker, alongside with S3 and Elastic Container Service(ECS), form an ecosystem for Machine Learning practitioners to store their dataset, build and package algorithms, train and store the model, maybe run the inference if necessary.
 
 <p align="center">
  <img src="/img/sagemaker_tut/sagemaker-architecture.png" alt="" align="middle">
@@ -26,7 +26,7 @@ In SageMaker, we can call an algorithm through a Jypyter Notebook, supply it the
  <div align="center">SageMaker Architecture <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/images/sagemaker-architecture.png">Source</a></div>
 </p>  
 
-It is basically what SageMaker is. Now I will deive deeper into how to use algorithms in SageMaker
+It is basically what SageMaker is. Now I will delve deeper into how to use algorithms in SageMaker
 
 # II. How to implement an algorithm in SageMaker
 
@@ -45,7 +45,7 @@ In general, there are three ways to implement an algorithm in this framework:
 
     It is more flexible than the first option since we could interfere with the algorithm. However, we have to depend deeply on the framework. For example, our code needs TensorFlow 1.10 to run perfectly, but SageMaker supports no further than 1.9 version, so there is nothing we could do in this situation.
 
-3. Write our own algorithm, dockerize it(and its prequisites) into an image and store this image in ECS. In SageMaker, we pull the image from ECS repositories and run it as perfectly as we expected. How to dockerize the algorithm and run the image smoothly will be the main goal of this post.
+3. Write our own algorithm, dockerize it(and its prerequisites) into an image and store this image in ECS. In SageMaker, we pull the image from ECS repositories and run it as perfectly as we expected. How to dockerize the algorithm and run the image smoothly will be the main goal of this post.
 
 # III. Dockerizing our own algorithm properly
 
@@ -55,7 +55,7 @@ Docker provides a way for us to package our code and deploy it anywhere. In prin
 
 Docker uses a simple file named *Dockerfile* to specify how an image is created. Docker can be store locally as well as in remote repositories like ECS.
 
-In SageMaker, we need a specific outline to construct Docker image to be invoked succesfully. I will focus only on the training process, the hosting is not really interesting in the production since we have to deploy in our own way.
+In SageMaker, we need a specific outline to construct Docker image to be invoked successfully. I will focus only on the training process, the hosting is not really interesting in the production since we have to deploy in our own way.
 
 ## 2. How Amazon SageMaker handles your Docker container
 
@@ -121,10 +121,10 @@ There are three components to prepare:
 
     * train: which will be called when we execute the *fit* function. This file is only a script with python interpreter, not a .py file. So we need to give them the permission to run.
 
-    * serve: it is similar to *train*, but during the intefere process.
-
+    * serve: it is similar to *train*, but during the interfere process.
 
 # IV. References
+
 * [Building your own TensorFlow container](https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/tensorflow_bring_your_own/tensorflow_bring_your_own.ipynb)
 
 * [AWS SageMaker Documentation](https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html)
@@ -134,5 +134,3 @@ There are three components to prepare:
 * [TensorFlow SageMaker Estimators and Models](https://github.com/aws/sagemaker-python-sdk/blob/master/src/sagemaker/tensorflow/README.rst#sagemaker-tensorflow-docker-containers)
 
 * [SageMaker : Bring your own Algorithms](https://medium.com/smileinnovation/sagemaker-bring-your-own-algorithms-719dd539607d)
-
-

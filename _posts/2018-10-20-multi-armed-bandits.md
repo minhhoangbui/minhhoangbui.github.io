@@ -130,8 +130,7 @@ Contextual Bandits ameliorates MAB by incorporating the context information when
  <div align="center">Relationship between MAB, Contextual Bandit and Reinforcement Learning</div>
 </p> 
 
-
-# V. References:
+# V. References
 
 - https://www.searchenginepeople.com/blog/16072-multi-armed-bandits-ab-testing-makes-money.html
 

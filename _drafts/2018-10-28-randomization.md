@@ -12,8 +12,54 @@ Back to the topic, gambling has two most famous capitals: Las Vegas and Monte Ca
 
 # Las Vegas approach
 
+<p align="center">
+ <img src="img/randomization/gn-gift_guide_variable_c.jpg" alt="" align="middle">
+ <div align="center"> The lux of Las Vegas</div>
+</p>
+
 Las Vegas uses randomization as a way to initialize the parameter for the problems. After a while running the program, no matter what you initialize, it will return the solution if possible or report failure. Better initialization of course will help to find the answer more efficiently. In other words, the method doesn't gamble the solution, it gambles the resources and time to run the algorithm. An good important for this method is Quick Sort algorithm:
 
+- We pick randomly a pivot from the array
+
+- Rearrange the array so that all the elements with values lower than pivot value come before the pivot and vice-versa. After this partitioning, the pivot will be at the end.
+
+- Recursively repeat the above step to separate the array into lower sub-array in the left side and greater sub-array in the right side.
+
+```py
+    def quick_sort(a_list):
+
+        def _quick_sort(a_list, first, last):
+            if first <  last:
+                split_point = partition(a_list, first, last)
+
+                _quick_sort(a_list, first, split_point - 1)
+                _quick_sort(a_list, split_point + 1, last)
+
+        def partition(a_list, first, last):
+            pivot_value = a_list[first]
+            left = first + 1
+            right = last
+            done = False
+
+            while not done:
+                while a_list[left] <= pivot_value and left <= right:
+                    left += 1
+                while a_list[right] >= pivot_value and left <= right:
+                    right -= 1
+                if left > right:
+                    done = True
+                else:
+                    temp = a_list[left]
+                    a_list[left] = a_list[right]
+                    a_list[right] = temp
+
+            temp = a_list[right]
+            a_list[right] = a_list[first]
+            a_list[first] = temp
+            return right
+
+        _quick_sort(a_list, 0, len(a_list) - 1)
+```
 
 # Monte Carlo approach
 
