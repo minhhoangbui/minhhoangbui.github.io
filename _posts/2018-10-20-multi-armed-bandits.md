@@ -10,7 +10,7 @@ With the growth of 24h distribution application developed by Chappiebot Inc., we
 
 Before diving into alternative approaches, we will present some primary points about A/B test. In A/B test, we compare two distinct models to check which one is superior. A group of user A continues using the old model, while the other group (B) experiences the new one. After a while, based on the statistics, we will have the winner-takes-it-all scheme: If the old one wins, everything stays where it is, nothing will be changed. Or else, the new model will be rolled out into production for every user.
 
-This method is very popular in software development. For instance, sometimes the friend next to you shows you some functionality of the Facebook app but you don't have even though you two use the same version. 
+This method is very popular in software development. For instance, sometimes the friend next to you shows you some functionality of the Facebook app but you don't have even though you two use the same version.
 
 ## Pros and cons:
 
@@ -23,7 +23,8 @@ This method is very popular in software development. For instance, sometimes the
 # II. Multi-Armed Bandits (MAB)
 
 Based on the previous observation, some brightest minds in Data Science look for the alternative to revise the testing. And in this process, Multi-Armed Bandits shows some potentials.
-The name comes from the One-Armed Bandits machines in the casino. This machine has a lever for you to try your luck to win the reward (in fact, it is tuned to lighten your pocket). 
+
+The name comes from the One-Armed Bandits machines in the casino. This machine has a lever for you to try your luck to win the reward (in fact, it is tuned to lighten your pocket).
 
 <p align="center">
  <img src="/img/multi-armed-bandits/download.jpeg" alt="" align="middle">

@@ -220,9 +220,9 @@ The detail benchmark can be found in the [Uber Engineering site](https://eng.ube
 
 Uber also make a comparison between 2 communication protocols TCP and RDMI. However, we won't discuss about it in this blog. You could read about it in the original blog of Uber.  
 
-
 # Conclusion
-To sum up, Facebook's paper and Uber's framework really make an echo in the community. They provide us a way to leverage distributing computing, which is important in the production. Horovod is still in its early stage of development, there are still some issues with it like MPI installation and deep learning scaling. In [OtoNhanh.vn](https://www.otonhanh.vn/), we have implemented Horovod in our classification training and the result is promising, especially when people use the Amazon platform which allows the GPUs to be fully connected to each other.
+
+To sum up, Facebook's paper and Uber framework really make an echo in the community. They provide us a way to leverage distributing computing, which is important in the production. Horovod is still in its early stage of development, there are still some issues with it like MPI installation and deep learning scaling. In [OtoNhanh.vn](https://www.otonhanh.vn/), we have implemented Horovod in our classification training and the result is promising, especially when people use the Amazon platform which allows the GPUs to be fully connected to each other.
 
 # References:
 

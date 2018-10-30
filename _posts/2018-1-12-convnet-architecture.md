@@ -7,12 +7,9 @@ In this part, I will discuss many famous architectures of ConvNet which are empl
 
 # 1. AlexNet
 
-It is developed by _Alex Krizhevsky and al._. It was submitted to the ImageNet 
-Challenge in 2012 and really made an echo in Deep Learning society by its superiority in the contest. In fact, it is pretty similar to the famous LeNet but bigger and deeper.  
+It is developed by _Alex Krizhevsky and al._. It was submitted to the ImageNet Challenge in 2012 and really made an echo in Deep Learning society by its superiority in the contest. In fact, it is pretty similar to the famous LeNet but bigger and deeper.  
 
-Furthermore, it introduced local response normalization to improve the performance 
-and some techniques like data augmentation or dropout to enhance the generalization. Also, it provides us an
-implementation technique to carry out the training in limited hardware.  
+Furthermore, it introduced local response normalization to improve the performance and some techniques like data augmentation or dropout to enhance the generalization. Also, it provides us an implementation technique to carry out the training in limited hardware.  
 
 Detail of AlexNet architecture used in ImageNet Challenge:
 
@@ -165,9 +162,7 @@ Inception also introduces a new concept of auxiliary classifiers. We add some cl
 
 ### Grid Size Reduction
 
-Traditionally, to reduce the size of the feature map, we use pooling operator before entering a module, which is 
-contrast to the principle of avoiding representational bottlenecks. We may reverse the order by executing the module 
-first and then applying the pooling, however, it is computationally expensive.  
+Traditionally, to reduce the size of the feature map, we use pooling operator before entering a module, which is contrast to the principle of avoiding representational bottlenecks. We may reverse the order by executing the module first and then applying the pooling, however, it is computationally expensive.  
 
 <p align="center">
  <img src="/img/Introduction_CNN/12.png" alt="" align="middle">

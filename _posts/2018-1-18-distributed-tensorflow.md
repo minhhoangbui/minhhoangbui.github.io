@@ -29,7 +29,8 @@ At the moment, *Data Parallelism* is heavily employed by [OtoNhanh.vn](https://w
 
 ## Method of Aggregation
 
-In *Data Parallelism* mechanism, each GPUs will compute its own gradients of the whole graph. So we have to think a way to combine all these gradients for the update of the parameter. There are 2 settings: *Synchronous Data Parallelism* and *Asynchronous Data Parallelism*. In synchronized setting, several data batches are processed simultaneously. Once all the local back-props are finished, the local gradients are averaged and we performed the update. We can see the bottleneck here: the overall computation speed of the system equals to the weakest worker in the network.  
+In *Data Parallelism* mechanism, each GPUs will compute its own gradients of the whole graph. So we have to think a way to combine all these gradients for the update of the parameter. There are 2 settings: *Synchronous Data Parallelism* and *Asynchronous Data Parallelism*. In synchronized setting, several data batches are processed simultaneously. Once all the local back-props are finished, the local gradients are averaged and we performed the update. We can see the bottleneck here: the overall computation speed of the system equals to the weakest worker in the network.
+
 In asynchronized setting, once a GPUs finishes its computation, we will use its gradient to update the model immediately. As we can see, in a system of N workers, the number of update in asynchronized setting is N times greater than that of synchronized setting.  
 
 <p align="center">
@@ -52,7 +53,7 @@ In this part, I will give a bottom-up introduction about the distributed mechani
 - Sessions and Servers
 - Fault tolerance  
 
-### Model Replication
+## Model Replication
 
 TensorFlow Graph is made of Variables and Operations. We assign them to device by the function `with tf.device`. Considering that we have a computer with 2 components `/cpu:0` and `/gpu:0`, we could assign the variables to the `/cpu:0` and the operations to the `/gpu:0` with this:
 
@@ -65,7 +66,8 @@ TensorFlow Graph is made of Variables and Operations. We assign them to device b
         loss = f(output)
 ```
 
-If we don't specify the device, TensorFlow will automatically choose the more optimal device, in this case, `/gpu:0`, to place both the variables and the operations.  
+If we don't specify the device, TensorFlow will automatically choose the more optimal device, in this case, `/gpu:0`, to place both the variables and the operations.
+
 In TensorFlow, there are 2 jobs: parameter server (ps) and worker:
 
 <p align="center">
@@ -74,10 +76,12 @@ In TensorFlow, there are 2 jobs: parameter server (ps) and worker:
 </p>
 
 Parameter server is responsible for storing the variables and updating the weights using the gradient from the worker. Correspondingly, the worker will compute the gradient and push it to the parameter server. In practice, `ps` job will be done by CPUs, while GPUs will act as `worker` thanks to their powerful parallel computing.
-This mechanism inherits from the system called DisBelief. DisBelief has several limitations like difficult configuration (there are separated code for `ps` and `worker`, etc.) and its inability to share code externally. TensorFlow helps to simplify the configuration: `ps` and `worker` will run the almost the same code with a little modification.  
+
+This mechanism inherits from the system called DisBelief. DisBelief has several limitations like difficult configuration (there are separated code for `ps` and `worker`, etc.) and its inability to share code externally. TensorFlow helps to simplify the configuration: `ps` and `worker` will run the almost the same code with a little modification.
+
 In *Data Parallelism*, we will assign the model to every worker in the network. So the question is, how to replicate the model in every `worker`?  There are two strategies for the model replication: `In-Graph Replication` and `Between-Graph Replication`.  
 
-#### In-Graph Replication
+### In-Graph Replication
 
 The client builds a single graph `tf.Graph()` which contains the parameters pinned to `ps` and the *compute-intensive part* (feed-forward operations and theirs back-propagation), each pinned to different tasks in the `workers`. This setting is not compatible with *Model Parallelism*.
 
@@ -88,7 +92,7 @@ The client builds a single graph `tf.Graph()` which contains the parameters pinn
 
 It is the most simple setting for replication, e.g, we don't have to modify the code too much and it works well with simple architectures. However, when things get complicated, the `tf.Graph()` becomes bigger, it is not optimal that we assign the huge graph to every node in the network.  
 
-#### Between-Graph Replication
+### Between-Graph Replication
 
 Each worker will build its own graph based on its responsibility. Generally speaking, each worker only shares the global variables placed on `ps` with each other and keep the local tasks for themselves. It is compatible with both *Model Parallelism* and surprisingly, *Data Parallelism*. In *Data Parallelism*, there will be a `chief worker`. Besides computing the gradient, the `chief worker` has to do some works like executing the `tf.train.Saver()` or logging, etc. So the `tf.Graph()`s of the workers are not exactly the same.  
  
@@ -164,7 +168,7 @@ A piece of code of Synchronous Between-Graph from our engine:
             )
 ```
 
-### Device placement for Variables
+## Device placement for Variables
 
 When scaling up the distributed model, it is usually not sufficient to have only one `ps` in the network. Obviously, we could create several `ps` with different `task_index` and then assign the variables to these `ps` using `with tf.device`. But this manual assignment seems really dull when we have about 100 `ps`. TensorFlow tackles this issue by creating a function called `tf.train.replica_device_setter()`. This function outputs an instance which acts as the input of `tf.device()`. This function will distribute the variables among the `ps` tasks in `round-robin` style.  
 
@@ -180,8 +184,11 @@ When scaling up the distributed model, it is usually not sufficient to have only
  <div align="center">Load balancing variables <a href="http://lynnapan.github.io/images/tensorflow/9.PNG">Source</a></div>
 </p>  
 
-### Session and Server
-In basic TensorFlow program, we often use `tf.Session()` to run the operations. But this function only know about the local machine. So there is a scenery that workers from different machines run independently if we keep everything unchanged. In Distributed TensorFlow, we invent two classes: `tf.train.ClusterSpec()` and `tf.train.Server` to link the task in each machine together.  
+## Session and Server
+
+In basic TensorFlow program, we often use `tf.Session()` to run the operations. But this function only know about the local machine. So there is a scenery that workers from different machines run independently if we keep everything unchanged. In Distributed TensorFlow, we invent two classes:
+`tf.train.ClusterSpec()` and `tf.train.Server` to link the task in each machine together.
+
 `tf.train.ClusterSpec()` specifies the machines which you want to run on and their job names. `tf.train.Server()` represents the task_index of each component in the cluster. In my opinion, each CPU/GPU will do a task and `task_index` helps to clarify `chief_worker`. Then we can pass `tf.train.Server().target` to `tf.Session()`. With that `tf.Session()` could run code from anywhere in the cluster.  
 
 <p align="center">
@@ -196,13 +203,13 @@ For `ps`, it is much simpler. If this component is `ps`, it only has to run `tf.
  <div align="center">Distributed code for parameter server <a href="http://lynnapan.github.io/images/tensorflow/14.PNG">Source</a></div>
 </p>  
 
-### Fault Tolerance
+## Fault Tolerance
 
 > A distributed system is a system in which I can't get my work done because a computer has failed that I've never even heard of - Leslie Lamport  
 
 In any training system, there will be always a risk that training is interrupted because of machine corruption. In Distributed Training, the risk is multiplied by the number of component in the network. So we must have some measures to limit the risk.  
 
-#### tf.train.Saver()
+### tf.train.Saver()
 
 We use `tf.train.Saver()` also in regular training, however, there are some things that we want to highlight in Distributed Training:  
 
@@ -212,7 +219,7 @@ We use `tf.train.Saver()` also in regular training, however, there are some thin
 
 - It is also able to write and send the checkpoint to cloud service instead of local machine to avoid the risk of machine corruption.
 
-#### Scenarios
+### Scenarios
 
 What if we encountered a problem during Distributed Training, how to recover from it? There are 3 possible scenarios:
 
@@ -222,7 +229,7 @@ What if we encountered a problem during Distributed Training, how to recover fro
 
 - Chief worker fails:  it is the most trickiest since `chief worker` plays many roles in training. When it crashes, the training could continues, but since that moment, we lose control of the training. So in this case, everything will be stopped and we turn back to the last checkpoint, just like the `ps` case. To reduce the risk, we may exchange the role of `chief worker` after a number of steps.
 
-#### tf.train.MonitoredTrainingSession()
+### tf.train.MonitoredTrainingSession()
 
 It is really a wrapper of `tf.Session()`, especially useful for Distributed Training. It helps to initialize parameters without `tf.global_variables_initializer`, decide `chief worker`, do some additional work with hooks etc.  
 

@@ -60,4 +60,3 @@ In the next part, we will concentrate on the architectures that we have implemen
 ## Reference
 
 - [Convolutional Neural Networks for Visual Recognition](http://cs231n.github.io/convolutional-networks/)  
-

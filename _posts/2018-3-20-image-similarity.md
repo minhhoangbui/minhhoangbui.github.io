@@ -16,7 +16,7 @@ In [OtoNhanh.vn](https://www.otonhanh.vn/), there is a section which allows the 
  <div align="center"> Some examples about the dissimilarity between the images from the same category </div>
 </p>  
 
-## I) K-Means Clustering
+# I) K-Means Clustering
 
 Considering that we work with the images of $$(\sqrt{d},\sqrt{d}$$), so each image will be a point in the $$ R_d $$ space, K-Means will help to assign the similar points into the same cluster. How to define similar images? We will compute the *Euclidean distance* in the $$R_d$$ space for example. Each above cluster will be represented by its centroid.
 
@@ -28,12 +28,14 @@ Considering that we work with the images of $$(\sqrt{d},\sqrt{d}$$), so each ima
 
 K-Means Clustering is a very well-known approach in unsupervised learning of Machine Learning (not Deep Learning!!!). It may be redundant to introduce this algorithm since it exists in every textbooks of Machine Learning. However, we still choose to introduce it briefly one more time with a simple implementation in Python.  
 
-Suppose we work with a data set $$ \{x_1, x_2, ..., x_N\} $$ in a $$ R_d$$ space. We want to gather the whole data set into K of clusters. In more detailed, each point in the data set will be partitioned based on its Euclidean distances with others. Each cluster will be represented by its centroid $$\mu_k$$,  $$k \in \{1,.., K\}, \mu_k \in R_d$$. After the training, if we want to classify the new sample, we just need to assign it to the group with the nearest cluster to the sample. Pretty intuitive, yeah? Suppose hyperparameter K is known, the goal of the learning phase is to find the coordinates of the centroids and the assignment of each point.  
+Suppose we work with a data set $$ \{x_1, x_2, ..., x_N\} $$ in a $$ R_d$$ space. We want to gather the whole data set into K of clusters. In more detailed, each point in the data set will be partitioned based on its Euclidean distances with others. Each cluster will be represented by its centroid $$\mu_k$$,  $$k \in \{1,.., K\}, \mu_k \in R_d$$. After the training, if we want to classify the new sample, we just need to assign it to the group with the nearest cluster to the sample. Pretty intuitive, yeah? Suppose hyperparameter K is known, the goal of the learning phase is to find the coordinates of the centroids and the assignment of each point.
+
 To do this, we might want to add a variable to describe the assignment of data points to clusters. For each point $$x_n$$, we introduce a corresponding variable $$r_{nk} \in \{0, 1\}$$, where $$k = 1, ..., K$$ describing which of K clusters the data point is assigned to. $$r_{nk} = 1$$ means $$x_n$$ belongs to cluster $$k$$ and vice-versa. With this variable, we can define a loss function:
 
 <p align='center'> $$ J = \sum_{n=1}^{N} \sum_{k=1}^{K} r_{nk} \|x_n - \mu_j\|^2$$ </p>
 
 To minimize this loss function, we use EM algorithm. In this approach, we initialize some value of $$\mu_k$$, then in the first phase, we minimize the loss function w.r.t the binary $$r_{nk}$$. In the second phase, we keep $$r_{nk}$$ fixed and look for the value of $$\mu_k$$ that makes $$J$$ minimized. These two stages will alternate repeatedly until convergence. These two steps correspond respectively to the E(expectation) step and M(maximization) step of EM method.
+
 This method belongs to a class of *Mixture Model*. Details of this model is beyond the scope of this blog, but you can read more in the Chapter 9 of [Pattern Recognition and Machine Learning](https://www.amazon.com/Pattern-Recognition-Learning-Information-Statistics/dp/0387310738).  
 
 To be short, the formulas for these above steps are:  
@@ -75,7 +77,7 @@ def get_dominant_colors(self, data, is_binary):
 
 So we could find the centroids in d_dims space, then we could query two images from two models which belong to the same cluster for the comparison session. Nevertheless, this approach is not feasible: the training time is too long and we may end up training the model every time there are new images available.  
 
-## II. Siamese Network and its variants
+# II. Siamese Network and its variants
 
 Siamese network is a special type of convolutional network. It is not used for classifying images, it is for learning the similarity between images. In this architecture, two images will be fed into two identical convolutional networks, then the two output will be inputs of a special loss function called *Contrastive Loss Function* for the purpose of differentiating two images. The ultimate goal of Siamese Network is to construct an embedding representation for the images in the form of vector. With the vectorized representation, we can use L2-distance or whatever other metrics to compute the similarity score between images.  
 
@@ -86,6 +88,7 @@ Siamese network is a special type of convolutional network. It is not used for c
 </p>
 
 In this section, we will focus on a variant of Siamese Network called Deep Ranking Model. We have finished building this model with TensorFlow and it will be used in [OtoNhanh.vn](https://www.otonhanh.vn/) soon enough.
+
 In Deep Ranking, each sample consists of three images: anchor image, positive image which is akin to the anchor image and the negative image which is not in the same category with the anchor one. We call a group of three images like that a triplet.
 
 <p align="center">
@@ -101,7 +104,7 @@ Three images will be again fed into three convolutional neural networks. The out
  <a href="http://bamos.github.io/2016/01/19/openface-0.2.0/">Source</a> </div>
 </p>  
 
-### Network Architecture
+## Network Architecture
 
 So what is the architecture of Deep Ranking model exactly?  
 According to the author:  
@@ -116,7 +119,7 @@ According to the author:
 
 In this architecture, the ConvNet can be any kind of convolutional neural network, including AlexNet, VGG, etc... In our model, we employ ResNet because of its superiority. ConvNet plays the role of *encoding strong invariance and capturing the image semantics*. The other two shallower networks rather capture visual appearance. The outputs of these *pipelines* will be normalized and combined as an embedding.  
 
-### Triplet Loss Function
+## Triplet Loss Function
 
 <p align="center">
  <img src="/img/similarity/download.png" alt="" width="300" height="200" align="middle">
@@ -133,11 +136,11 @@ To realize that target, the author suggest using *Hinge Loss*:
 
 Minimizing this loss function encourages the distance between the $$(p_i, p_i^+)$$ is less that between $$(p_i, p_i^+)$$ by a value of $$g$$.  
 
-### Triplet Sampling
+## Triplet Sampling
 
-As we can see, the intuition of network architecture and loss function is not complicated. Nonetheless, the real challenge of this model is how to sampling the triplet effectively? We cannot choose the too easy triplet: this make the training easily overfitted. In the original paper, the author introduced an additional metric $$r$$ to measure the similarity between images: As the training goes further, we will insert a triplet with the furthest positive image and 
-nearest negative image to regularize the training. However, he didn't clarify the metric $$r$$. So we have to find another way to get around it.  
-In the paper [In Defense of the Triplet Loss for Person Re-Identification](https://arxiv.org/pdf/1703.07737.pdf), the authors suggested using the same metric $$D$$ for the triplet sampling *during the training*. This method is called *Batch Hard*. Supposing in the minibatch $$X$$, we have $$P$$ classes and there are $$K$$ images in each class. Images from the same class can be paired positively and vice-versa. This raises another challenge in term of batch sampling:
+As we can see, the intuition of network architecture and loss function is not complicated. Nonetheless, the real challenge of this model is how to sampling the triplet effectively? We cannot choose the too easy triplet: this make the training easily overfitted. In the original paper, the author introduced an additional metric $$r$$ to measure the similarity between images: As the training goes further, we will insert a triplet with the furthest positive image and nearest negative image to regularize the training. However, he didn't clarify the metric $$r$$. So we have to find another way to get around it.
+
+In the paper [In Defense of the Triplet Loss for Person Re-Identification](https://arxiv.org/pdf/1703.07737.pdf), the authors suggested using the same metric $$D$$ for the triplet sampling *during the training*. This method is called *Batch Hard*. Supposing in the mini-batch $$X$$, we have $$P$$ classes and there are $$K$$ images in each class. Images from the same class can be paired positively and vice-versa. This raises another challenge in term of batch sampling:
 How to sample a batch with at least three classes with at least 2 images in each class?
 
 <p align='center'> 
@@ -149,7 +152,7 @@ How to sample a batch with at least three classes with at least 2 images in each
 
 However, we argue that we may have to pay the price of slower training in order to realize the selection of triplet during the training. So we may want to select the triplets first by ourselves for the faster training.
 
-### Implementation
+## Implementation
 
 In our implementation, we've done some modification:
 
@@ -162,7 +165,6 @@ In our implementation, we've done some modification:
 Source code for model network:  
 
 ```py
- 
 def _build_conv_net(self, images, config, depths, res_func, name='resnet'):
 """
 Construct embedded representation for images using ResNet
@@ -240,7 +242,7 @@ Source code for triplet loss function:
 
 ```
 
-### Results
+## Results
 
 We are still in the first phase of deploying this model into production. However, the result is very promising: This model can produce a very high margin between the positive pair and negative pair:  
 
@@ -252,10 +254,11 @@ We are still in the first phase of deploying this model into production. However
 <p align="center">
  <img src="/img/similarity/Screenshot from 2018-03-17 14-50-29.png" alt="" align="middle">
  <div align="center"> L2 Distance:  9.133037 </div>
-</p>  
+</p>
+
 In the future, we have an intention to improve the triplet sampling during the training. It is anyway the optimal approach to improve the ability of differentiating the images.
 
-## References
+# References
 
 - [Pattern Recognition and Machine Learning](https://www.amazon.com/Pattern-Recognition-Learning-Information-Statistics/dp/0387310738)
 - [Learning Fine-grained Image Similarity with Deep Ranking](https://users.eecs.northwestern.edu/~jwa368/pdfs/deep_ranking.pdf)  

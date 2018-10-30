@@ -174,7 +174,9 @@ In this architecture, we empower Bi-LSTM by adding a fully-connected layer follo
 # III. Conclusion
 
 Both model are tested with our data from 24hNews and CoNLL2003. With CoNLL2003 dataset, Bi-LSTM-CRF achieves 84% on the test set while BiLSTM-Dense gets 97%.
-With 24hNews dataset, the number is 90% and 96% respectively. Clearly, Slot tagging outperforms the CRF, which is not very intuitive to us. We guess that, BiLSTM and CRF are good at remembering the faraway themselves, so the overall result is not impressive in comparison to each of them. We should instead increase the computing capacity by adding dense layer. We will conduct more experiments to test this hypothesis.
+With 24hNews dataset, the number is 90% and 96% respectively.
+
+Clearly, Slot tagging outperforms the CRF, which is not very intuitive to us. We guess that, BiLSTM and CRF are good at remembering the faraway themselves, so the overall result is not impressive in comparison to each of them. We should instead increase the computing capacity by adding dense layer. We will conduct more experiments to test this hypothesis.
 
 # IV. References
 
