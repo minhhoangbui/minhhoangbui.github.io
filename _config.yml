@@ -71,18 +71,18 @@ social-network-links:
   email: minhhoangbui.vn@gmail.com
   facebook: bmhoang.0602
   github: minhhoangbui
-# twitter: daattali
+# twitter: 
 #  reddit: yourname
-#  google-plus: +DeanAttali
+#  google-plus: 
   linkedin: minh-hoang-bui-vn
 #  xing: yourname
-#  stackoverflow: "3943160/daattali"
-#  snapchat: deanat78
+#  stackoverflow: 
+#  snapchat: 
   instagram: minhhoang.bui
-#  youtube: user/deanat78
+#  youtube: 
 #  spotify: yourname
   telephone: +840704886700
-#  steam: deanat78
+#  steam: 
 #  twitch: yourname
 #  yelp: yourname
 
@@ -120,7 +120,7 @@ google_analytics: "UA-128069477-1"
 # --- Comments --- #
 
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
-# disqus: minhhoangbui
+disqus: minhhoangbui
 
 # To use Facebook Comments, fill in a Facebook App ID
 # fb_comment_id: ""
