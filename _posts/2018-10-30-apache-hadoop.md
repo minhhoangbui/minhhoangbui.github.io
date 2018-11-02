@@ -25,4 +25,49 @@ Back to the topic, there are five properties of Big Data that you should notice:
 
 - Value: Since the data is everything and everywhere, we have to find a way to exploit its value or else, it is just a piece of crap. Traditional systems cannot deal with this because of their processing power limit.
 
-- Veracity: Data always contains noises, not everything they tell us is true. So how to deal with this inconsistency is also a big problems to solve
+- Veracity: Data always contains noises, not everything they tell us is true. So how to deal with this inconsistency is also a big problems to solve.
+
+An interesting analogy could give you a better understanding of the origin of Big Data.
+
+Supposed you run a small restaurant in town. You hire only 2 chefs since it is just a small resto in a small town. The chefs could serve 4 dishes per hour and they are satisfied with that productivity. As time of the Internet comes, your restaurant grows and starts receiving online order.
+
+Now there are about 20 orders per hour and sure the old 2 chefs cannot meet that demand. As the result, you have to hire more chefs.
+
+But the problem doesn't end here. If many chefs share the same cook-shelf, obviously there will be a bottleneck. Each chef will have to wait other chefs to finish their shopping spree. It is not optimal. So we have to buy more cook shelf too!!!
+
+<p align="center">
+ <img src="/img/hadoop-architecture/Traditional-Restaurant-Analogy-Hadoop-Tutorial-Edureka-768x353.png" alt="" align="middle">
+ <div align="center"> The scene before Big Data</div>
+</p>
+
+<p align="center">
+ <img src="/img/hadoop-architecture/Traditional-Scenario-Failed-Hadoop-Tutorial-Edureka-768x350.png" alt="" align="middle">
+ <div align="center"> When Big Data comes, things get abundant</div>
+</p>
+
+<p align="center">
+ <img src="/img/hadoop-architecture/Distributed-Chef-Hadoop-Tutorial-Edureka-768x371.png" alt="" align="middle">
+ <div align="center"> The bottleneck when the warehouse is limited </div>
+</p>
+
+Furthermore, we also have to optimize the work flow in the restaurant. For example, we divide our chefs into two groups: one deals with the raw material, the other transforms the preprocessed material into completed dishes.
+
+<p align="center">
+ <img src="/img/hadoop-architecture/Restaurant-Solution-Hadoop-Tutorial-Edureka-768x362.png" alt="" align="middle">
+ <div align="center"> The bottleneck when the warehouse is limited </div>
+</p>
+
+Similarly, when the data was in control, our traditional tools could handle it well. But when Digital Age comes, it brings multiple types of data with it, and it makes our tool useless. More specific, our old storage systems and processing units cannot cope with. We have to give them more power and more optimal mechanism so that our systems can work more efficiently. This is where Hadoop enters our life.
+
+# II. Hadoop Components
+
+By definition:
+
+> Hadoop is a framework that allows us to store and process large data sets in parallel and distributed fashion.
+
+Each system has its own components and its architecture to combine the components, Hadoop is not an exception. They are:
+
+1. Hadoop Distributed File System(HDFS)
+
+2. MapReduce
+
