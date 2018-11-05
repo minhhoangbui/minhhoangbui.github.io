@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Apache Hadoop Architecture
+title: Introduction to Apache Hadoop Architecture
 ---
 
 Recently, I've taken part in a online course in order to augment my salary. It is about Big Data and Apache's tools in this area. So I decide to write a series about this topic. This series will act as a summary for my learning and also help to enrich the content of this site. In this course, they teach us about doing machine learning at scale and the way deploying machine learning model into production environment. That sounds great, right? So let's begin.
@@ -65,9 +65,96 @@ By definition:
 
 > Hadoop is a framework that allows us to store and process large data sets in parallel and distributed fashion.
 
+<p align="center">
+ <img src="/img/hadoop-architecture/Hadoop-as-a-Solution-What-is-Hadoop-Edureka.png" alt="" align="middle">
+ <div align="center"> Hadoop resolution </div>
+</p>
+
 Each system has its own components and its architecture to combine the components, Hadoop is not an exception. They are:
 
-1. Hadoop Distributed File System(HDFS)
+- Hadoop Distributed File System
 
-2. MapReduce
+- MapReduce
 
+- YARN
+
+Both the components work in the master-slave fashion. Master is responsible for distributing the work load for each slave to to the job
+
+## 1. Hadoop Distributed File System(HDFS)
+
+In HDFS, we have two inferior components:
+
+- NameNode:
+  - Maintain and manage DataNodes
+  - Record meta-data .i.e information about data blocks, size of the data
+  - Receive feedback and report from all the DataNodes
+
+- DataNode:
+  - Store actual data
+  - Serve request from client
+
+Normally, there are only one NameNode and many DataNodes. In case of one DataNode broken, we have back-up immediately. In addition, there is also a component named Secondary NameNode. You may guess it acts as a back-up for NameNode but it's not. In fact, it plays the role in checkpoint process. In the Secondary NameNode, we combine periodically the entire history log and the most recent one into the only one, then it send the updated log file to NameNode for saving.
+
+<p align="center">
+ <img src="/img/hadoop-architecture/checkpointing3.jpg" alt="" align="middle">
+ <div align="center"> Checkpoint process </div>
+</p>
+
+In general, when the client sends the data to the HDFS, the NameNode divides that data into smaller blocks and stores it in different DataNodes. Furthermore, for fault tolerance, each small blocks has its own replications stored in different place.
+
+> Never put all eggs in one basket.
+
+## 2. MapReduce
+
+The principle of MapReduce is: Instead of letting one unit do all the work, we divide the work into simpler tasks, then distribute the tasks to many units to process in parallel (Map), then combine all the result to have the final output (Reduce)
+
+<p align="center">
+ <img src="/img/hadoop-architecture/Apache-Hadoop-MapReduce-Architecture.png" alt="" align="middle">
+ <div align="center"> MapReduce mechanism </div>
+</p>
+
+## 3. YARN
+
+Similarly to HDFS, YARN provides a distributed framework for processing. Different to other distributed solutions, we don't bring the data to the processing unit, we install the processing unit in each DataNode. There are also two components:
+
+- ResourceManager
+
+  - Receive requests from client.
+  - Pass request to corresponding processing unit.
+  - Supervise the work of each processing unit and combine the result from the slave machine.
+
+- NodeManager
+  
+  - It resides in each DataNode
+  - Responsible for executing the task
+  - Communicate with the ResourceManager to remain up-to-date
+
+<p align="center">
+ <img src="/img/hadoop-architecture/YARN-Hadoop-Tutorial-Edureka-768x314.png" alt="" align="middle">
+ <div align="center"> YARN </div>
+</p>
+
+# III. Conclusion
+
+Thanks to this architecture, Apache Hadoop brings to the users 4 benefits:
+
+<p align="center">
+ <img src="/img/hadoop-architecture/Hadoop-Features-Hadoop-Tutorial-Edureka.png" alt="" align="middle">
+ <div align="center"> Benefits from Hadoop </div>
+</p>
+
+- Reliability: we have a fault tolerance mechanism when things get broken. When one machine fails, there will be back-up machine available at the same time.
+
+- Economical: We could have many hardware configurations for the same task. It may help us to use the hardware more efficiently.
+
+- Scalability: Hadoop has very flexible mechanism in integrating new hardware, even the cloud service. So if you are able to install Hadoop on a cloud, you don't have to worry about the scalability since the hardware is always available on the cloud service.
+
+- Flexibility: Hadoop can deal with all kinds of data, from structured, semi-structured to unstructured data.
+
+This framework is so vast so that I cannot cover in a single blog. In the upcoming blogs, I will go in more detail about the MapReduce mechanism and other things.
+
+# IV. Reference
+
+- https://www.edureka.co/blog/hadoop-tutorial/
+
+- https://www.youtube.com/watch?v=mafw2-CVYnA
