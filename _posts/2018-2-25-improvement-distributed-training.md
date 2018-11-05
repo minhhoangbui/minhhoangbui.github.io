@@ -15,8 +15,7 @@ Surely, the above statement is a bit exaggerated but it still indicates that thi
 > While distributed synchronous SGD is now commonplace, no existing results show that validation accuracy can be maintained with mini-batches as large as 8192 or that such high-accuracy models can be trained in such short time.  
 
 Nonetheless, limiting the batch size is really a waste since the hardwares are more and more powerful and distributed computing is available. In this circumstance, Facebook tries to *demonstrate the feasibility of and to communicate a practical guide to large-scale training with distributed synchronous stochastic gradient descent*. In short, they aim to keep the validation error low in the shortest time while using a large batch-size to utilize Distributed Computing.
-The key idea is to modify the learning rate so that the training curves in the case of large batch-size imitate these of
-small batch-size.  
+The key idea is to modify the learning rate so that the training curves in the case of large batch-size imitate these of small batch-size.  
 
 ## Linear Scaling Rule  
 
@@ -43,8 +42,7 @@ We use a low constant learning rate during a first few training epochs. However,
 
 - Gradual warmup:
 
-In this setting, we gradually ramp up the learning rate from a small to large value. In practice, we start the learning rate from a value $$\eta$$ and increase it by a constant amount at each iteration so that the learning rate could reach $$\hat\eta = k\eta$$ after a number of epochs(normally 5 epochs). This setting avoids a sudden increase in the value of learning rate, allows a healthy convergence at the beginning of learning. After the 
-warmup phase, we could go back to the original learning rate schedule.  
+In this setting, we gradually ramp up the learning rate from a small to large value. In practice, we start the learning rate from a value $$\eta$$ and increase it by a constant amount at each iteration so that the learning rate could reach $$\hat\eta = k\eta$$ after a number of epochs(normally 5 epochs). This setting avoids a sudden increase in the value of learning rate, allows a healthy convergence at the beginning of learning. After the warmup phase, we could go back to the original learning rate schedule.  
 
 # II) Uber framework for Distributed Training
 
@@ -107,9 +105,9 @@ as an effort to replace the above step 2 and step 3 using a protocol called ring
 <p align="center">
  <img src="/img/distributed-improvement/image4-2.png" alt="" align="middle">
  <div align="center">How the workers combine the gradients between them <a href="http://eng.uber.com/wp-content/uploads/2017/10/image4-2.png">Source</a></div>
-</p>  
-Consider that there are N nodes in the network, each worker will communicate 2*(N-1) times with the others. In the first (N-1) iteration, the gradients in the buffer are summed in the ring network fashion. In the second (N-1) iteration, we replace the gradient in all the node by the new one. Give the sufficient buffer, this paradigm can leverage the hardware capacity. Baidu suggest that this is the most bandwidth-optimal method until now. Furthermore, this method is more intuitive than the standard one. The all-reduce method can be found in MPI's implementation like OpenMPI. The users just 
-have to modify their programs of averaging the gradient using allreduce operation.  
+</p>
+
+Consider that there are N nodes in the network, each worker will communicate 2*(N-1) times with the others. In the first (N-1) iteration, the gradients in the buffer are summed in the ring network fashion. In the second (N-1) iteration, we replace the gradient in all the node by the new one. Give the sufficient buffer, this paradigm can leverage the hardware capacity. Baidu suggest that this is the most bandwidth-optimal method until now. Furthermore, this method is more intuitive than the standard one. The all-reduce method can be found in MPI's implementation like OpenMPI. The users just have to modify their programs of averaging the gradient using allreduce operation.  
 
 ## Introducing Horovod  
 
@@ -202,7 +200,7 @@ In the above code, there are some lines worth noticing:
 - <b>hvd.init()</b> initializes Horovod.  
 - <b>config.gpu_options.visible_device_list = str(hvd.local_rank)</b> assigns a GPU to each of processes. Why local_rank ? Since the script run on a single machine with (possibly) multiple GPUs.  
 - <b>opt=hvd.DistributedOptimizer(opt)</b> wraps the TensorFlow optimizer, which provides the ability to use ring-allreduce.  
-- <b>hvd.BroadcastGlobalVariablesHook(0)</b> helps to broacast the variables initialized by the first process to all other processes to ensure consistent initialization.  
+- <b>hvd.BroadcastGlobalVariablesHook(0)</b> helps to broadcast the variables initialized by the first process to all other processes to ensure consistent initialization.  
 - I divide the max_step by the number of GPUs as max_step in my subconsciousness as well as in the configuration file is for a single GPU training, so in multiple GPUs training, we should divide the max_step by the number of GPUs.
 
 ## Tensor Fusion

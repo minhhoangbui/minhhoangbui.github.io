@@ -29,9 +29,9 @@ At the moment, *Data Parallelism* is heavily employed by [OtoNhanh.vn](https://w
 
 ## Method of Aggregation
 
-In *Data Parallelism* mechanism, each GPUs will compute its own gradients of the whole graph. So we have to think a way to combine all these gradients for the update of the parameter. There are 2 settings: *Synchronous Data Parallelism* and *Asynchronous Data Parallelism*. In synchronized setting, several data batches are processed simultaneously. Once all the local back-props are finished, the local gradients are averaged and we performed the update. We can see the bottleneck here: the overall computation speed of the system equals to the weakest worker in the network.
+In *Data Parallelism* mechanism, each GPU will compute its own gradients of the whole graph. So we have to think a way to combine all these gradients for the update of the parameter. There are 2 settings: *Synchronous Data Parallelism* and *Asynchronous Data Parallelism*. In synchronized setting, several data batches are processed simultaneously. Once all the local back-props are finished, the local gradients are averaged and we performed the update. We can see the bottleneck here: the overall computation speed of the system equals to the weakest worker in the network.
 
-In asynchronized setting, once a GPUs finishes its computation, we will use its gradient to update the model immediately. As we can see, in a system of N workers, the number of update in asynchronized setting is N times greater than that of synchronized setting.  
+In asynchronized setting, once a GPU finishes its computation, we will use its gradient to update the model immediately. As we can see, in a system of N workers, the number of updates in asynchronized setting is N times greater than that of synchronized setting.  
 
 <p align="center">
  <img src="/img/distributed-tensorflow/sync_async_tensorflow_diagram.png" alt="" align="middle">
@@ -95,7 +95,7 @@ It is the most simple setting for replication, e.g, we don't have to modify the 
 ### Between-Graph Replication
 
 Each worker will build its own graph based on its responsibility. Generally speaking, each worker only shares the global variables placed on `ps` with each other and keep the local tasks for themselves. It is compatible with both *Model Parallelism* and surprisingly, *Data Parallelism*. In *Data Parallelism*, there will be a `chief worker`. Besides computing the gradient, the `chief worker` has to do some works like executing the `tf.train.Saver()` or logging, etc. So the `tf.Graph()`s of the workers are not exactly the same.  
- 
+
 <p align="center">
  <img src="/img/distributed-tensorflow/7.PNG" alt="" align="middle">
  <div align="center">Between-Graph Replication Illustration. <a href="http://lynnapan.github.io/images/tensorflow/7.PNG">Source</a></div>

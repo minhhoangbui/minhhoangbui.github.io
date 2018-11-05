@@ -34,7 +34,7 @@ To do this, we might want to add a variable to describe the assignment of data p
 
 <p align='center'> $$ J = \sum_{n=1}^{N} \sum_{k=1}^{K} r_{nk} \|x_n - \mu_j\|^2$$ </p>
 
-To minimize this loss function, we use EM algorithm. In this approach, we initialize some value of $$\mu_k$$, then in the first phase, we minimize the loss function w.r.t the binary $$r_{nk}$$. In the second phase, we keep $$r_{nk}$$ fixed and look for the value of $$\mu_k$$ that makes $$J$$ minimized. These two stages will alternate repeatedly until convergence. These two steps correspond respectively to the E(expectation) step and M(maximization) step of EM method.
+To minimize this loss function, we use EM algorithm. In this approach, we initialize some valuea of $$\mu_k$$, then in the first phase, we minimize the loss function w.r.t the binary $$r_{nk}$$. In the second phase, we keep $$r_{nk}$$ fixed and look for the value of $$\mu_k$$ that makes $$J$$ minimized. These two stages will alternate repeatedly until convergence. These two steps correspond respectively to the E(expectation) step and M(maximization) step of EM method.
 
 This method belongs to a class of *Mixture Model*. Details of this model is beyond the scope of this blog, but you can read more in the Chapter 9 of [Pattern Recognition and Machine Learning](https://www.amazon.com/Pattern-Recognition-Learning-Information-Statistics/dp/0387310738).  
 
@@ -87,7 +87,7 @@ Siamese network is a special type of convolutional network. It is not used for c
  <a href="https://cdn-images-1.medium.com/max/1200/1*XzVUiq-3lYFtZEW3XfmKqg.jpeg">Source</a> </div>
 </p>
 
-In this section, we will focus on a variant of Siamese Network called Deep Ranking Model. We have finished building this model with TensorFlow and it will be used in [OtoNhanh.vn](https://www.otonhanh.vn/) soon enough.
+In this section, we will focus on a variant of Siamese Network called Deep Ranking Model. We have finished building this model with TensorFlow and it will be used in [OtoNhanh.vn](https://www.otonhanh.vn/) soon.
 
 In Deep Ranking, each sample consists of three images: anchor image, positive image which is akin to the anchor image and the negative image which is not in the same category with the anchor one. We call a group of three images like that a triplet.
 
@@ -138,7 +138,7 @@ Minimizing this loss function encourages the distance between the $$(p_i, p_i^+)
 
 ## Triplet Sampling
 
-As we can see, the intuition of network architecture and loss function is not complicated. Nonetheless, the real challenge of this model is how to sampling the triplet effectively? We cannot choose the too easy triplet: this make the training easily overfitted. In the original paper, the author introduced an additional metric $$r$$ to measure the similarity between images: As the training goes further, we will insert a triplet with the furthest positive image and nearest negative image to regularize the training. However, he didn't clarify the metric $$r$$. So we have to find another way to get around it.
+As we can see, the intuition of network architecture and loss function is not complicated. Nonetheless, the real challenge of this model is how to sampling the triplet effectively? We cannot choose the too easy triplet: this make the training easily over-fitted. In the original paper, the author introduced an additional metric $$r$$ to measure the similarity between images: As the training goes further, we will insert a triplet with the furthest positive image and nearest negative image to regularize the training. However, he didn't clarify the metric $$r$$. So we have to find another way to get around it.
 
 In the paper [In Defense of the Triplet Loss for Person Re-Identification](https://arxiv.org/pdf/1703.07737.pdf), the authors suggested using the same metric $$D$$ for the triplet sampling *during the training*. This method is called *Batch Hard*. Supposing in the mini-batch $$X$$, we have $$P$$ classes and there are $$K$$ images in each class. Images from the same class can be paired positively and vice-versa. This raises another challenge in term of batch sampling:
 How to sample a batch with at least three classes with at least 2 images in each class?
@@ -146,7 +146,7 @@ How to sample a batch with at least three classes with at least 2 images in each
 <p align='center'> 
     $$ L_{BH}(f, X) = \overbrace{\sum_{i=1}^{P}\sum_{a=1}^{K}}^{\text{all anchor}} 
     max(0, g + \overbrace{\max_{p=1..K} D(f(x_a^i), f(x_p^i))}^{\text{hardest positive}} -
-    \overbrace{\min_{j=1..P,\\ n=1..K, \\j \neq i} D(f(x_a^i), f(x_n^i))}^{\text{hardest negative}}) 
+    \overbrace{\min_{j=1..P,\\ n=1..K, \\j \neq i} D(f(x_a^i), f(x_n^i))}^{\text{hardest negative}})
     $$ 
 </p>
 
@@ -154,11 +154,11 @@ However, we argue that we may have to pay the price of slower training in order 
 
 ## Implementation
 
-In our implementation, we've done some modification:
+In our implementation, we've done some modifications:
 
 - We pass the anchor image, positive image and negative image successively to a single pipeline to construct their embedding representations instead of three identical networks to save memory while training on GPUs.
 
-- We will define the triplets manually or by bootstraping before training and write the triplet path to a text file.
+- We will define the triplets manually or by boot-straping before training and write the triplet path to a text file.
 
 - In the original paper, they employed 4000-dims embedding vector. However, we observe that during our training 128-dims vector outperforms 4000-dims one. This is super queer to us as it seems intuitive that vector with bigger dimension must capture more features. This issue will be investigated carefully during our deployment.  
 
@@ -220,8 +220,8 @@ return merge_two
 Source code for triplet loss function:  
 
 ```py
- 
- def _calc_triplet_loss(self, a_embedding, p_embedding, n_embedding, margin, epsilon=1e-7):
+
+def _calc_triplet_loss(self, a_embedding, p_embedding, n_embedding, margin, epsilon=1e-7):
     """
     Calculate the triplet loss
     :param a_embedding: anchor image of the triplet

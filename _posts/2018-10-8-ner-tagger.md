@@ -3,7 +3,7 @@ layout: post
 title: NER-Tagger with BiLSTM
 author: hoangbm
 ---
-In the process of building news distribution platform for 24h News, we realize the importance of a Named-entity recognition (NER) Model. It helps us to identify the user's preference, then we could amplify the effectiveness of the platform. In this blog, we will explain our approach in more details.  
+In the process of building news distribution platform for 24h News, we realize the importance of a Named-entity Recognition (NER) Model. It helps us to identify the user's preferences, then we could amplify the effectiveness of the platform. In this blog, we will explain our approach in more details.  
 
 # I. Bidirectional LSTM-CRF Models
 
@@ -45,11 +45,11 @@ In HMM, we assume that there is a latent variable *Y* which affects the output *
 
 ## c) A fusion between BiLSTM and CRF
 
-To amplify the ability to connect two entity in the corpus, we combine BiLSTM and CRF in a network. BiLSTM plays the role of feature engineering while CRF is the last layer to make the prediction.
+To amplify the ability to connect two entities in the corpus, we combine BiLSTM and CRF in a network. BiLSTM plays the role of feature engineering while CRF is the last layer to make the prediction.
 
 ```python
 class BiLSTM(object):
-    def __init__(self, num_tag_classes, 
+    def __init__(self, num_tag_classes,
         vocab_size, embedding_size=50,
         n_hidden_gate=50, dropout_rate=0.0):
 
