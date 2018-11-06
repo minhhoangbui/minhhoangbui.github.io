@@ -3,7 +3,6 @@ layout: page
 title: Activities
 subtitle: My life at a data scientist so far
 ---
-#
 
 ## Since 10/2017: Data Scientist in Chappiebot Inc.
 
