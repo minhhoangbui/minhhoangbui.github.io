@@ -100,7 +100,7 @@ Normally, there are only one NameNode and many DataNodes. In case of one DataNod
  <div align="center"> Checkpoint process </div>
 </p>
 
-In general, when the client sends the data to the HDFS, the NameNode divides that data into smaller blocks and stores it in different DataNodes. Furthermore, for fault tolerance, each small blocks has its own replications stored in different place.
+In general, when the client sends the data to the HDFS, the NameNode divides that data into smaller blocks and stores it in different DataNodes. Furthermore, for fault tolerance, each small blocks has its own replicas stored in different place.
 
 > Never put all eggs in one basket.
 
