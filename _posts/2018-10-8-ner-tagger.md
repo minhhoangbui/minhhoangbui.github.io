@@ -180,5 +180,5 @@ Clearly, Slot tagging outperforms the CRF, which is not very intuitive to us. We
 
 # IV. References
 
-- https://colah.github.io/posts/2015-08-Understanding-LSTMs/
-- https://arxiv.org/pdf/1508.01991.pdf
+- [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)
+- [Bidirectional LSTM-CRF Models for Sequence Tagging](https://arxiv.org/pdf/1508.01991.pdf)

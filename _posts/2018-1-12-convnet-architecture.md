@@ -132,7 +132,7 @@ Personally, I recommend you to take time with the second paper, it gives us some
 
 ## General Design Principles
 
-- **Avoid representational bottlenecks**: We shouldn't reduce the size as well as the dimension of the input too abruptly, especially in the first layers. The representation size ought to be shrinked mildly throughout the network in order to avoid the loss of information.
+- **Avoid representational bottlenecks**: We shouldn't reduce the size as well as the dimension of the input too abruptly, especially in the first layers. The representation size ought to be shrank mildly throughout the network in order to avoid the loss of information.
 
 - **Higher dimensional representations are easier to process**: Adding more filters per tile is encouraged for the purpose of faster training.  
 

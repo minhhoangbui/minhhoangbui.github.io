@@ -133,10 +133,10 @@ Contextual Bandits ameliorates MAB by incorporating the context information when
 
 # V. References
 
-- https://www.searchenginepeople.com/blog/16072-multi-armed-bandits-ab-testing-makes-money.html
+- [Multi Armed Bandit Testing Can Make You More Money, Faster](https://www.searchenginepeople.com/blog/16072-multi-armed-bandits-ab-testing-makes-money.html)
 
-- http://stevehanov.ca/blog/index.php?id=132
+- [20 lines of code that will beat A/B testing every time](http://stevehanov.ca/blog/index.php?id=132)
 
-- https://towardsdatascience.com/solving-the-multi-armed-bandit-problem-b72de40db97c
+- [Solving the Multi-Armed Bandit Problem](https://towardsdatascience.com/solving-the-multi-armed-bandit-problem-b72de40db97c)
 
-- https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-1-5-contextual-bandits-bff01d1aad9c
+- [Simple Reinforcement Learning with Tensorflow Part 1.5: Contextual Bandits](https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-1-5-contextual-bandits-bff01d1aad9c)
