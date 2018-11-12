@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Amazon SageMaker Tutorial
-image: img/sagemaker_tut/eyecatch_sagemaker.png
+image: /img/sagemaker_tut/eyecatch_sagemaker.png
 ---
 
 Nowadays, deployment plays a major role in applying Deep Learning in daily life. We could build an algorithm and develop a demo in our development machine. However, to put these algorithm in production at large scale, using Deep Learning framework offered by large corporations is a requirement. Today, I will introduce AWS SageMaker from Amazon.
@@ -15,7 +15,7 @@ According to *Amazon Web Service(AWS)*:
 We can imagine this way: SageMaker, alongside with S3 and Elastic Container Service(ECS), form an ecosystem for Machine Learning practitioners to store their datasets, build and package algorithms, train and store the models, maybe run the inference if necessary.
 
 <p align="center">
- <img src="/img/sagemaker_tut/sagemaker-architecture.png" alt="" align="middle">
+ <img src="/img/sagemaker_tut/ml-concepts-10.png" alt="" align="middle">
  <div align="center">Machine Learning task cycle <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/images/ml-concepts-10.png">Source</a></div>
 </p>  
 
@@ -77,15 +77,15 @@ In the below illustration, I present the file system in the *container* under */
     └── output
         └── failure
 
-/opt/ml/code: contains all the code to run the program. For example, when we execute the *fit* function, SageMaker will come to this directory and execute the *train* script.
+*/opt/ml/code*: contains all the code to run the program. For example, when we execute the *fit* function, SageMaker will come to this directory and execute the *train* script.
 
-/opt/ml/input/config: When we specify the resource configuration and the training parameters, SageMaker will copy the content to 2 above JSON file. In the code, we have to deal explicitly these json file, especially the *hyperparamters.json*.
+*/opt/ml/input/config*: When we specify the resource configuration and the training parameters, SageMaker will copy the content to 2 above JSON file. In the code, we have to deal explicitly these json file, especially the *hyperparamters.json*.
 
-/opt/ml/input/data/: When we define the data location from S3 Storage, SageMaker will download the data into the folder *channel_name* of this directory. The data used as argument of *fit* function will be placed under channel *training*.
+*/opt/ml/input/data/*: When we define the data location from S3 Storage, SageMaker will download the data into the folder *channel_name* of this directory. The data used as argument of *fit* function will be placed under channel *training*.
 
-/opt/ml/model: All the checkpoints and model export will be place in this directory.
+*/opt/ml/model*: All the checkpoints and model export will be place in this directory.
 
-/opt/ml/output: The *failure* file in this directory will record the error if existed in the training process. If everything goes as expected, no *failure* will be found.
+*/opt/ml/output*: The *failure* file in this directory will record the error if existed in the training process. If everything goes as expected, no *failure* will be found.
 
 ### Notices
 
