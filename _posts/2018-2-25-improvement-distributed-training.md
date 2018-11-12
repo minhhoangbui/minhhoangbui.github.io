@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Improvement in Distributed Training
-# image: img/distributed-improvement/images.png
+image: /img/distributed-improvement/images.png
 ---
 
 In the last blog about [Distributed TensorFlow](/distributed-TensorFlow), we have provided some fundamental knowledge of Distributed Training in this framework. However, it is not enough if we want to apply it efficiently. Today, we will provide some additional tricks to make use of Distributed Computing better in [OtoNhanh.vn](https://www.otonhanh.vn/).  
