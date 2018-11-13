@@ -55,7 +55,14 @@ the input image.
 </p>  
 
 Generally speaking, Convolutional Layer, Pooling Layer and Fully-Connected Layer are the principal components of ConvNet in the image classification task. To make use these layers at its best, the researchers in Deep Learning community try to construct different network architectures. The arrival of ConvNet has changed the fundamental tasks of Computer Vision from *feature engineering* to *network engineering* to find the best representation for the classification. One of the most popular benchmark is the ImageNet challenge. To further boost the performance of ConvNet, the researchers also introduces some secondary components like Batch Normalization, Local Response Normalization, Dropout...
-In the next part, we will concentrate on the architectures that we have implemented in our business.  
+In the next part, we will concentrate on the architectures that we have implemented in our business.
+
+## A very cool illustration
+
+<p align="center">
+ <img src="/img/Introduction_CNN/lenet.gif" alt="" align="middle">
+ <div align="center">LeNet Illustration</div>
+</p>  
 
 ## Reference
 
