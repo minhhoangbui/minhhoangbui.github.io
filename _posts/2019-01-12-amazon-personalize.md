@@ -57,7 +57,7 @@ And what is the workflow of Amazon Personalize?
 
 There are three main way to access Personalize: Personalize console, AWS CLI and AWS SDK (boto3). In this blog, everything will be presented with boto3 in Python.
 
-# II. Recipe in Personalize
+# II. Recipes in Personalize
 
 As stated above, there are 6 built-in algorithm built by Amazon for you to choose. In this section, since the document on the website is incomplete, I will cover their usages based on my knowledge, feel free to correct me if you think my understanding is erroneous.
 
