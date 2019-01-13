@@ -61,24 +61,17 @@ There are three main way to access Personalize: Personalize console, AWS CLI and
 
 As stated above, there are 6 built-in algorithm built by Amazon for you to choose. In this section, since the document on the website is incomplete, I will cover their usages based on my knowledge, feel free to correct me if you think my understanding is erroneous.
 
-1. DeepFM
-Matrix factorization is so popular in RecSys world. It is used to analyze the interaction between users and items. In principle, each user interacts with some items but not all. So based on their interactions and the others interactions, we predict their preference with other items. Previously, this task is done in the machine learning style, using SVD and other related algorithms. It just works for average customer and long-lived items. Now we could employ neural network to solve this problems more efficiently.
+1. DeepFM: Matrix factorization is so popular in RecSys world. It is used to analyze the interaction between users and items. In principle, each user interacts with some items but not all. So based on their interactions and the others interactions, we predict their preference with other items. Previously, this task is done in the machine learning style, using SVD and other related algorithms. It just works for average customer and long-lived items. Now we could employ neural network to solve this problems more efficiently.
 
-2.  FFNN
-I just know that FFNN stands for Fast Forward Neural Network, but how does it work or what is its applications, I totally have no ideas since Amazon doesn't present anything about it
+2. FFNN: I just know that FFNN stands for Fast Forward Neural Network, but how does it work or what is its applications, I totally have no ideas since Amazon doesn't present anything about it
 
-3.  HRNN
-HRNN stands for Hierarchical Recurrent Neural Network. HRNN system is employed to predict the user's behavior changes with time. The more recent activities will have more weight than the old ones. The timestamp data will be incorporated into the system so that we could predict more accurately.
+3. HRNN: It stands for Hierarchical Recurrent Neural Network. HRNN system is employed to predict the user's behavior changes with time. The more recent activities will have more weight than the old ones. The timestamp data will be incorporated into the system so that we could predict more accurately.
 
-4.  Popularity-baseline
-It simply count the most popular item in the dataset. It is usually considered as the baseline to compare other recipes.
+4. Popularity-baseline: It simply count the most popular item in the dataset. It is usually considered as the baseline to compare other recipes.
 
-5.  Search Personalization
+5. Search Personalization: It is used to predict the user preferences: which one he likes the most ? etc.
 
-It is used to predict the user preferences: which one he likes the most ? etc.
-
-6.  SIMS
-It is item-to-item similarity recipe. It is basically the collaborative filtering, and it also leverages the interactions between users and items to recommend the similar items to the users. In the absence of user-item interactions dataset, it is the most optimal recipe.
+6. SIMS: It is item-to-item similarity recipe. It is basically the collaborative filtering, and it also leverages the interactions between users and items to recommend the similar items to the users. In the absence of user-item interactions dataset, it is the most optimal recipe.
 
 Other than built-in algorithm, if you want to tailor yourself a recipe, Personalize also support that. You just have to dockerize your algorithm in SageMaker standard and store it in ECR.
 
@@ -348,3 +341,8 @@ print "Recommendations: {}".format(json.dumps(title_list, indent=2))
 
 This service, to me, is very promising since it is really the expertise of Amazon. However, it is still in developing. By the time this blog is published, I still cannot get the authorization to try it and the document is still a mess. But hey, stay tuned for the upcoming news from Amazon.
 
+# V. References
+
+- [What Is Amazon Personalize?](https://docs.aws.amazon.com/en_us/personalize/latest/dg/what-is-personalize.html)
+
+- [AWS re:Invent 2018 – Introducing Amazon Personalize](https://www.youtube.com/watch?v=9tArgQrJBzE)
