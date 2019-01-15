@@ -1,0 +1,169 @@
+%-------------------------
+% Resume in Latex
+% Author : Sourabh Bajaj
+% Website: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[pdftex]{hyperref}
+\usepackage{fancyhdr}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.375in}
+\addtolength{\evensidemargin}{-0.375in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\href{https://github.com/minhhoangbui/}{\Large Minh-Hoang Bui}} & Email : \href{mailto:minhhoangbui.vn@gmail.com}{minhhoangbui.vn@gmail.com}\\
+  \href{https://minhhoangbui.github.io/}{https://minhhoangbui.github.io/} & Mobile : +84-070-488-6700 \\
+\end{tabular*}
+
+
+%-----------EDUCATION-----------------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of Technology of Troyes}{Champagne-Ardenne, France}
+      {Master of Science in Optimization and System Security}{Aug. 2016 -- Oct. 2017}
+    \resumeSubheading
+      {Ho Chi Minh University of Technology}{Ho Chi Minh City, Vietnam}
+      {Bachelor of Engineering in Electrical and Electronics;  GPA: 8.29/10 }{Aug. 2012 -- July. 2016}
+  \resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Chappiebot Inc.}{Ho Chi Minh City, Vietnam}
+      {Data Scientist}{Oct 2017 - Present}
+      \resumeItemListStart
+        \resumeItem{Computer Vision}
+          {Research and implement state-of-the-art deep learning architectures for the task of image classification(ResNet, DenseNet...) and image similarity (Deep Ranking) in order to enhance user experience in an e-commerce site.}
+        \resumeItem{Natural Language Processing (NLP)}
+          {Develop a pool of algorithms to solve multiple problems in NLP like Text Classification, Name-Entity Recognition, etc. Various architectures are implemented: ConvNet, Attention Bi-LSTM, CRF etc. These techniques are used to develop a Personalized News Distribution platform for 24h Inc.}
+        \resumeItem{Distributed Training}
+          {Research Horovod(Uber), Apache Hadoop, Apache Spark for distributed model training when dealing with Big Data.}
+        \resumeItem{Amazon Web Service}
+          {Responsible for data organization with Amazon S3, algorithm dockerizing with Amazon ECS, cloud training and deployment with Amazon SageMake.}
+        \resumeItem{Engineering Blog}
+          {In charge of deep learning and mathematical-related content for the engineering blog of the company.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {CEA-LETI}{Campus MINATEC, Grenoble, France}
+      {Engineering Intern}{Jan 2017 - Sep 2017}
+      \resumeItemListStart
+        \resumeItem{Edge Detection}
+          {Understand the general concept of edge detection and some important gradient-based methods like Sobel-filter and Canny method with the help of OpenCV}
+        \resumeItem{Active Contour}
+          {Apprehend the mathematical complication of the method Active Contour which will be applied to SEM images in micro-technologies}
+        \resumeItem{Optimization}
+          {Understand various optimization techniques(CG, Powell, BFGS, Newton-based methods etc.) and their pros/cons with the help of Scipy}
+        \resumeItem{Neural Network}
+          {Work with another intern to compare the effectiveness of Neural Network method and Active Contour in contour detection with SEM images}
+        \resumeItem{Code Organization}
+          {Get familiar with version-control systems like SVN and Git}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Sirinhorn International Institute of Technology}{Pathum Thani, Thailand}
+      {Research Intern}{06/2016- 08/2016}
+      \resumeItemListStart
+        \resumeItem{3D Reconstruction}
+          {Get familiar with 3D Reconstruction mechanism and the definition of reversed engineering}
+        \resumeItem{Image Processing}
+          {Get familiar with various techniques in Image Processing like Hough Transform, Canny Detector with OpenCV}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------------
+\section{Projects}
+  \resumeSubHeadingListStart
+    \resumeSubItem{OtoNhanh.vn}
+      {An e-commerce website which uses machine learning to simplify the car purchasing procedure in Vietnam}
+    \resumeSubItem{Personalized News Distribution}
+      {An application which recommends news and articles to user based on the user's insight with the help of machine learning}
+    \resumeSubItem{Contour Detector with SEM image}
+      {Building a algorithm which can detect SEM image in micro-technology.}
+%     \resumeSubItem{Mac Setup}
+%       {Book that gives step by step instructions on setting up developer environment on Mac OS.}
+  \resumeSubHeadingListEnd
+
+%
+%--------PROGRAMMING SKILLS------------
+\section{Programming Skills}
+ \resumeSubHeadingListStart
+   \item{\textbf{Languages}{: Python, C\#, C++, Matlab, Markdown, Latex}}
+   \item{\textbf{Framework}{: TensorFlow, PyTorch, Docker, Github}
+   \item{\textbf{Technologies}{: Amazon Web Service, Apache Hadoop, Apache Spark}
+ \resumeSubHeadingListEnd
+
+ \resumeSubHeadingListEnd
+
+%-------------------------------------------
+\end{document}
