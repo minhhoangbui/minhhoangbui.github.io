@@ -73,7 +73,7 @@ In case of text, there are many methods that could help us to vectorize the docu
 
 ### Distance metrics
 
-1. Scaled Euclidean Distance
+* Scaled Euclidean Distance
 
 $$ distance(x_i, x_q) = \sqrt{a_1(x_i[1] - x_q[1])^2 + .. + a_d(x_i[d] - x_q[d])^2}$$
 
@@ -81,7 +81,7 @@ $$a_1, .., a_d$$ are the weights for each feature. This feature selection is in 
 
 $$ distance(x_i, x_q) = \sqrt{a_1(x_i[1] - x_q[1])^2 + .. + a_d(x_i[d] - x_q[d])^2}$$
 
-2. Cosine similarity
+* Cosine similarity
 
 $$ distance(x_i, x_q) = \frac{x_i^\mathsf{T} x_q}{||x_i|| ||x_q||}$$
 
@@ -104,21 +104,21 @@ So, as you can see, I use a Tree data structure to accelerate query time. And no
 
 There are three steps:
 
-1. Exploring the leaf node that contains our query item:
+* Exploring the leaf node that contains our query item:
 
 <p align="center">
  <img src="/img/clustering-retrieval/step1.png" alt="" align="middle">
  <div align="center"> Find the bin of the query item</div>
 </p>
 
-2. Compute the distance to other points in the leaf node and save the nearest distance to $$NN$$
+* Compute the distance to other points in the leaf node and save the nearest distance to $$NN$$
 
 <p align="center">
  <img src="/img/clustering-retrieval/step2.png" alt="" align="middle">
  <div align="center"> Compute the temporary nearest distance</div>
 </p>
 
-3. Backtrack using traversal techniques and try other branches. If the distance from the query point to the branch is shorter than the current nearest distance, we examine this branch to compute the (maybe) next nearest distance. If not, we just ignore the branch and move the next one.
+* Backtrack using traversal techniques and try other branches. If the distance from the query point to the branch is shorter than the current nearest distance, we examine this branch to compute the (maybe) next nearest distance. If not, we just ignore the branch and move the next one.
 
 <p align="center">
  <img src="/img/clustering-retrieval/step3.png" alt="" align="middle">
@@ -126,3 +126,44 @@ There are three steps:
 </p>
 
 The worst-case complexity of this approach for 1-NN is $$O(N)$$ and for k-NN is $$O(N^2)$$. However, the worst-case is really rare, so we could save a lot of resources using this techniques. We can also use pruning to approximate this technique. Instead of ignoring the branch if the distance to it is longer than $$NN$$, we can ignore it if it is longer than $$NN/\alpha$$ ($$\alpha > 1$$).
+
+### Local sensitive hashing
+
+KD-Tree is cool but it has its own drawback. First of all, it is not easy to implement it efficiently. Secondly, when the dimension of the vector is large, the computation is quite expensive. So we move to another method: Local sensitive hashing. In this method, we define the line to divide the item space into different bins and we just examine the items residing in the same bin with the query one.
+
+<p align="center">
+ <img src="/img/clustering-retrieval/binning.png" alt="" align="middle">
+ <div align="center"> Dividing the item space</div>
+</p>
+
+Surely, when binning like this, there will be cases that we cannot find the nearest neighbor:
+
+<p align="center">
+ <img src="/img/clustering-retrieval/cons.png" alt="" align="middle">
+ <div align="center"> When the nearest neighbor is in another hill</div>
+</p>
+
+So, the question here is, how to do the binning efficiently? The answer is simple: leave it to the fate, just do the binning randomly. The probability that two similar points reside in different bins is small.
+
+<p align="center">
+ <img src="/img/clustering-retrieval/random-bin.png" alt="" align="middle">
+ <div align="center"> Binning the space randomly</div>
+</p>
+
+Furthermore, we could reduce the searching cost by using more bins, even though we risk to have the nearest neighbor in the different bin. It is a trade-off that we have to accept.
+
+<p align="center">
+ <img src="/img/clustering-retrieval/more-bin.png" alt="" align="middle">
+ <div align="center"> Using more bins to reduce the search cost</div>
+</p>
+
+To sum up, to realize this method, we do the following steps:
+
+* Draw $$h$$ line randomly
+
+* Compute score for each bin and translate to binary index, use the collection of binary index as bin index
+
+* Create a hash table
+
+* Search the bin in which the query one stays, and if possible, examine the neighboring bins
+
