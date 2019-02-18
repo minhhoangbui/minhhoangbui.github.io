@@ -34,6 +34,7 @@ The idea is pretty simple, just like what I said above
 * Pseudo-code:
 
 ```{r, eval=FALSE, tidy=FALSE}
+
 Initialize Dist2NN = $$\infty$$
 For i = 1, 2, .., N:
     compute $$\delta$$ = distance($$x, x_i$$)
@@ -81,4 +82,7 @@ $$ distance(x_i, x_q) = \sqrt{a_1(x_i[1] - x_q[1])^2 + .. + a_d(x_i[d] - x_q[d])
 
 2. Cosine similarity
 
-$$ distance(x_i, x_q) = \frac{x_i^\mathsf{T} x_q}{\norm{x_i} \norm{x_q}}$$
+$$ distance(x_i, x_q) = \frac{x_i^\mathsf{T} x_q}{||x_i|| ||x_q||}$$
+
+There are many other metrics, for example: Manhattan, Jaccard, Hamming, etc.
+
