@@ -33,8 +33,7 @@ The idea is pretty simple, just like what I said above
 
 * Pseudo-code:
 
-```{r, eval=FALSE, tidy=FALSE}
-
+```
 Initialize Dist2NN = $$\infty$$
 For i = 1, 2, .., N:
     compute $$\delta$$ = distance($$x, x_i$$)
@@ -46,9 +45,11 @@ return the item with distance Dist2NN
 
 ## k-NN algorithm
 
-In this algorithm, we keep the record of most k similar items
+In this algorithm, we keep the record of most k similar items.
 
-```{r, eval=FALSE, tidy=FALSE}
+* Pseudo-code:
+
+```
 
 Initialize Dist2kNN = sorted($$\delta_1, \delta_2, .., \delta_k$$)
 
@@ -80,9 +81,48 @@ $$a_1, .., a_d$$ are the weights for each feature. This feature selection is in 
 
 $$ distance(x_i, x_q) = \sqrt{a_1(x_i[1] - x_q[1])^2 + .. + a_d(x_i[d] - x_q[d])^2}$$
 
-2. Cosine similarity
+1. Cosine similarity
 
 $$ distance(x_i, x_q) = \frac{x_i^\mathsf{T} x_q}{||x_i|| ||x_q||}$$
 
 There are many other metrics, for example: Manhattan, Jaccard, Hamming, etc.
 
+## Complexity of algorithms
+
+As you can see, for each query, we have to sweep through the whole data-set, so it is really computationally demanding. The complexity for 1-NN and k-NN is $$O(N), O(Nlog(k))$$ respectively. This level of complexity is really infeasible in real life applications. So we have to improve it.
+
+### KD-tree
+
+We could divide the item space into the binary tree with respect to its features:
+
+<p align="center">
+ <img src="/img/clustering-retrieval/tree-construction.png" alt="" align="middle">
+ <div align="center"> KD-Tree</div>
+</p>
+
+So, as you can see, I use a Tree data structure to accelerate query time. And now, how to implement it in our problem of Nearest Neighbor?
+
+There are three steps:
+
+1. Exploring the leaf node that contains our query item:
+
+<p align="center">
+ <img src="/img/clustering-retrieval/step1.png" alt="" align="middle">
+ <div align="center"> Find the bin of the query item</div>
+</p>
+
+1. Compute the distance to other points in the leaf node and save the nearest distance to $$NN$$
+
+<p align="center">
+ <img src="/img/clustering-retrieval/step2.png" alt="" align="middle">
+ <div align="center"> Compute the temporary nearest distance</div>
+</p>
+
+1. Backtrack using traversal techniques and try other branches. If the distance from the query point to the branch is shorter than the current nearest distance, we examine this branch to compute the (maybe) next nearest distance. If not, we just ignore the branch and move the next one.
+
+<p align="center">
+ <img src="/img/clustering-retrieval/step3.png" alt="" align="middle">
+ <div align="center"> Compute the temporary nearest distance recursively</div>
+</p>
+
+The worst-case complexity of this approach for 1-NN is $$O(N)$$ and for k-NN is $$O(N^2)$$. However, the worst-case is really rare, so we could save a lot of resources using this techniques. We can also use pruning to approximate this technique. Instead of ignoring the branch if the distance to it is longer than $$NN$$, we can ignore it if it is longer than $$NN/\alpha$$ ($$\alpha > 1$$).
