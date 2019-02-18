@@ -81,7 +81,7 @@ $$a_1, .., a_d$$ are the weights for each feature. This feature selection is in 
 
 $$ distance(x_i, x_q) = \sqrt{a_1(x_i[1] - x_q[1])^2 + .. + a_d(x_i[d] - x_q[d])^2}$$
 
-1. Cosine similarity
+2. Cosine similarity
 
 $$ distance(x_i, x_q) = \frac{x_i^\mathsf{T} x_q}{||x_i|| ||x_q||}$$
 
@@ -111,14 +111,14 @@ There are three steps:
  <div align="center"> Find the bin of the query item</div>
 </p>
 
-1. Compute the distance to other points in the leaf node and save the nearest distance to $$NN$$
+2. Compute the distance to other points in the leaf node and save the nearest distance to $$NN$$
 
 <p align="center">
  <img src="/img/clustering-retrieval/step2.png" alt="" align="middle">
  <div align="center"> Compute the temporary nearest distance</div>
 </p>
 
-1. Backtrack using traversal techniques and try other branches. If the distance from the query point to the branch is shorter than the current nearest distance, we examine this branch to compute the (maybe) next nearest distance. If not, we just ignore the branch and move the next one.
+3. Backtrack using traversal techniques and try other branches. If the distance from the query point to the branch is shorter than the current nearest distance, we examine this branch to compute the (maybe) next nearest distance. If not, we just ignore the branch and move the next one.
 
 <p align="center">
  <img src="/img/clustering-retrieval/step3.png" alt="" align="middle">
