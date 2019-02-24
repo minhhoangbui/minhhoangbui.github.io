@@ -14,7 +14,7 @@ Back to the topic, gambling has two most famous capitals: Las Vegas and Monte Ca
 # Las Vegas approach
 
 <p align="center">
- <img src="/img/randomization/gn-gift_guide_variable_c.jpg" alt="" align="middle">
+ <img src="/_image/randomization/gn-gift_guide_variable_c.jpg" alt="" align="middle">
  <div align="center"> The lux of Las Vegas</div>
 </p>
 
@@ -65,7 +65,7 @@ Las Vegas uses randomization as a way to initialize the parameters for the probl
 # Monte Carlo approach
 
 <p align="center">
- <img src="/img/randomization/16980.jpg" alt="" align="middle">
+ <img src="/_image/randomization/16980.jpg" alt="" align="middle">
  <div align="center"> The charm of Monte Carlo</div>
 </p>
 

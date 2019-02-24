@@ -12,7 +12,7 @@ Previously, AWS has introduced Amazon Sagemaker for machine learning, and surely
 This service will cover four minor applications: music recommendation, product recommendation, film recommendation and article recommendation.
 
 <p align="center">
- <img src="/img/personalize/applications.png" alt="" align="middle">
+ <img src="/_image/personalize/applications.png" alt="" align="middle">
  <div align="center"> Applications</div>
 </p>
 
@@ -51,7 +51,7 @@ And what is the workflow of Amazon Personalize?
 7. Continue improve the trained model based on user activities
 
 <p align="center">
- <img src="/img/personalize/pipeline.png" alt="" align="middle">
+ <img src="/_image/personalize/pipeline.png" alt="" align="middle">
  <div align="center"> Personalize Pipeline</div>
 </p>
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to Apache Hadoop Architecture
-image: /img/hdfs/hadoop.png
+image: /_image/hdfs/hadoop.png
 ---
 
 Recently, I've taken part in a online course in order to augment my salary. It is about Big Data and Apache's tools in this area. So I decide to write a series about this topic. This series will act as a summary for my learning and also help to enrich the content of this site. In this course, they teach us about doing machine learning at scale and the way deploying machine learning model into production environment. That sounds great, right? So let's begin.
@@ -37,24 +37,24 @@ Now there are about 20 orders per hour and sure the old 2 chefs cannot meet that
 But the problem doesn't end here. If many chefs share the same cook-shelf, obviously there will be a bottleneck. Each chef will have to wait other chefs to finish their shopping spree. It is not optimal. So we have to buy more cook shelf too!!!
 
 <p align="center">
- <img src="/img/hadoop-architecture/Traditional-Restaurant-Analogy-Hadoop-Tutorial-Edureka-768x353.png" alt="" align="middle">
+ <img src="/_image/hadoop-architecture/Traditional-Restaurant-Analogy-Hadoop-Tutorial-Edureka-768x353.png" alt="" align="middle">
  <div align="center"> The scene before Big Data</div>
 </p>
 
 <p align="center">
- <img src="/img/hadoop-architecture/Traditional-Scenario-Failed-Hadoop-Tutorial-Edureka-768x350.png" alt="" align="middle">
+ <img src="/_image/hadoop-architecture/Traditional-Scenario-Failed-Hadoop-Tutorial-Edureka-768x350.png" alt="" align="middle">
  <div align="center"> When Big Data comes, things get abundant</div>
 </p>
 
 <p align="center">
- <img src="/img/hadoop-architecture/Distributed-Chef-Hadoop-Tutorial-Edureka-768x371.png" alt="" align="middle">
+ <img src="/_image/hadoop-architecture/Distributed-Chef-Hadoop-Tutorial-Edureka-768x371.png" alt="" align="middle">
  <div align="center"> The bottleneck when the warehouse is limited </div>
 </p>
 
 Furthermore, we also have to optimize the work flow in the restaurant. For example, we divide our chefs into two groups: one deals with the raw material, the other transforms the preprocessed material into completed dishes.
 
 <p align="center">
- <img src="/img/hadoop-architecture/Restaurant-Solution-Hadoop-Tutorial-Edureka-768x362.png" alt="" align="middle">
+ <img src="/_image/hadoop-architecture/Restaurant-Solution-Hadoop-Tutorial-Edureka-768x362.png" alt="" align="middle">
  <div align="center"> The bottleneck when the warehouse is limited </div>
 </p>
 
@@ -67,7 +67,7 @@ By definition:
 > Hadoop is a framework that allows us to store and process large data sets in parallel and distributed fashion.
 
 <p align="center">
- <img src="/img/hadoop-architecture/Hadoop-as-a-Solution-What-is-Hadoop-Edureka.png" alt="" align="middle">
+ <img src="/_image/hadoop-architecture/Hadoop-as-a-Solution-What-is-Hadoop-Edureka.png" alt="" align="middle">
  <div align="center"> Hadoop resolution </div>
 </p>
 
@@ -97,7 +97,7 @@ In HDFS, we have two inferior components:
 Normally, there are only one NameNode and many DataNodes. In case of one DataNode broken, we have back-up immediately. In addition, there is also a component named Secondary NameNode. You may guess it acts as a back-up for NameNode but it's not. In fact, it plays the role in checkpoint process. In the Secondary NameNode, we combine periodically the entire history log and the most recent one into the only one, then it send the updated log file to NameNode for saving.
 
 <p align="center">
- <img src="/img/hadoop-architecture/checkpointing3.jpg" alt="" align="middle">
+ <img src="/_image/hadoop-architecture/checkpointing3.jpg" alt="" align="middle">
  <div align="center"> Checkpoint process </div>
 </p>
 
@@ -110,7 +110,7 @@ In general, when the client sends the data to the HDFS, the NameNode divides tha
 The principle of MapReduce is: Instead of letting one unit do all the work, we divide the work into simpler tasks, then distribute the tasks to many units to process in parallel (Map), then combine all the result to have the final output (Reduce)
 
 <p align="center">
- <img src="/img/hadoop-architecture/Apache-Hadoop-MapReduce-Architecture.png" alt="" align="middle">
+ <img src="/_image/hadoop-architecture/Apache-Hadoop-MapReduce-Architecture.png" alt="" align="middle">
  <div align="center"> MapReduce mechanism </div>
 </p>
 
@@ -131,7 +131,7 @@ Similarly to HDFS, YARN provides a distributed framework for processing. Differe
   - Communicate with the ResourceManager to remain up-to-date
 
 <p align="center">
- <img src="/img/hadoop-architecture/YARN-Hadoop-Tutorial-Edureka-768x314.png" alt="" align="middle">
+ <img src="/_image/hadoop-architecture/YARN-Hadoop-Tutorial-Edureka-768x314.png" alt="" align="middle">
  <div align="center"> YARN </div>
 </p>
 
@@ -140,7 +140,7 @@ Similarly to HDFS, YARN provides a distributed framework for processing. Differe
 Thanks to this architecture, Apache Hadoop brings to the users 4 benefits:
 
 <p align="center">
- <img src="/img/hadoop-architecture/Hadoop-Features-Hadoop-Tutorial-Edureka.png" alt="" align="middle">
+ <img src="/_image/hadoop-architecture/Hadoop-Features-Hadoop-Tutorial-Edureka.png" alt="" align="middle">
  <div align="center"> Benefits from Hadoop </div>
 </p>
 

@@ -10,17 +10,17 @@ In this last blog of the series, I am talking about the challenges I have met du
 - We collect images in automobile industry automatically by our crawler. In this process, some images are not well-defined(multiple objects in one image, image which is difficult to recognize the object, even for human)... Obviously, we could set a threshold to ignore images with low confidence score. However, in many cases, the models can give a very high 'thumb-up' for these kind of images. So the most optimal solution in this case is the intervention of human during the acquisition. After crawling the images from the internet, our firm will check and delete unwell-defined images before giving them to our classification models.
 
 <p align="center">
-<img src="/img/Introduction_CNN/1503650313909.jpg" alt="" align="middle">
+<img src="/_image/Introduction_CNN/1503650313909.jpg" alt="" align="middle">
 <div align="center">Multiple car pose in one image <a href="https://www.smart.com/content/dam/smart/HQ/master/index/Visuals/VP1/VP1_01HE_smart_range_autumn_campaign.jpg.imgresize.width=1920.name=imagevp1.jpg/1503650299540.jpg">Source</a></div>
 </p>  
 
 <p align="center">
-<img src="/img/Introduction_CNN/guong-chieu-hau.jpg" alt="" align="middle">
+<img src="/_image/Introduction_CNN/guong-chieu-hau.jpg" alt="" align="middle">
 <div align="center">Object in object <a href="https://www.smart.com/content/dam/smart/HQ/master/index/Visuals/VP1/VP1_01HE_smart_range_autumn_campaign.jpg.imgresize.width=1920.name=imagevp1.jpg/1503650299540.jpg">Source</a></div>
 </p>  
 
 <p align="center">
- <img src="/img/Introduction_CNN/1.jpg" alt="" align="middle">
+ <img src="/_image/Introduction_CNN/1.jpg" alt="" align="middle">
  <div align="center">Un well-defined image</div>
 </p>
 
@@ -29,12 +29,12 @@ In this last blog of the series, I am talking about the challenges I have met du
 For example, the images from 'left_front_view' and 'right_rear_view' are similar.
 
 <p align="center">
- <img src="/img/Introduction_CNN/0d283c8a2ddd7be343024378a75647b5.jpg" alt="" align="middle">
+ <img src="/_image/Introduction_CNN/0d283c8a2ddd7be343024378a75647b5.jpg" alt="" align="middle">
  <div align="center">Right_rear_view image</div>
 </p>
 
 <p align="center">
- <img src="/img/Introduction_CNN/2c93b2d8573db5a98232861ccdd6c520.jpg" alt="" align="middle">
+ <img src="/_image/Introduction_CNN/2c93b2d8573db5a98232861ccdd6c520.jpg" alt="" align="middle">
  <div align="center">Left_front_view image</div>
 </p>  
 

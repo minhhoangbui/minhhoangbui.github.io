@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Amazon SageMaker Tutorial
-image: /img/sagemaker_tut/eyecatch_sagemaker.png
+image: /_image/sagemaker_tut/eyecatch_sagemaker.png
 ---
 
 Nowadays, deployment plays a major role in applying Deep Learning in daily life. We could build an algorithm and develop a demo in our development machine. However, to put these algorithm in production at large scale, using Deep Learning framework offered by large corporations is a requirement. Today, I will introduce AWS SageMaker from Amazon.
@@ -15,14 +15,14 @@ According to *Amazon Web Service(AWS)*:
 We can imagine this way: SageMaker, alongside with S3 and Elastic Container Service(ECS), form an ecosystem for Machine Learning practitioners to store their datasets, build and package algorithms, train and store the models, maybe run the inference if necessary.
 
 <p align="center">
- <img src="/img/sagemaker_tut/ml-concepts-10.png" alt="" align="middle">
+ <img src="/_image/sagemaker_tut/ml-concepts-10.png" alt="" align="middle">
  <div align="center">Machine Learning task cycle <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/images/ml-concepts-10.png">Source</a></div>
 </p>  
 
 In SageMaker, we can call an algorithm through a Jupyter Notebook, supply it the dataset from S3 Storage, choose the instance type then run the notebook.
 
 <p align="center">
- <img src="/img/sagemaker_tut/sagemaker-architecture.png" alt="" align="middle">
+ <img src="/_image/sagemaker_tut/sagemaker-architecture.png" alt="" align="middle">
  <div align="center">SageMaker Architecture <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/images/sagemaker-architecture.png">Source</a></div>
 </p>  
 

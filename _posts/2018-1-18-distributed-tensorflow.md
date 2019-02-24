@@ -12,7 +12,7 @@ Along with the development of [OtoNhanh.vn](https://www.otonhanh.vn/), datasets 
 They are two popular styles in Parallelism Computing, which solve different problems in Deep Learning training. First, we talk about *Model Parallelism*. A very first example of this method can be found in this famous [article](http://vision.stanford.edu/teaching/cs231b_spring1415/slides/alexnet_tugce_kyunghee.pdf). In this Alex-Net, the model is too big for a single GPU, so the authors employed it in two GPUs: some parts of the graph reside in a GPU, while the others stay in the other GPU. In model parallelism, we split the whole graph among GPUs and use the same data for each GPU: each GPU will compute the gradient for some variables of the model using the same data.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/modelpara1.png" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/modelpara1.png" alt="" align="middle">
  <div align="center">Model parallelism diagram. <a href="https://i0.wp.com/timdettmers.com/wp-content/uploads/2014/11/modelpara1.png?resize=1025%2C626">Source</a></div>
 </p>  
 
@@ -21,7 +21,7 @@ The advantage of this approach is quite apparent: it helps us to deal with the l
 In contrast, *Data Parallelism* fixes the same graph in every GPUs in the network but uses different data batches for each GPU, then do some aggregation to combine the gradients from different GPUs. This approach helps us to slide over the whole data-set faster, e.g, finish an epoch in a shorter time. In fact, *Data Parallelism* gains more attention from the community and the rest of this blog, we will talk about the technique used in this approach.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/datapara1.png" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/datapara1.png" alt="" align="middle">
  <div align="center">Data parallelism diagram. <a href="https://i1.wp.com/timdettmers.com/wp-content/uploads/2014/10/datapara1.png?resize=1025%2C626">Source</a></div>
 </p>  
 
@@ -34,13 +34,13 @@ In *Data Parallelism* mechanism, each GPU will compute its own gradients of the 
 In asynchronized setting, once a GPU finishes its computation, we will use its gradient to update the model immediately. As we can see, in a system of N workers, the number of updates in asynchronized setting is N times greater than that of synchronized setting.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/sync_async_tensorflow_diagram.png" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/sync_async_tensorflow_diagram.png" alt="" align="middle">
  <div align="center">Two update settings in Data Parallelism <a href="http://ischlag.github.io/images/sync_async_tensorflow_diagram.png">Source</a></div>
 </p>
 Personally, I think asynchronised setting is more optimal: Its performance is comparable to synchronized version while its speed is understandably superior.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/1.png" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/1.png" alt="" align="middle">
  <div align="center">Comparison in term of speed. <a href="http://lynnapan.github.io/images/tensorflow/1.PNG">Source</a></div>
 </p>  
 
@@ -71,7 +71,7 @@ If we don't specify the device, TensorFlow will automatically choose the more op
 In TensorFlow, there are 2 jobs: parameter server (ps) and worker:
 
 <p align="center">
- <img src="/img/distributed-tensorflow/clever-dist-tf-arch.png" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/clever-dist-tf-arch.png" alt="" align="middle">
  <div align="center">Parameter server and worker. <a href="https://docs.caicloud.io/images/clever-dist-tf-arch.png">Source</a></div>
 </p>
 
@@ -86,7 +86,7 @@ In *Data Parallelism*, we will assign the model to every worker in the network. 
 The client builds a single graph `tf.Graph()` which contains the parameters pinned to `ps` and the *compute-intensive part* (feed-forward operations and theirs back-propagation), each pinned to different tasks in the `workers`. This setting is not compatible with *Model Parallelism*.
 
 <p align="center">
- <img src="/img/distributed-tensorflow/5.PNG" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/5.PNG" alt="" align="middle">
  <div align="center">In-Graph Replication Illustration. <a href="http://lynnapan.github.io/images/tensorflow/5.PNG">Source</a></div>
 </p>
 
@@ -97,7 +97,7 @@ It is the most simple setting for replication, e.g, we don't have to modify the 
 Each worker will build its own graph based on its responsibility. Generally speaking, each worker only shares the global variables placed on `ps` with each other and keep the local tasks for themselves. It is compatible with both *Model Parallelism* and surprisingly, *Data Parallelism*. In *Data Parallelism*, there will be a `chief worker`. Besides computing the gradient, the `chief worker` has to do some works like executing the `tf.train.Saver()` or logging, etc. So the `tf.Graph()`s of the workers are not exactly the same.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/7.PNG" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/7.PNG" alt="" align="middle">
  <div align="center">Between-Graph Replication Illustration. <a href="http://lynnapan.github.io/images/tensorflow/7.PNG">Source</a></div>
 </p>  
 
@@ -173,14 +173,14 @@ A piece of code of Synchronous Between-Graph from our engine:
 When scaling up the distributed model, it is usually not sufficient to have only one `ps` in the network. Obviously, we could create several `ps` with different `task_index` and then assign the variables to these `ps` using `with tf.device`. But this manual assignment seems really dull when we have about 100 `ps`. TensorFlow tackles this issue by creating a function called `tf.train.replica_device_setter()`. This function outputs an instance which acts as the input of `tf.device()`. This function will distribute the variables among the `ps` tasks in `round-robin` style.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/8.PNG" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/8.PNG" alt="" align="middle">
  <div align="center">Round-robin placement <a href="http://lynnapan.github.io/images/tensorflow/8.PNG">Source</a></div>
 </p>  
 
 `Round-robin` is the default strategy for variables placement. We could change this strategy by add value to `ps_strategy`, A more intelligent strategy worth considering is `tf.contrib.training.GreedyLoadBalancingStrategy`.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/9.PNG" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/9.PNG" alt="" align="middle">
  <div align="center">Load balancing variables <a href="http://lynnapan.github.io/images/tensorflow/9.PNG">Source</a></div>
 </p>  
 
@@ -192,14 +192,14 @@ In basic TensorFlow program, we often use `tf.Session()` to run the operations. 
 `tf.train.ClusterSpec()` specifies the machines which you want to run on and their job names. `tf.train.Server()` represents the task_index of each component in the cluster. In my opinion, each CPU/GPU will do a task and `task_index` helps to clarify `chief_worker`. Then we can pass `tf.train.Server().target` to `tf.Session()`. With that `tf.Session()` could run code from anywhere in the cluster.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/13.PNG" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/13.PNG" alt="" align="middle">
  <div align="center">Distributed code for worker <a href="http://lynnapan.github.io/images/tensorflow/13.PNG">Source</a></div>
 </p>  
 
 For `ps`, it is much simpler. If this component is `ps`, it only has to run `tf.train.Server().join()` to combine the gradients from the workers.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/14.PNG" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/14.PNG" alt="" align="middle">
  <div align="center">Distributed code for parameter server <a href="http://lynnapan.github.io/images/tensorflow/14.PNG">Source</a></div>
 </p>  
 
@@ -234,7 +234,7 @@ What if we encountered a problem during Distributed Training, how to recover fro
 It is really a wrapper of `tf.Session()`, especially useful for Distributed Training. It helps to initialize parameters without `tf.global_variables_initializer`, decide `chief worker`, do some additional work with hooks etc.  
 
 <p align="center">
- <img src="/img/distributed-tensorflow/20.PNG" alt="" align="middle">
+ <img src="/_image/distributed-tensorflow/20.PNG" alt="" align="middle">
  <div align="center">Example of `tf.train.MonitoredTrainingSession()` <a href="http://lynnapan.github.io/images/tensorflow/20.PNG">Source</a></div>
 </p>  
 
