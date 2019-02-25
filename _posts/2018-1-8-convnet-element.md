@@ -19,7 +19,7 @@ In this context, Yann LeCunn developed a biologically-inspired neural network ca
 with some differentiable function that may or may not have parameters.  
 
 <p align="center">
- <img src="/_image/Introduction_CNN/cnn.jpeg" alt="" align="middle">
+ <img src="/image/Introduction_CNN/cnn.jpeg" alt="" align="middle">
  <div align="center">In each layer of ConvNet, it transform a 3-D input block to 3-D output block. <a href="http://cs231n.github.io/assets/cnn/cnn.jpeg">Source</a></div>
 </p>  
 
@@ -29,7 +29,7 @@ It plays the roles of feature detector in ConvNet. In more detailed, it computes
 Convolution has been used previously with some man-made filter like Laplace or Sobel to detect feature in the image, however, ConvNet proposes a way to *learn* the filters automatically.  
 
 <p align="center">
- <img src="/_image/Introduction_CNN/conv-layer.gif" alt="" align="middle">
+ <img src="/image/Introduction_CNN/conv-layer.gif" alt="" align="middle">
  <div align="center">Illustration of convolution operation. <a href="http://cs231n.github.io/convolutional-networks/">Source</a></div>
 </p> 
 
@@ -39,7 +39,7 @@ The most two popular pooling operation are average pooling and max pooling. This
 However, the way it achieve the invariance by losing the information raises a lot of arguments in the Deep Learning community. Recently, G.Hinton, a "god father" in this domain, has publicized his research about Capsule Net, a method to achieve the pose invariance without using pooling.  
 
 <p align="center">
- <img src="/_image/Introduction_CNN/maxpool.jpeg" alt="" align="middle">
+ <img src="/image/Introduction_CNN/maxpool.jpeg" alt="" align="middle">
  <div align="center">Maxpool operation <a href="http://cs231n.github.io/assets/cnn/maxpool.jpeg">Source</a></div>
 </p>    
 
@@ -50,7 +50,7 @@ function in case of multi-classification. It will measure the score for each lab
 the input image.  
 
 <p align="center">
- <img src="/_image/Introduction_CNN/neural_net2.jpeg" alt="" align="middle">
+ <img src="/image/Introduction_CNN/neural_net2.jpeg" alt="" align="middle">
  <div align="center">Fully-Connected Layer in Regular Neural Network <a href="http://cs231n.github.io/assets/nn1/neural_net2.jpeg">Source</a></div>
 </p>  
 
@@ -60,7 +60,7 @@ In the next part, we will concentrate on the architectures that we have implemen
 ## A very cool illustration
 
 <p align="center">
- <img src="/_image/Introduction_CNN/lenet.gif" alt="" align="middle">
+ <img src="/image/Introduction_CNN/lenet.gif" alt="" align="middle">
  <div align="center">LeNet Illustration</div>
 </p>  
 

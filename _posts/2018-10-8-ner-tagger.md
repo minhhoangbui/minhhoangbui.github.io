@@ -14,7 +14,7 @@ First of all, I will describe briefly two most components of this model: Long Sh
 LSTM, in fact, is an variant of famous model for sequential data: Recurrent Neural Network. RNN solves the problem of sequential data by reasoning the previous events in the sequence to predict the current event.
 
 <p align="center">
- <img src="/_image/ner-lstm/RNN-unrolled.png" alt="" align="middle">
+ <img src="/image/ner-lstm/RNN-unrolled.png" alt="" align="middle">
  <div align="center">An unrolled recurrent neural network <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/RNN-unrolled.png">Source</a></div>
 </p>  
 
@@ -25,7 +25,7 @@ However, there is a problems with RNN: Its memory seems limited: It means that i
 Then LSTM is born! LSTM has its mechanism to filter unnecessary information and keep the important features. Therefore, we can extend the memory of the model in some meaning.
 
 <p align="center">
- <img src="/_image/ner-lstm/LSTM3-SimpleRNN.png" alt="" align="middle">
+ <img src="/image/ner-lstm/LSTM3-SimpleRNN.png" alt="" align="middle">
  <div align="center">An unrolled LSTM network <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-SimpleRNN.png">Source</a></div>
 </p>  
 
@@ -39,7 +39,7 @@ Unlike LSTM, CRF is not an Deep Learning architecture but a Machine Learning met
 In HMM, we assume that there is a latent variable *Y* which affects the output *X*, so we need to maximize the generative probability P(X, Y) for the prediction. In CRF, we maximize the discriminative probability P(X|Y).
 
 <p align="center">
- <img src="/_image/ner-lstm/khcnl.png" alt="" align="middle">
+ <img src="/image/ner-lstm/khcnl.png" alt="" align="middle">
  <div align="center"> Illustration of CRF and HMM <a href="https://www.research.ed.ac.uk/portal/files/10482724/crftut_fnt.pdf">Source</a></div>
 </p>
 
