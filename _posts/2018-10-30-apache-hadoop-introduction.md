@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introduction to Apache Hadoop Architecture
-image: /_image/hdfs/hadoop.png
+image: /image/hdfs/hadoop.png
 ---
 
 Recently, I've taken part in a online course in order to augment my salary. It is about Big Data and Apache's tools in this area. So I decide to write a series about this topic. This series will act as a summary for my learning and also help to enrich the content of this site. In this course, they teach us about doing machine learning at scale and the way deploying machine learning model into production environment. That sounds great, right? So let's begin.
