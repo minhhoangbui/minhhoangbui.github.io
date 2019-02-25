@@ -10,14 +10,14 @@ At the moment, we are working in a big project of personalized news distribution
 Giving an item, *retrieval* helps you to find a similar item to that by calculating the distances between the given item and every other items in the item space. To do this, the most important thing is to find an appropriate metric which helps you to compute the similarity between things.
 
 <p align="center">
- <img src="/_image/clustering-retrieval/retrieval.png" alt="" align="middle">
+ <img src="/_image/retrieval/retrieval.png" alt="" align="middle">
  <div align="center"> Retrieval</div>
 </p>
 
 On the other hand, clustering helps you to group the similar items in the space. Items with similar characteristics will be near each other and then we assume that they are in the same cluster. Obviously, every problems which is related to similarity is in need of a distance metrics. Each cluster will be represented by its centroids, which is in most cases the average point of the items in that cluster.
 
 <p align="center">
- <img src="/_image/clustering-retrieval/clustering.png" alt="" align="middle">
+ <img src="/_image/retrieval/clustering.png" alt="" align="middle">
  <div align="center"> Clustering</div>
 </p>
 
@@ -96,7 +96,7 @@ As you can see, for each query, we have to sweep through the whole data-set, so 
 We could divide the item space into the binary tree with respect to its features:
 
 <p align="center">
- <img src="/_image/clustering-retrieval/tree-construction.png" alt="" align="middle">
+ <img src="/_image/retrieval/tree-construction.png" alt="" align="middle">
  <div align="center"> KD-Tree</div>
 </p>
 
@@ -107,21 +107,21 @@ There are three steps:
 1. Exploring the leaf node that contains our query item:
 
 <p align="center">
- <img src="/_image/clustering-retrieval/step1.png" alt="" align="middle">
+ <img src="/_image/retrieval/step1.png" alt="" align="middle">
  <div align="center"> Find the bin of the query item</div>
 </p>
 
 2. Compute the distance to other points in the leaf node and save the nearest distance to $$NN$$
 
 <p align="center">
- <img src="/_image/clustering-retrieval/step2.png" alt="" align="middle">
+ <img src="/_image/retrieval/step2.png" alt="" align="middle">
  <div align="center"> Compute the temporary nearest distance</div>
 </p>
 
 3. Backtrack using traversal techniques and try other branches. If the distance from the query point to the branch is shorter than the current nearest distance, we examine this branch to compute the (maybe) next nearest distance. If not, we just ignore the branch and move the next one.
 
 <p align="center">
- <img src="/_image/clustering-retrieval/step3.png" alt="" align="middle">
+ <img src="/_image/retrieval/step3.png" alt="" align="middle">
  <div align="center"> Compute the temporary nearest distance recursively</div>
 </p>
 
@@ -132,28 +132,28 @@ The worst-case complexity of this approach for 1-NN is $$O(N)$$ and for k-NN is 
 KD-Tree is cool but it has its own drawback. First of all, it is not easy to implement it efficiently. Secondly, when the dimension of the vector is large, the computation is quite expensive. So we move to another method: Local sensitive hashing. In this method, we define the line to divide the item space into different bins and we just examine the items residing in the same bin with the query one.
 
 <p align="center">
- <img src="/_image/clustering-retrieval/binning.png" alt="" align="middle">
+ <img src="/_image/retrieval/binning.png" alt="" align="middle">
  <div align="center"> Dividing the item space</div>
 </p>
 
 Surely, when binning like this, there will be cases that we cannot find the nearest neighbor:
 
 <p align="center">
- <img src="/_image/clustering-retrieval/cons.png" alt="" align="middle">
+ <img src="/_image/retrieval/cons.png" alt="" align="middle">
  <div align="center"> When the nearest neighbor is in another hill</div>
 </p>
 
 So, the question here is, how to do the binning efficiently? The answer is simple: leave it to the fate, just do the binning randomly. The probability that two similar points reside in different bins is small.
 
 <p align="center">
- <img src="/_image/clustering-retrieval/random-bin.png" alt="" align="middle">
+ <img src="/_image/retrieval/random-bin.png" alt="" align="middle">
  <div align="center"> Binning the space randomly</div>
 </p>
 
 Furthermore, we could reduce the searching cost by using more bins, even though we risk to have the nearest neighbor in the different bin. It is a trade-off that we have to accept.
 
 <p align="center">
- <img src="/_image/clustering-retrieval/more-bin.png" alt="" align="middle">
+ <img src="/_image/retrieval/more-bin.png" alt="" align="middle">
  <div align="center"> Using more bins to reduce the search cost</div>
 </p>
 
