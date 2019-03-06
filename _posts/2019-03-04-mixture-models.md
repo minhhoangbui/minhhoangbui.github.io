@@ -60,7 +60,7 @@ $$ \hat{r}_{ik} = \frac{\hat{\pi}_k \mathcal{N}(x_i | \hat{\mu}_k, \hat{\Sigma}_
 
 2. Given the probabilities $$\hat{r}_ik$$, maximize the likelihood over parameters
 
-$$\hat{pi}_k, \hat{\mu}_k, \hat{\Sigma}_k | {x_i, \hat{r}_{ik}}$$
+$$\hat{\pi}_k, \hat{\mu}_k, \hat{\Sigma}_k | {x_i, \hat{r}_{ik}}$$
 
 
 # IV. Reference
