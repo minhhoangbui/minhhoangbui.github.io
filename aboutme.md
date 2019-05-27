@@ -12,6 +12,8 @@ After graduating with high distinction, I earned an [Excellence Scholarship](htt
 
 Following this, I returned to Vietnam and works as a junior data scientist in an e-commerce startup named Chappiebot Inc. My role here is to develop and implement state-of-the-art algorithm to classify image in their website and also preprocess user command using NLP.
 
+At the moment, I'm working in a Japanese company which focuses on the applications of Deep Learning, especially Computer Vision, in retail industry. My main mission is to optimize deep learning model to work well within embedded system.
+
 I work mainly in Python and my favorite frameworks in Deep Learning are TensorFlow and PyTorch.
 As a junior data scientist, I am motivated and willing to contribute my knowledge and skills to any company which treasure them. I am open to any offer in the domain of Data Science which involves researching and implementing deep learning architecture.
 

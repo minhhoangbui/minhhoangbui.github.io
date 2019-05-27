@@ -4,7 +4,13 @@ title: Activities
 subtitle: My life at a data scientist so far
 ---
 
-## Since 10/2017: Data Scientist in Chappiebot Inc.
+## Since 03/2019: R&D Engineer in AWL Vietnam
+
+My second official job is with AWL Vietnam. This company focuses on the application of Computer Vision in retail. At the moment, we are working on a project of person re-identification in stores, which runs on RaspberryPi 3. Thus, it requires us to choose a lightweight neural architecture and optimise it wisely.
+
+In order to finish my tasks, I have to equip myself several machine learning techniques such as model distillation, model compression etc. as well as programming skills to deploy the models into embedded system.
+
+## From 10/2017 to 02/2019: Data Scientist in Chappiebot Inc.
 
 After graduating from Master course, I returned to Vietnam and joined this startup ever since.
 
