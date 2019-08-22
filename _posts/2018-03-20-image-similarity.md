@@ -144,7 +144,8 @@ called *Triplet Loss Function* to learn the similarities and the differences bet
 So what is the architecture of Deep Ranking model exactly?  
 According to the author:  
 
-> We design a novel multi-scale deep neural network architecture that employs different levels of invariance at different scales.  
+> We design a novel multi-scale deep neural network architecture that employs different levels of invariance at 
+>different scales.  
 
 <p align="center">
  <img src="/image/similarity/similarity.png" alt="" align="middle">

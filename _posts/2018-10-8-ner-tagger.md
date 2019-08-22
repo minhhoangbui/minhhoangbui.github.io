@@ -3,15 +3,19 @@ layout: post
 title: NER-Tagger with BiLSTM
 author: hoangbm
 ---
-In the process of building news distribution platform for 24h News, we realize the importance of a Named-entity Recognition (NER) Model. It helps us to identify the user's preferences, then we could amplify the effectiveness of the platform. In this blog, we will explain our approach in more details.  
+In the process of building news distribution platform for 24h News, we realize the importance of a Named-entity 
+Recognition (NER) Model. It helps us to identify the user's preferences, then we could amplify the effectiveness of the 
+platform. In this blog, we will explain our approach in more details.  
 
 # I. Bidirectional LSTM-CRF Models
 
-First of all, I will describe briefly two most components of this model: Long Short Term Memory (LSTM) and Conditional Random Field(CRF).
+First of all, I will describe briefly two most components of this model: Long Short Term Memory (LSTM) and Conditional 
+Random Field(CRF).
 
 ## a) LSTM
 
-LSTM, in fact, is an variant of famous model for sequential data: Recurrent Neural Network. RNN solves the problem of sequential data by reasoning the previous events in the sequence to predict the current event.
+LSTM, in fact, is an variant of famous model for sequential data: Recurrent Neural Network. RNN solves the problem of 
+sequential data by reasoning the previous events in the sequence to predict the current event.
 
 <p align="center">
  <img src="/image/ner-lstm/RNN-unrolled.png" alt="" align="middle">
@@ -20,9 +24,12 @@ LSTM, in fact, is an variant of famous model for sequential data: Recurrent Neur
 
 As you can see, apart from the inputs themselves, the model also use the previous output to predict the current one.
 
-However, there is a problems with RNN: Its memory seems limited: It means that in some cases, we cannot retrieve the key information from the past since it is far from the current one. So we need to augment the memory of the model in order to connect two events between which there is a big gap.
+However, there is a problems with RNN: Its memory seems limited: It means that in some cases, we cannot retrieve the key 
+information from the past since it is far from the current one. So we need to augment the memory of the model in order 
+to connect two events between which there is a big gap.
 
-Then LSTM is born! LSTM has its mechanism to filter unnecessary information and keep the important features. Therefore, we can extend the memory of the model in some meaning.
+Then LSTM is born! LSTM has its mechanism to filter unnecessary information and keep the important features. Therefore, 
+we can extend the memory of the model in some meaning.
 
 <p align="center">
  <img src="/image/ner-lstm/LSTM3-SimpleRNN.png" alt="" align="middle">
@@ -31,12 +38,15 @@ Then LSTM is born! LSTM has its mechanism to filter unnecessary information and 
 
 In TensorFlow, we can use class *tf.nn.rnn_cell.LSTMCell* to implement LSTM Model.
 
-An important extension of LSTM is Bi-LSTM. LSTM only uses the information for the past for the prediction. Bi-LSTM pushes it to limit by using two LSTM model to exploit both the past and future information.
+An important extension of LSTM is Bi-LSTM. LSTM only uses the information for the past for the prediction. Bi-LSTM 
+pushes it to limit by using two LSTM model to exploit both the past and future information.
 
 ## b) CRF
 
-Unlike LSTM, CRF is not an Deep Learning architecture but a Machine Learning method to deal with sequential data. CRF is a conditional form of the famous Hidden Markov Model for sequences.
-In HMM, we assume that there is a latent variable *Y* which affects the output *X*, so we need to maximize the generative probability P(X, Y) for the prediction. In CRF, we maximize the discriminative probability P(X|Y).
+Unlike LSTM, CRF is not an Deep Learning architecture but a Machine Learning method to deal with sequential data. CRF 
+is a conditional form of the famous Hidden Markov Model for sequences.
+In HMM, we assume that there is a latent variable *Y* which affects the output *X*, so we need to maximize the 
+generative probability P(X, Y) for the prediction. In CRF, we maximize the discriminative probability P(X|Y).
 
 <p align="center">
  <img src="/image/ner-lstm/khcnl.png" alt="" align="middle">
@@ -45,7 +55,8 @@ In HMM, we assume that there is a latent variable *Y* which affects the output *
 
 ## c) A fusion between BiLSTM and CRF
 
-To amplify the ability to connect two entities in the corpus, we combine BiLSTM and CRF in a network. BiLSTM plays the role of feature engineering while CRF is the last layer to make the prediction.
+To amplify the ability to connect two entities in the corpus, we combine BiLSTM and CRF in a network. BiLSTM plays the 
+role of feature engineering while CRF is the last layer to make the prediction.
 
 ```python
 class BiLSTM(object):
@@ -97,7 +108,8 @@ Please note that we have to save crf_params in the model. It plays an important 
 
 # II. Bi-LSTM with slot tagging
 
-In this architecture, we empower Bi-LSTM by adding a fully-connected layer followed by softmax layer. This architecture works pretty well with CoNLL2003, in fact, I still don't understand why exists this tremendous superiority.
+In this architecture, we empower Bi-LSTM by adding a fully-connected layer followed by softmax layer. This architecture 
+works pretty well with CoNLL2003, in fact, I still don't understand why exists this tremendous superiority.
 
 ```python
     with tf.variable_scope('embedding'):
@@ -173,10 +185,13 @@ In this architecture, we empower Bi-LSTM by adding a fully-connected layer follo
 
 # III. Conclusion
 
-Both model are tested with our data from 24hNews and CoNLL2003. With CoNLL2003 dataset, Bi-LSTM-CRF achieves 84% on the test set while BiLSTM-Dense gets 97%.
+Both model are tested with our data from 24hNews and CoNLL2003. With CoNLL2003 dataset, Bi-LSTM-CRF achieves 84% on the 
+test set while BiLSTM-Dense gets 97%.
 With 24hNews dataset, the number is 90% and 96% respectively.
 
-Clearly, Slot tagging outperforms the CRF, which is not very intuitive to us. We guess that, BiLSTM and CRF are good at remembering the faraway themselves, so the overall result is not impressive in comparison to each of them. We should instead increase the computing capacity by adding dense layer. We will conduct more experiments to test this hypothesis.
+Clearly, Slot tagging outperforms the CRF, which is not very intuitive to us. We guess that, BiLSTM and CRF are good at 
+remembering the faraway themselves, so the overall result is not impressive in comparison to each of them. We should 
+instead increase the computing capacity by adding dense layer. We will conduct more experiments to test this hypothesis.
 
 # IV. References
 
