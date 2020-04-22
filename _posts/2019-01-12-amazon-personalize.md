@@ -23,7 +23,7 @@ article recommendation.
 </p>
 
 In general, Amazon will do all the stuffs for you: collecting data, training model and deploying model. There are 3 main 
-component correspondingly:
+components correspondingly:
 
 - Amazon Personalize: Use this to create, manage and deploy solutions.
 
@@ -34,7 +34,7 @@ component correspondingly:
 There are several concepts that you need to understand before diving into this service:
 
 - Dataset: Obviously, you need data to train your model. Outside dataset has to come with a schema for it to be defined 
-in Personalize. There are three type of dataset in Personalize: Users, Items and Interactions. Each type will have their 
+in Personalize. There are three type of dataset in Personalize: Users, Items and Interactions. Each type will have its 
 own schema that you must follow
 
 - Dataset group: Training a model requires you to define a dataset group which is a collection of dataset. Each dataset 
@@ -45,7 +45,7 @@ choose. Otherwise, you could create your own algorithm.
 
 - Solution: it is the model after training. It is the precious child of dataset group and recipe.
 
-- Metrics: it is the tools which helps you evaluate your solution after training.
+- Metrics: it is the tool which helps you evaluate your solution after training.
 
 - Campaign: the hosting service that your solution resides. Each time you need the real-time recommendation, you need 
 to call the campaign on the fly via endpoint.
@@ -67,29 +67,29 @@ And what is the workflow of Amazon Personalize?
  <div align="center"> Personalize Pipeline</div>
 </p>
 
-There are three main way to access Personalize: Personalize console, AWS CLI and AWS SDK (boto3). In this blog, 
+There are three main ways to access Personalize: Personalize console, AWS CLI and AWS SDK (boto3). In this blog, 
 everything will be presented with boto3 in Python.
 
 # II. Recipes in Personalize
 
-As stated above, there are 6 built-in algorithm built by Amazon for you to choose. In this section, since the document 
+As stated above, there are 6 built-in algorithms built by Amazon for you to choose. In this section, since the document 
 on the website is incomplete, I will cover their usages based on my knowledge, feel free to correct me if you think my 
 understanding is erroneous.
 
 1. DeepFM: Matrix factorization is so popular in RecSys world. It is used to analyze the interaction between users and 
 items. In principle, each user interacts with some items but not all. So based on their interactions and the others 
-interactions, we predict their preference with other items. Previously, this task is done in the machine learning style, 
-using SVD and other related algorithms. It just works for average customer and long-lived items. Now we could employ 
+interactions, we predict their preferences with other items. Previously, this task is done in the machine learning style, 
+using SVD and other related algorithms. They just work for average customer and long-lived items. Now we could employ 
 neural network to solve this problems more efficiently.
 
-2. FFNN: I just know that FFNN stands for Fast Forward Neural Network, but how does it work or what is its applications, 
+2. FFNN: I just know that FFNN stands for Fast Forward Neural Network, but how does it work or what its applications are, 
 I totally have no ideas since Amazon doesn't present anything about it
 
 3. HRNN: It stands for Hierarchical Recurrent Neural Network. HRNN system is employed to predict the user's behavior 
 changes with time. The more recent activities will have more weight than the old ones. The timestamp data will be 
 incorporated into the system so that we could predict more accurately.
 
-4. Popularity-baseline: It simply count the most popular item in the dataset. It is usually considered as the baseline 
+4. Popularity-baseline: It simply counts the most popular item in the dataset. It is usually considered as the baseline 
 to compare other recipes.
 
 5. Search Personalization: It is used to predict the user preferences: which one he likes the most ? etc.
@@ -98,7 +98,7 @@ to compare other recipes.
 interactions between users and items to recommend the similar items to the users. In the absence of user-item 
 interactions dataset, it is the most optimal recipe.
 
-Other than built-in algorithm, if you want to tailor yourself a recipe, Personalize also support that. You just have to 
+Other than built-in algorithm, if you want to tailor yourself a recipe, Personalize also supports that. You just have to 
 dockerize your algorithm in SageMaker standard and store it in ECR.
 
 
@@ -148,7 +148,7 @@ boto3.Session().resource('s3').Bucket(bucket).Object(filename).upload_file(filen
 
 Noted that you have to specify your key and secret key in the Session() in order to upload it successfully.
 
-- Then define the schema for your data. The reason is EMR will play the role of preprocessing your data and DataFrame 
+- Then define the schema for your data. The reason is EMR will play the role of pre-processing your data and DataFrame 
 is its favorite data format. The schema must follow Avro format
 
 ```py
@@ -326,7 +326,7 @@ print json.dumps(create_campaign_response, indent=2)
 ```
 
 Noted that updateMode equals 'MANUAL' means that we may have the more updated solution using more data but we have to 
-update it in the campaign ourself. Surely, we can make it automatic by changing the value.
+update it in the campaign our-self. Surely, we can make it automatic by changing the value.
 
 - Wait for the above step to complete
 
@@ -368,7 +368,7 @@ print "Recommendations: {}".format(json.dumps(title_list, indent=2))
 
 # IV. Conclusion
 
-This service, to me, is very promising since it is really the expertise of Amazon. However, it is still in developing. 
+This service, to me, is very promising since it is really the expertise of Amazon. However, it is still in development. 
 By the time this blog is published, I still cannot get the authorization to try it and the document is still a mess. 
 But hey, stay tuned for the upcoming news from Amazon.
 

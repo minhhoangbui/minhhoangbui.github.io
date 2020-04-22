@@ -6,12 +6,18 @@ subtitle: My life as a data scientist so far
 
 ## Since 03/2019: R&D Engineer in AWL Vietnam
 
-My second official job is with AWL Vietnam. This company focuses on the application of Computer Vision in retail. At 
-the moment, we are working on a project of person re-identification in stores, which runs on RaspberryPi 3. Thus, it 
-requires us to choose a lightweight neural architecture and optimise it wisely.
+My second official job is with AWL Vietnam. This company focuses on the application of Computer Vision in retail. From 
+03-06/2019, I worked on a project of person re-identification in stores, which runs on RaspberryPi 3. Thus, it 
+required us to choose a lightweight neural architecture and optimise it wisely.
 
-In order to finish my tasks, I have to equip myself several machine learning techniques such as model distillation, 
-model compression etc. as well as programming skills to deploy the models into embedded system.
+From 06-12/2020, I was in charge of 2D pose estimation module. After a while doing survey about this domain, I've decided 
+to focus on top-down approaches due to availability of tracking function and higher accuracy. This architecture could be 
+empowered even more using knowledge distillation I have deployed a holistic system using DSOD plus HourGlass 
+architecture to detect fare evasion in Kyushu(Japan).
+
+At the moment, I am working as a senior engineer who is in charge of R&D Activities in Behaviour Estimation. My research 
+interests include Bottom-Up Pose Estimation, Skeletal-Based and Visual-Based Action Recognition.
+
 
 ## From 10/2017 to 02/2019: Data Scientist in Chappiebot Inc.
 

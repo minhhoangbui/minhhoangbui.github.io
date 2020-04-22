@@ -13,7 +13,7 @@ seems plausible to us. In this blog, I want to tell you about the journey of fin
 # I. What is retrieval and what is clustering
 
 Giving an item, *retrieval* helps you to find a similar item to that by calculating the distances between the given 
-item and every other items in the item space. To do this, the most important thing is to find an appropriate metric 
+item and every other items in the item space. To do this, the most important task is to find an appropriate metrics 
 which helps you to compute the similarity between things.
 
 <p align="center">
@@ -22,8 +22,8 @@ which helps you to compute the similarity between things.
 </p>
 
 On the other hand, clustering helps you to group the similar items in the space. Items with similar characteristics will 
-be near each other and then we assume that they are in the same cluster. Obviously, every problems which is related to 
-similarity is in need of a distance metrics. Each cluster will be represented by its centroids, which is in most cases 
+be near each other and then we assume that they are in the same cluster. Obviously, every problem which is related to 
+similarity is in need of a distance metrics. Each cluster will be represented by its centroid, which is in most cases 
 the average point of the items in that cluster.
 
 <p align="center">
@@ -82,7 +82,7 @@ are 2 critical elements that need considering carefully: the vectorized represen
 In case of text, there are many methods that could help us to vectorize the documents, like:
 
 * Bag of Word (BoW): It is quite similar to the histogram in the visual domain. We count the occurrence of each word in 
-the corpus, then make the vector with that. There is a major drawbacks with this idea: There are some words which appear 
+the corpus, then make the vector with that. There is a major drawback with this idea: There are some words which appear 
 in almost every document like *a, the, you, etc.*
 
 * TF-IDF: It uses the same idea of word count, but TF-IDF penalize the score of words which appear in different 
@@ -96,7 +96,7 @@ easily from the Internet.
 
 $$ distance(x_i, x_q) = \sqrt{a_1(x_i[1] - x_q[1])^2 + .. + a_d(x_i[d] - x_q[d])^2}$$
 
-$$a_1, .., a_d$$ are the weights for each feature. This feature selection is in fact not very popular in the real life 
+$$a_1, .., a_d$$ are the weights for each feature. This feature selection is in fact not very popular in reality 
 since feature engineering is always hard for us. So the non-scaled version is more preferable:
 
 $$ distance(x_i, x_q) = \sqrt{a_1(x_i[1] - x_q[1])^2 + .. + a_d(x_i[d] - x_q[d])^2}$$
@@ -127,21 +127,21 @@ of Nearest Neighbor?
 
 There are three steps:
 
-1. Exploring the leaf node that contains our query item:
+- Step 1: Exploring the leaf node that contains our query item:
 
 <p align="center">
  <img src="/image/retrieval/step1.png" alt="" align="middle">
  <div align="center"> Find the bin of the query item</div>
 </p>
 
-2. Compute the distance to other points in the leaf node and save the nearest distance to $$NN$$
+- Step 2: Compute the distance to other points in the leaf node and save the nearest distance to $$NN$$
 
 <p align="center">
  <img src="/image/retrieval/step2.png" alt="" align="middle">
  <div align="center"> Compute the temporary nearest distance</div>
 </p>
 
-3. Backtrack using traversal techniques and try other branches. If the distance from the query point to the branch is 
+- Step 3: Backtrack using traversal technique and try other branches. If the distance from the query point to the branch is 
 shorter than the current nearest distance, we examine this branch to compute the (maybe) next nearest distance. If not, 
 we just ignore the branch and move the next one.
 
@@ -157,7 +157,7 @@ than $$NN/\alpha$$ ($$\alpha > 1$$).
 
 ### Local sensitive hashing
 
-KD-Tree is cool but it has its own drawback. First of all, it is not easy to implement it efficiently. Secondly, when 
+KD-Tree is cool but it has its own drawbacks. First of all, it is not easy to implement it efficiently. Secondly, when 
 the dimension of the vector is large, the computation is quite expensive. So we move to another method: Local sensitive 
 hashing. In this method, we define the line to divide the item space into different bins and we just examine the items 
 residing in the same bin with the query one.

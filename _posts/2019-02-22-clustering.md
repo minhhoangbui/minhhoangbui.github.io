@@ -4,7 +4,7 @@ title: Clustering and Retrieval (Part 2)
 ---
 
 In this blog, I will dive deeper into the techniques of clustering. Clustering or segmentation has wide applications, 
-particularly in RecSys, when you can have the insight about users preferences given their activities. For examples, 
+particularly in RecSys, when you can have the insight about users's preferences given their activities. For examples, 
 assuming that we have a list of articles that user A reads everyday, we can extract his favorite topics and then give 
 him what he likes.
 
@@ -19,7 +19,7 @@ classification has label for each input whereas the clustering doesn't.
  <div align="center"> Clustering goal</div>
 </p>
 
-So what is a cluster and what characterizes it? A cluster in space is a group of similar points which stay near each 
+So what a cluster is and what characterizes it? A cluster in space is a group of similar points which stay near each 
 other. Each cluster is defined by its centroid and its shape. An observation $$x_i$$ is assigned to cluster $$C_j$$ if 
 the score between $$x_i$$ and $$C_j$$ is the smallest in comparison to other clusters
 
@@ -87,7 +87,7 @@ Nowadays, most parallel computing frameworks in Big Data employs the mechanism o
 mechanism can be found in this [blog](/2018-10-30-apache-hadoop-introduction/). Fortunately, two steps of cluster 
 assignment and centroids update fit perfectly MapReduce.
 
-In the Map phase, we distribute the data points to the mapper. The mapper now compute the distance from data points to 
+In the Map phase, we distribute the data points to the mapper. The mapper now computes the distance from data points to 
 the centroids and then do the assignment. In the Reduce phase, every data points with the same labels will go to the 
 same reducer and each reducer will update the centroids. The above process will be repeated until convergence.
 

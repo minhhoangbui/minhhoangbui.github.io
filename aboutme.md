@@ -4,7 +4,7 @@ title: About me
 subtitle: On my way becoming successful
 ---
 
-My name is Minh-Hoang Bui, a junior data scientist.
+My name is Minh-Hoang Bui, a deep learning engineer.
 
 I graduated from Department of Electrical and Electronic Engineering of Ho Chi Minh University of Technology, one of the 
 most prestigious engineering school in Vietnam. During my bachelor, I studied about signal processing, embedded 
@@ -18,10 +18,11 @@ My role here is to develop and implement state-of-the-art algorithm to classify 
 preprocess user command using NLP.
 
 At the moment, I'm working in a Japanese company which focuses on the applications of Deep Learning, especially Computer 
-Vision, in retail industry. My main mission is to optimize deep learning model to work well within embedded system.
+Vision, in retail industry. My main mission is to optimize deep learning model to work well in edge devices as well as
+servers.
 
 I work mainly in Python and my favorite frameworks in Deep Learning are TensorFlow and PyTorch.
-As a junior data scientist, I am motivated and willing to contribute my knowledge and skills to any companies which 
+As a machine learning scientist, I am motivated and willing to contribute my knowledge and skills to any companies which 
 treasure them. I am open to any offer in the domain of Data Science which involves researching and implementing deep 
 learning architectures.
 
