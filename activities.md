@@ -12,7 +12,7 @@ required us to choose a lightweight neural architecture and optimise it wisely.
 
 From 06-12/2020, I was in charge of 2D pose estimation module. After a while doing survey about this domain, I've decided 
 to focus on top-down approaches due to availability of tracking function and higher accuracy. This architecture could be 
-empowered even more using knowledge distillation I have deployed a holistic system using DSOD plus HourGlass 
+boosted even more using knowledge distillation I have deployed a holistic system using DSOD plus HourGlass 
 architecture to detect fare evasion in Kyushu(Japan).
 
 At the moment, I am working as a senior engineer who is in charge of R&D Activities in Behaviour Estimation. My research 
@@ -23,21 +23,21 @@ interests include Bottom-Up Pose Estimation, Skeletal-Based and Visual-Based Act
 
 After graduating from Master course, I returned to Vietnam and joined this startup ever since.
 
-In the beginning, I was assigned to cover the computer vision part of _OtoNhanh.vn_. We constructs this site as a 
-connection between dealer system and end user in automobile industry. People can access the gallery collection of 
+In the beginning, I was assigned to cover the computer vision part of _OtoNhanh.vn_. We constructed this site as a 
+connection between dealer system and end-user in automobile industry. People can access the gallery collection of 
 almost every car in the market and also can book a test drive online. Every image in this site is arranged with the 
 help of machine learning techniques like image classification and image similarity.
 
-Then, we construct a news distribution platform for 24h Inc., a large multimedia corporation in Vietnam. To boost the 
-profit for the company, they decide to build a personalized news distribution for each user. We investigate the action 
-of each user, predict their preferences then give them what they want. This project requires various techniques in NLP 
-like NER Tagger, Topic classification, etc. Beside that, we have to build a solid platform for storing data and 
+Then, we constructed a news distribution platform for 24h Inc., a large multimedia corporation in Vietnam. To boost the 
+profit for the company, they decided to build a personalized news distribution for each user. We investigated the actions 
+of each user, predicted their preferences then gave them what they want. This project required various techniques in NLP 
+like NER Tagger, Topic classification, etc. Beside that, we had to build a sophisticated platform for storing data and 
 distributing smoothly the articles to millions of users.
 
-During this time, I acquire several skills in deployment with Deep Learning, how to transform a scientific article to a 
-machine learning model then make it usable by the outsider in a scalable way. Furthermore, in the startup, I'm given the 
-opportunity to study more about other applications of machine learning which I have not got a chance to know like image 
-similarity or Name-entity recognition etc. It is rough but it helps to broaden my mind in this particular domain.
+During this time, I acquired several skills in deployment with Deep Learning, how to transform a scientific article to a 
+machine learning model then make it usable by the outsider in a scalable way. Furthermore, in the startup, I was given the 
+opportunity to study more about other applications of machine learning which I had't got a chance to know like image 
+similarity or Name-entity recognition etc. It was rough but it helped to broaden my horizon in this particular domain.
 
 ## 01/2017 - 09/2017: Research Intern in CEA-LETI
 

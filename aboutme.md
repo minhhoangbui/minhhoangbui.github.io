@@ -22,7 +22,7 @@ Vision, in retail industry. My main mission is to optimize deep learning model t
 servers.
 
 I work mainly in Python and my favorite frameworks in Deep Learning are TensorFlow and PyTorch.
-As a machine learning scientist, I am motivated and willing to contribute my knowledge and skills to any companies which 
+As a machine learning engineer, I am motivated and willing to contribute my knowledge and skills to any companies which 
 treasure them. I am open to any offer in the domain of Data Science which involves researching and implementing deep 
 learning architectures.
 

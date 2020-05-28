@@ -5,8 +5,8 @@ title: Pose Extraction in Retail Industry
 
 In the age when vision technology thrive remarkably, Computer Vision and its application become more and more rife, 
 particularly in retail industry where a host of issues remains unsolved. In AWL Vietnam, we are concentrating on 
-developing a system detecting wrongdoings and analyzing customers's behaviour. One of the concrete pillar of this system 
-is the module of Pose Extraction.
+developing a system detecting wrongdoings and analyzing customers's behaviours. One of the concrete pillar of this 
+system is the module of Pose Extraction.
 
 # I. Overview
 There are two approaches to solve this problem: top-down and bottom-up. In top-down approach, we detect the keypoints of 
@@ -14,7 +14,7 @@ one person in the image while the bottom-up, the model is capable of detecting t
 Each has its own perks:  
 - Top-down method: In case of multi-people case, we need to employ the human detection model to explore all the bounding 
 boxes containing person. So in this case, the processing time is proportional to the number of people is this frame. 
-However, this model is accurate as it can resolve the occlusion in many cases.
+However, this model is accurate as it can resolve the occlusion and overlapping in many cases.
 - Bottom-up method: This model could detect the joints of many people at once. In order to connect joints from different 
 people, this architecture also predicts joints connection. Even though this method guarantees stable speed during 
 inference, its performance in term of accuracy is poor.
@@ -25,11 +25,11 @@ understanding of body and scale invariance. This architecture consists of two ma
 refinement blocks:
 <p align="center">
  <img src="/image/pose/hourglass.png" alt="" align="middle">
- <div align="center"> Challenging topologies</div>
+ <div align="center">HourGlass architecture</div>
 </p>
 
 In HourGlass, backbone resembles ResNet architecture much and this module is used to predict the very first output, 
-which is a heatmap in the context of pose estimation, each heatmap for each joint. Hourglass-like refinement blocks 
+which is heatmaps in the context of pose estimation, each heatmap for each joint. Hourglass-like refinement blocks 
 receive this prediction as a starting point. They execute consecutively several down-sampling and up-sampling layers to 
 produce more refined heatmaps. The more the number of refinement blocks, the better the final results seem to be.
 
@@ -64,7 +64,7 @@ def forward(self, x):
 
 ### *Intermediate Supervision*
 Another interesting point of HourGlass implementation is that the final loss is computed from heatmaps of every 
-refinement block. This guarantee better prediction after every refinement blocks, not only the last one.
+refinement block. This guarantees better prediction after every refinement blocks, not only the last one.
 
 ```python
 loss = 0
@@ -75,7 +75,7 @@ for o in output:
 ### *Knowledge distillation*
 Thanks to this stacked architecture, we are able to use knowledge distillation technique. We could use model with more 
 stacks to teach the less one which is more lightweight. However, in my experiments, improvement is limited when I trained
-student model using groundtruth labels and teacher model
+student model using ground-truth labels and teacher model.
 
 ```python
 for j in range(0, len(output)):
@@ -148,7 +148,7 @@ def generate_target(self, joints, joints_vis):
 Since both predictions and targets are continuous variables, we use MSELoss to compute the loss between those.
 
 ### *Pros and cons*
-It is undeniable that accuracy of this approach is high in both public datasets (MPII, COCO) and private datasets. 
+It is undeniable that accuracy of this approach is higher in both public datasets (MPII, COCO) and private datasets. 
 Nevertheless, its dependence on person detection poses several challenges for me. Firstly, overall speed relies heavily 
 on the number of bounding boxes. The more this number is, the slower the whole system runs. 
 Secondly, it also depends on the quality of bounding box. If person detection module fails to capture the whole body, 
@@ -171,9 +171,9 @@ over successive stages.
 
 The original implementation is on Caffe and quite heavy. There has been tremendous effort to bring this architecture to
 mobile devices or embedded systems, [Lightweight OpenPose](https://arxiv.org/pdf/1905.08711.pdf) is one of those. In 
-this implementation, they use lightweight backbones like MobileNetV2 or ShuffleNet. Furthermore, they leverage shared 
-computation to accelerate inference speed. Having said that, from my observation, its accuracy is not high enough for 
-real-time applications.
+this implementation, they use lightweight backbones like MobileNetV2 or ShuffleNet instead of VGG16. Furthermore, they 
+leverage shared computation to accelerate inference speed. Having said that, from my observation, its accuracy is not 
+high enough for real-life applications.
 
 In Lightweight OpenPose, initial predictions of keypoints and PAFs are made like this:
 ```python
