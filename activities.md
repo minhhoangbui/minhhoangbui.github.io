@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Activities
-subtitle: My life as a data scientist so far
+subtitle: My life as a ML/DL engineer so far
 ---
 
 ## Since 03/2019: R&D Engineer in AWL Vietnam
