@@ -4,7 +4,7 @@ title: Activities
 subtitle: My life as a ML/DL engineer so far
 ---
 
-## Since 03/2019: R&D Engineer in AWL Vietnam
+## From 03/2019 to 03/2021: Deep Learning Engineer in AWL Vietnam
 
 My second official job is with AWL Vietnam. This company focuses on the application of Computer Vision in retail. From 
 03-06/2019, I worked on a project of person re-identification in stores, which runs on RaspberryPi 3. Thus, it 
@@ -19,7 +19,7 @@ At the moment, I am working as a senior engineer who is in charge of R&D Activit
 interests include Bottom-Up Pose Estimation, Skeletal-Based and Visual-Based Action Recognition.
 
 
-## From 10/2017 to 02/2019: Data Scientist in Chappiebot Inc.
+## From 10/2017 to 02/2019: Machine Learning Engineer in Chappiebot Inc.
 
 After graduating from Master course, I returned to Vietnam and joined this startup ever since.
 
