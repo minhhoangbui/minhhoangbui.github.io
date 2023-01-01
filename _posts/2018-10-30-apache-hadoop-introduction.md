@@ -158,4 +158,4 @@ This framework is so vast so that I cannot cover in a single blog. In the upcomi
 
 - [Hadoop Tutorial: All you need to know about Hadoop!](https://www.edureka.co/blog/hadoop-tutorial/)
 
-- [Apache Hadoop Tutorial | Hadoop Tutorial For Beginners](https://www.youtube.com/watch?v=mafw2-CVYnA)
+- [Apache Hadoop Tutorial \| Hadoop Tutorial For Beginners](https://www.youtube.com/watch?v=mafw2-CVYnA)
