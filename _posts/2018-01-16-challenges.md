@@ -6,14 +6,9 @@ title: Challenges and Prospective
 In this last blog of the series, I am talking about the challenges I have met during the work and some way of using 
 Computer Vision to enhance user experience with our website.
 
-# Challenges
+## Challenges
 
-- We collect images in automobile industry automatically by our crawler. In this process, some images are not 
-well-defined(multiple objects in one image, image which is difficult to recognize the object, even for human)... 
-Obviously, we could set a threshold to ignore images with low confidence score. However, in many cases, the models 
-can give a very high 'thumb-up' for these kind of images. So the most optimal solution in this case is the intervention 
-of human during the acquisition. After crawling the images from the internet, our firm will check and delete 
-unwell-defined images before giving them to our classification models.
+- We collect images in automobile industry automatically by our crawler. In this process, some images are not well-defined(multiple objects in one image, image which is difficult to recognize the object, even for human)... Obviously, we could set a threshold to ignore images with low confidence score. However, in many cases, the models can give a very high 'thumb-up' for these kind of images. So the most optimal solution in this case is the intervention of human during the acquisition. After crawling the images from the internet, our firm will check and delete unwell-defined images before giving them to our classification models.
 
 <p align="center">
 <img src="/image/Introduction_CNN/1503650313909.jpg" alt="" align="middle">
@@ -44,23 +39,17 @@ For example, the images from 'left_front_view' and 'right_rear_view' are similar
  <div align="center">Left_front_view image</div>
 </p>  
 
-- The decision of model is sometimes inconsistent due to the fact that we use random cropping in our pre-processing. 
-Images from the internet are various in size, so we have to use random cropping to fix the size of the input as well 
-as a way to regularize the model. Nevertheless, it leads to the different results in each inference.
+- The decision of model is sometimes inconsistent due to the fact that we use random cropping in our pre-processing. Images from the internet are various in size, so we have to use random cropping to fix the size of the input as well as a way to regularize the model. Nevertheless, it leads to the different results in each inference.
 
-# Prospective work
+## Prospective work
 
-In [OtoNhanh](https://otonhanh.vn), we aim at improving end-user experience with our website, and Computer Vision will
-be an important part. Our forthcoming works will be:  
+In [OtoNhanh](https://otonhanh.vn), we aim at improving end-user experience with our website, and Computer Vision willbe an important part. Our forthcoming works will be:  
 
-- Since our current classification is just at the low level: it can only capture the shallow semantic feature. We are 
-in need of more detailed investigation, including image similarity in a same class or car orientation estimation.
+- Since our current classification is just at the low level: it can only capture the shallow semantic feature. We are in need of more detailed investigation, including image similarity in a same class or car orientation estimation.
 
 [3D Pose Regression using Convolutional Neural Networks](http://juxi.net/workshop/deep-learning-robotic-vision-cvpr-2017/papers/9.pdf)  
 [Learning Fine-grained Image Similarity with Deep Ranking](https://static.googleusercontent.com/media/research.google.com/vi//pubs/archive/42945.pdf)  
 
 - We also target at the Interior 3D Reconstruction so that the user can have a lively view of the car.
 
-- For data collection, we intend to integrate a secondary model to the crawler. It will play the role of labeling the 
-crawled images automatically. Then someone from our firm will justify their validity before give them to our main models 
-as training data.
+- For data collection, we intend to integrate a secondary model to the crawler. It will play the role of labeling the crawled images automatically. Then someone from our firm will justify their validity before give them to our main models as training data.

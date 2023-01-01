@@ -3,37 +3,29 @@ layout: post
 title: Pose Extraction in Retail Industry
 ---
 
-In the age when vision technology thrive remarkably, Computer Vision and its application become more and more rife, 
-particularly in retail industry where a host of issues remains unsolved. In AWL Vietnam, we are concentrating on 
-developing a system detecting wrongdoings and analyzing customers's behaviours. One of the concrete pillar of this 
-system is the module of Pose Extraction.
+In the age when vision technology thrive remarkably, Computer Vision and its application become more and more rife, particularly in retail industry where a host of issues remains unsolved. In AWL Vietnam, we are concentrating on developing a system detecting wrongdoings and analyzing customers's behaviours. One of the concrete pillar of this system is the module of Pose Extraction.
 
-# I. Overview
-There are two approaches to solve this problem: top-down and bottom-up. In top-down approach, we detect the keypoints of 
-one person in the image while the bottom-up, the model is capable of detecting the pose of several people in the image. 
-Each has its own perks:  
-- Top-down method: In case of multi-people case, we need to employ the human detection model to explore all the bounding 
-boxes containing person. So in this case, the processing time is proportional to the number of people is this frame. 
-However, this model is accurate as it can resolve the occlusion and overlapping in many cases.
-- Bottom-up method: This model could detect the joints of many people at once. In order to connect joints from different 
-people, this architecture also predicts joints connection. Even though this method guarantees stable speed during 
-inference, its performance in term of accuracy is poor.
+## I. Overview
 
-# II. Top-down approach
-A representative architecture of this method is HourGlass. This network design is motivated by the need of coherent 
-understanding of body and scale invariance. This architecture consists of two main elements: backbone block and 
-refinement blocks:
+There are two approaches to solve this problem: top-down and bottom-up. In top-down approach, we detect the keypoints of one person in the image while the bottom-up, the model is capable of detecting the pose of several people in the image. Each has its own perks:
+
+- Top-down method: In case of multi-people case, we need to employ the human detection model to explore all the bounding boxes containing person. So in this case, the processing time is proportional to the number of people is this frame. However, this model is accurate as it can resolve the occlusion and overlapping in many cases.
+
+- Bottom-up method: This model could detect the joints of many people at once. In order to connect joints from different people, this architecture also predicts joints connection. Even though this method guarantees stable speed during inference, its performance in term of accuracy is poor.
+
+## II. Top-down approach
+
+A representative architecture of this method is HourGlass. This network design is motivated by the need of coherent understanding of body and scale invariance. This architecture consists of two main elements: backbone block and refinement blocks:
+
 <p align="center">
  <img src="/image/pose/hourglass.png" alt="" align="middle">
  <div align="center">HourGlass architecture</div>
 </p>
 
-In HourGlass, backbone resembles ResNet architecture much and this module is used to predict the very first output, 
-which is heatmaps in the context of pose estimation, each heatmap for each joint. Hourglass-like refinement blocks 
-receive this prediction as a starting point. They execute consecutively several down-sampling and up-sampling layers to 
-produce more refined heatmaps. The more the number of refinement blocks, the better the final results seem to be.
+In HourGlass, backbone resembles ResNet architecture much and this module is used to predict the very first output, which is heatmaps in the context of pose estimation, each heatmap for each joint. Hourglass-like refinement blocks receive this prediction as a starting point. They execute consecutively several down-sampling and up-sampling layers to produce more refined heatmaps. The more the number of refinement blocks, the better the final results seem to be.
 
 Forward flow looks like this:
+
 ```python
 def forward(self, x):
     # x [N*256*256*3]
@@ -62,9 +54,9 @@ def forward(self, x):
     return out
 ```
 
-### *Intermediate Supervision*
-Another interesting point of HourGlass implementation is that the final loss is computed from heatmaps of every 
-refinement block. This guarantees better prediction after every refinement blocks, not only the last one.
+### Intermediate Supervision
+
+Another interesting point of HourGlass implementation is that the final loss is computed from heatmaps of every refinement block. This guarantees better prediction after every refinement blocks, not only the last one.
 
 ```python
 loss = 0
@@ -72,7 +64,8 @@ for o in output:
     loss += criterion(o, target, target_weight)
 ```
 
-### *Knowledge distillation*
+### Knowledge distillation
+
 Thanks to this stacked architecture, we are able to use knowledge distillation technique. We could use model with more 
 stacks to teach the less one which is more lightweight. However, in my experiments, improvement is limited when I trained
 student model using ground-truth labels and teacher model.
@@ -87,9 +80,10 @@ acc = accuracy(score_map, target, idxs=idxs)
 total_loss = kdloss_alpha * kd_loss + (1.0 - kdloss_alpha) * gt_loss
 ```
 
-### *Data Preparation and Loss Function*
-For each bounding box, we have corresponding joint coordinates. In order to transform these numbers into useful labels. 
-We use Gaussian Transform to create heatmaps from coordinates:
+### Data Preparation and Loss Function
+
+For each bounding box, we have corresponding joint coordinates. In order to transform these numbers into useful labels. We use Gaussian Transform to create heatmaps from coordinates:
+
 ```python
 def generate_target(self, joints, joints_vis):
     '''
@@ -145,24 +139,22 @@ def generate_target(self, joints, joints_vis):
 
     return target, target_weight
 ```
+
 Since both predictions and targets are continuous variables, we use MSELoss to compute the loss between those.
 
-### *Pros and cons*
-It is undeniable that accuracy of this approach is higher in both public datasets (MPII, COCO) and private datasets. 
-Nevertheless, its dependence on person detection poses several challenges for me. Firstly, overall speed relies heavily 
-on the number of bounding boxes. The more this number is, the slower the whole system runs. 
-Secondly, it also depends on the quality of bounding box. If person detection module fails to capture the whole body, 
-top-down methods cannot deduce accurate keypoints.
+### Pros and cons
 
-# III. Bottom-up approach
+It is undeniable that accuracy of this approach is higher in both public datasets (MPII, COCO) and private datasets. Nevertheless, its dependence on person detection poses several challenges for me. Firstly, overall speed relies heavily on the number of bounding boxes. The more this number is, the slower the whole system runs.
+Secondly, it also depends on the quality of bounding box. If person detection module fails to capture the whole body, top-down methods cannot deduce accurate keypoints.
+
+## III. Bottom-up approach
+
 The most renowned architecture must be OpenPose by CMU. Generally speaking, this approach does not only predict heatmaps
-but also Part Affinity Field (PAF) which could be described as pairwise connection between keypoints. This extension 
-helps us to differentiate keypoints from different people in the same frame.
-Bottom-up architecture shares the same iterative idea of top-down approach when the result is refined over and over in 
-order to produce satisfactory result. It consists of two parts:
+but also Part Affinity Field (PAF) which could be described as pairwise connection between keypoints. This extension helps us to differentiate keypoints from different people in the same frame.
+Bottom-up architecture shares the same iterative idea of top-down approach when the result is refined over and over in order to produce satisfactory result. It consists of two parts:
+
 - ConvNet provides two tensors: keypoint heatmaps and their corresponding pairwise relations (PAFs).
-- Grouping keypoints of same person to each other to acquire the initial prediction. This prediction will be refined 
-over successive stages.
+- Grouping keypoints of same person to each other to acquire the initial prediction. This prediction will be refined over successive stages.
 
 <p align="center">
  <img src="/image/pose/openpose.png" alt="" align="middle">
@@ -170,12 +162,10 @@ over successive stages.
 </p>
 
 The original implementation is on Caffe and quite heavy. There has been tremendous effort to bring this architecture to
-mobile devices or embedded systems, [Lightweight OpenPose](https://arxiv.org/pdf/1905.08711.pdf) is one of those. In 
-this implementation, they use lightweight backbones like MobileNetV2 or ShuffleNet instead of VGG16. Furthermore, they 
-leverage shared computation to accelerate inference speed. Having said that, from my observation, its accuracy is not 
-high enough for real-life applications.
+mobile devices or embedded systems, [Lightweight OpenPose](https://arxiv.org/pdf/1905.08711.pdf) is one of those. In this implementation, they use lightweight backbones like MobileNetV2 or ShuffleNet instead of VGG16. Furthermore, they leverage shared computation to accelerate inference speed. Having said that, from my observation, its accuracy is not high enough for real-life applications.
 
 In Lightweight OpenPose, initial predictions of keypoints and PAFs are made like this:
+
 ```python
 class InitialStage(nn.Module):
     def __init__(self, num_channels, num_heatmaps, num_pafs):
@@ -204,12 +194,15 @@ class InitialStage(nn.Module):
 Furthermore, if you want to find out how they create PAFs label for training, please have a look at their original 
 github repository.
 
-### *Pros and cons*
-##### Advantages:
+### Pros and cons
+
+#### Advantages
+
 - Inference speed stays stable during inference speed since its input is frame, not bounding box.
 - It simplifies the whole system since we don't have to integrate person detection module.
 
-##### Disadvantages:
+#### Disadvantages
+
 - The unavailability of tracking module: Since we don't have bounding boxes at our disposal, we cannot utilise traditional
 tracking algorithms like Sort or DeepSort. At the moment, there is a new efficient solution for this named [Spatial 
 Temporal Affinity Field](https://arxiv.org/pdf/1811.11975), however implementation in popular frameworks is not available
@@ -219,16 +212,12 @@ of bottom-up approach is to connect nearby keypoints so discrete inference is im
 keypoints to be workable.
 - Accuracy is pretty low.
 
+## IV. Conclusion
 
-# IV. Conclusion
 Based on my experience, while recent improvement for top-down methods is negligible, there is a great deal of space for
-bottom-up approach to enhance, including accuracy and tracking ability. This is the issue that my team and I aim to 
-tackle in the next stage.
+bottom-up approach to enhance, including accuracy and tracking ability. This is the issue that my team and I aim to tackle in the next stage.
 
-# V. Reference:
+## V. Reference
+
 1. [OpenPose: Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields](https://arxiv.org/pdf/1812.08008)
 2. [Lightweight Network Architecture for Real-Time Action Recognition](https://arxiv.org/pdf/1905.08711)
-
-
-
-
