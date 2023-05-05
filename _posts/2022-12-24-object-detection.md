@@ -1,6 +1,6 @@
 ---
 layout: post
-title: SSD versus YOLO
+title: SSD vs YOLO
 author: hoangbm
 ---
 
