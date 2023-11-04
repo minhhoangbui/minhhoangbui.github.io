@@ -27,11 +27,8 @@ Conv7: 19×19×6 = 2166 boxes (6 boxes for each location)
 Conv8_2: 10×10×6 = 600 boxes (6 boxes for each location)
 Conv9_2: 5×5×6 = 150 boxes (6 boxes for each location)
 Conv10_2: 3×3×4 = 36 boxes (4 boxes for each location)
-Conv11_2: 1×1×4 = 4 boxes (4 boxes for each location
+Conv11_2: 1×1×4 = 4 boxes (4 boxes for each location)
 ```
-
-Why 125 here?
-Suppose for each grid cell we predict 5 bounding boxes, each bounding box has 4 coordinate values and are 21 classes, then `(20 + 5) * 5 = 125`. One thing that SSD is different from YOLO is that it considers background as a class along with 20 actual class from VOC Dataset.
 
 <p align="center">
      <img src="/image/object_detection/ssd.png" alt="" align="middle">
@@ -44,15 +41,18 @@ The first version of YOLO don't give a damn about multiscale. The last Conv laye
 <p align="center">
      <img src="/image/object_detection/yolo_v1.png" alt="" align="middle">
      <div align="center">
-        How YOLOv1 produces its output.
+        How YOLOv3 produces its output.
     </div>
 </p>
-
 
 That's the reason why YOLOv3 implements multiscale detection. With an image of input `1 x 416 x 416 x3`,
 this creates a output in form of a list of 3 `[(1 x 13 x 13 x 125), (1 x 26 x 26 x 125), (1 x 52 x 52 x 125)]`.
 
-Another thing is that while SSD considers background as a class, YOLO gives another meaning to this number, `objectness score`, which indicates the probability there is a object in this grid cell. It's more intuitive, in my opinion. Considering `background` as a class will lead to imbalance between this class and the others and this can't be remedied effectively by hard negative sampling.
+Why 125 here?
+
+Suppose for each grid cell we predict 5 bounding boxes, each bounding box has 4 coordinate values and are 21 classes, then `(20 + 5) * 5 = 125`.
+
+Another thing is that while SSD considers background as a class, YOLO gives another meaning to this number, `objectness score`, which indicates the probability there is a object in this grid cell. It's more intuitive, in my opinion. Considering `background` as a class will lead to imbalance between this class and the others and this can't be remedied effectively by hard negative sampling. In short, in YOLO, it is `20 + 4 + 1`, while in SSD it's `21 + 4`.
 
 <p align="center">
      <img src="/image/object_detection/yolo_v3.png" alt="" align="middle">
@@ -66,6 +66,10 @@ Basically speaking, the format of outputs is relatively the same between. There 
 ## II. Loss function
 
 I believe the second important factors of machine learning algorithm is its loss function. While input/output is the core of inference (I think), loss function is the heart of training process. In fact, understanding loss function and how it associates the output to the label is the only thing I deem important when training a model.
+
+Up until now, you can see that when we compute the forward-pass, we keep mentioning the number of anchor boxes per cell to calculate the total number value each cell must output. However, other than that, we don't use them at all, we don't know where they are, their coordinates. So when do we use them?
+
+The answer is we use it during loss computation and inference. Basically, object detector doesn't predict the bounding boxes directly like most people assume, instead it predicts the likelihood the corresponding anchor box contains object or not and its distance to the true bounding box. That's why we only need the anchor box's information when computing loss and during inference, remember `anchor box + prediction = bounding box`.
 
 From the annotation, SSD and YOLO build its ground-truth label. The label tends to have 5 values: 4 coordiates and class info. They also share the idea of matching anchor-boxes to ground-truth labels. Roughly speaking, the anchor boxes are divided into 2 groups: positive and negative. Positive group includes boxes that has IoU with groundtruth bigger than a specified threshold and vice versa. Each anchor box will associate with only one ground-truth box or nothing at all (background). And the model will predict the `correction` of coordinates and the class label for each anchor box. Why I call `correction`? This is the key idea (I think I should put it in input/output?). The model don't predict the coordinates directly but the differences between this anchor box and its corresponding gt box.
 
