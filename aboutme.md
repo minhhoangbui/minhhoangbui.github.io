@@ -10,13 +10,12 @@ I graduated from Department of Electronics and Computer Engineering of Ho Chi Mi
 
 After graduating with high distinction, I earned an [Excellence Scholarship](https://vn.ambafrance.org/Programme-de-Bourses-d-Excellence-de-l-Ambassade-de-France-au-Vietnam-appel-a-4627) from French Ministry of Foreign Affairs for Master Degree. During my time in France, I acquired knowledge about statistics and optimization, which is extremely useful for a data scientist.
 
-I have been working as MLE/SWE for the last 5 years and I love this job. In my freetime, I'd like to read tech blog in Medium and other sources. I'm also a Leetcoder, it's my way to keep my mind sharp and to be active in labour market.
+I have been working as MLE/SWE for the last 7 years and I love this job. In my freetime, I'd like to read tech blog in Medium and other sources. I'm also a Leetcoder, it's my way to keep my mind sharp and to be active in labour market.
 
-For the last 2 years, I worked at Zalo, which is the most used app in Vietnam.
+For the last 2 years, I've lived in Canada and work as a machine learning for a startup in Montreal
 
-At the moment, I have just immigrated to Canada. Hope that I will learn many things new in this country.
 
 I work mainly in Python and my favorite frameworks in Deep Learning are TensorFlow and PyTorch.
-As a machine learning engineer, I am motivated and willing to contribute my knowledge and skills to any companies which treasure them. I am open to any offer in the domain of Data Science which involves researching and implementing deep learning architectures.
+As a machine learning engineer, I am motivated and willing to contribute my knowledge and skills to any company which appreciate them. I am open to any opportunity in the domain of Data Science which involves researching and implementing deep learning architectures.
 
-Reach me out at minhhoangbui.vn@gmail.com
+Reach me out at `minhhoangbui.vn@gmail.com`
