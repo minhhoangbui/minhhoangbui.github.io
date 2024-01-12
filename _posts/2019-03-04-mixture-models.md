@@ -22,7 +22,7 @@ There are 3 parameters which need solving in order to define the densities: $$ \
 From my perspective, soft assignment (which provides us the additional information about the probability) is always better than hard assignment(which only cares about the one with highest score). For example, given the list of articles user A has read, we have to find his favorite so that we can give him what he want. Sometimes, the distance from user vector to centroid 2 is just slightly bigger than the smallest one which is the distance to centroid 4. If we play the scheme *winner takes it all*, it is really inefficient: in this case, maybe user just like two topic equally.
 
 <p align="center">
- <img src="/image/mixture-model/uncertainty.png" alt="" align="middle">
+ <img src="/images/mixture-model/uncertainty.png" alt="" align="middle">
  <div align="center"> Uncertainty in the task of clustering</div>
 </p>
 
@@ -33,21 +33,21 @@ Differently speaking, hard assignment doesn't welcome the overlap which means a 
 So how to apply this approach to our problems? Suppose we have a set of image with histogram below:
 
 <p align="center">
- <img src="/image/mixture-model/histogram.png" alt="" align="middle">
+ <img src="/images/mixture-model/histogram.png" alt="" align="middle">
  <div align="center">Histogram from data-set</div>
 </p>
 
 As we can see the distribution from the histogram, our data is a superposition from 3 single Gaussian distributions:
 
 <p align="center">
- <img src="/image/mixture-model/analysis.png" alt="" align="middle">
+ <img src="/images/mixture-model/analysis.png" alt="" align="middle">
  <div align="center"> Superposition of 3 Gaussian distribution</div>
 </p>
 
 Each Gaussian distribution $$N$$ is characterized by its mean $$\mu_k$$ and its variance $$\sigma_k$$. So what is the role of $$\pi_k$$. From the Bayesian view, the weight plays the role of prior probability which describes the proportion of each cluster member in our data-set. It can be considered as our belief of the population of each cluster in the set. Therefore, it has another name as weighted Gaussian
 
 <p align="center">
- <img src="/image/mixture-model/weighted.png" alt="" align="middle">
+ <img src="/images/mixture-model/weighted.png" alt="" align="middle">
  <div align="center"> Weighted Gaussian</div>
 </p>
 

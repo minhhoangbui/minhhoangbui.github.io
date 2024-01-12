@@ -1,7 +1,7 @@
 ---
 layout: post
 title: First post!
-image: /image/hello_world.jpeg
+image: /images/hello_world.jpeg
 ---
 
 This is my first post of my personal blog. This site is created by the inspiration of many engineering blog nowadays.

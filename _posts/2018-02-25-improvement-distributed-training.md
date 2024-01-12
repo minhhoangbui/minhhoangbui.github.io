@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Improvement in Distributed Training
-image: /image/distributed-improvement/images.png
+image: /images/distributed-improvement/images.png
 ---
 
 In the last blog about [Distributed TensorFlow](/distributed-TensorFlow), we have provided some fundamental knowledge of Distributed Training in this framework. However, it is not enough if we want to apply it efficiently. Today, we will provide some additional tricks to make use of Distributed Computing better in [OtoNhanh.vn](https://www.otonhanh.vn/).  
 
-## I) Facebook's tricks to train ImageNet faster  
+## I. Facebook's tricks to train ImageNet faster  
 
 > On June 8, 2017, the age of distributed deep learning began. On that day, Facebook released a paper showing the methods they used to reduce the training time for a convolutional neural network (RESNET-50 on ImageNet) from two weeks to one hour, using 256 GPUs spread over 32 servers.  
 
@@ -47,14 +47,14 @@ We use a low constant learning rate during a first few training epochs. However,
 
 In this setting, we gradually ramp up the learning rate from a small to large value. In practice, we start the learning rate from a value $$\eta$$ and increase it by a constant amount at each iteration so that the learning rate could reach $$\hat\eta = k\eta$$ after a number of epochs(normally 5 epochs). This setting avoids a sudden increase in the value of learning rate, allows a healthy convergence at the beginning of learning. After the warmup phase, we could go back to the original learning rate schedule.  
 
-## II) Uber framework for Distributed Training
+## II. Uber framework for Distributed Training
 
 To begin with, Uber is one of the most active companies in the field of Deep Learning. They apply Deep Learning to pair the drivers and the customers. With the augmentation of the dataset, they invest strongly to increase the computational power of their Deep Learning engine. And [Horovod](https://github.com/uber/horovod) is one of the most remarkable solutions of theirs. Horovod, in short, is a framework which helps to exploit the computational power of distributing system much more efficiently than standard [Distributed TensorFlow](/distributed-TensorFlow).  
 Back to *Distributed TensorFlow*, we have to admit that there are many new concepts like: **worker, parameter server, tf.ClusterSpec()** etc.: it is hard for a newbie to understand fully and also hard for an expert to debug his program. So we are in need of a simpler wrapper.  
 Another issue is, the standard *Distributed TensorFlow* cannot exploit fully the hardware power.
 
 <p align="center">
- <img src="/image/distributed-improvement/image4-1.png" alt="" align="middle">
+ <img src="/images/distributed-improvement/image4-1.png" alt="" align="middle">
  <div align="center">Comparison between Distributed TensorFlow and ideal computation <a href="http://eng.uber.com/wp-content/uploads/2017/10/image4-1.png">Source</a></div>
 </p>  
 
@@ -71,21 +71,21 @@ Consider that we train a model on 4 servers with 4 GPUs in each.
 - All-reduce is an operation which combines the gradients from the GPUs and distributes back to them.  
 
 <p align="center">
- <img src="/image/distributed-improvement/687474703a2f2f6d70697475746f7269616c2e636f6d2f7475746f7269616c732f6d70692d7265647563652d616e642d616c6c7265647563652f6d70695f616c6c7265647563655f312e706e67.png" alt="" align="middle">
+ <img src="/images/distributed-improvement/687474703a2f2f6d70697475746f7269616c2e636f6d2f7475746f7269616c732f6d70692d7265647563652d616e642d616c6c7265647563652f6d70695f616c6c7265647563655f312e706e67.png" alt="" align="middle">
  <div align="center">MPI-All-reduce <a href="https://camo.githubusercontent.com/73a34c7e1ff1b19e8011027934ce997e2c1d5dcf/687474703a2f2f6d70697475746f7269616c2e636f6d2f7475746f7269616c732f6d70692d7265647563652d616e642d616c6c7265647563652f6d70695f616c6c7265647563655f312e706e67">Source</a></div>
 </p>
 
 - All-gather is an operation that one process gathers data from the other processes.  
 
 <p align="center">
- <img src="/image/distributed-improvement/687474703a2f2f6d70697475746f7269616c2e636f6d2f7475746f7269616c732f6d70692d736361747465722d6761746865722d616e642d616c6c6761746865722f616c6c6761746865722e706e67.png" alt="" align="middle">
+ <img src="/images/distributed-improvement/687474703a2f2f6d70697475746f7269616c2e636f6d2f7475746f7269616c732f6d70692d736361747465722d6761746865722d616e642d616c6c6761746865722f616c6c6761746865722e706e67.png" alt="" align="middle">
  <div align="center">MPI-All-gather<a href="https://camo.githubusercontent.com/73a34c7e1ff1b19e8011027934ce997e2c1d5dcf/687474703a2f2f6d70697475746f7269616c2e636f6d2f7475746f7269616c732f6d70692d7265647563652d616e642d616c6c7265647563652f6d70695f616c6c7265647563655f312e706e67">Source</a></div>
 </p>
 
 - Broadcast is an operation that diffuses the data from one process.  
 
 <p align="center">
- <img src="/image/distributed-improvement/687474703a2f2f6d70697475746f7269616c2e636f6d2f7475746f7269616c732f6d70692d62726f6164636173742d616e642d636f6c6c6563746976652d636f6d6d756e69636174696f6e2f62726f6164636173745f7061747465726e2e706e67.png" alt="" align="middle">
+ <img src="/images/distributed-improvement/687474703a2f2f6d70697475746f7269616c2e636f6d2f7475746f7269616c732f6d70692d62726f6164636173742d616e642d636f6c6c6563746976652d636f6d6d756e69636174696f6e2f62726f6164636173745f7061747465726e2e706e67.png" alt="" align="middle">
  <div align="center">Broadcast <a href="https://camo.githubusercontent.com/7173c02d44489ca6f680b40611c1c55234e98908/687474703a2f2f6d70697475746f7269616c2e636f6d2f7475746f7269616c732f6d70692d62726f6164636173742d616e642d636f6c6c6563746976652d636f6d6d756e69636174696f6e2f62726f6164636173745f7061747465726e2e706e67">Source</a></div>
 </p>  
 
@@ -107,7 +107,7 @@ In the early 2017, Baidu published his paper [Bringing HPC Techniques to Deep Le
 as an effort to replace the above step 2 and step 3 using a protocol called ring-allreduce. In this paradigm, there is no parameter-servers to combine the gradient. The workers communicate with each other.  
 
 <p align="center">
- <img src="/image/distributed-improvement/image4-2.png" alt="" align="middle">
+ <img src="/images/distributed-improvement/image4-2.png" alt="" align="middle">
  <div align="center">How the workers combine the gradients between them <a href="http://eng.uber.com/wp-content/uploads/2017/10/image4-2.png">Source</a></div>
 </p>
 
@@ -216,7 +216,7 @@ Recall that *Give the sufficient buffer, this paradigm can leverage the hardware
 The detail benchmark can be found in the [Uber Engineering site](https://eng.uber.com/horovod/). To be short, Horovod overpowers the traditional paradigm, especially when the number of GPUs grows higher.  
 
 <p align="center">
- <img src="/image/distributed-improvement/image6-768x330.png" alt="" align="middle">
+ <img src="/images/distributed-improvement/image6-768x330.png" alt="" align="middle">
  <div align="center">Comparison between Distributed TensorFlow and Horovod over the number of GPUs.<a href="http://eng.uber.com/wp-content/uploads/2017/10/image6.png">Source</a></div>
 </p>  
 
@@ -226,7 +226,7 @@ Uber also make a comparison between 2 communication protocols TCP and RDMI. Howe
 
 To sum up, Facebook's paper and Uber framework really make an echo in the community. They provide us a way to leverage distributing computing, which is important in the production. Horovod is still in its early stage of development, there are still some issues with it like MPI installation and deep learning scaling. In [OtoNhanh.vn](https://www.otonhanh.vn/), we have implemented Horovod in our classification training and the result is promising, especially when people use the Amazon platform which allows the GPUs to be fully connected to each other.
 
-## References:
+## References
 
 - [Uber Engineering site](https://eng.uber.com/horovod/)
 - [Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour](https://arxiv.org/pdf/1706.02677.pdf)

@@ -13,7 +13,7 @@ Please notice that this blog is only to indicate the difference in high level. I
 Attention mechanism comes hands in hands with encoder-decoder architecture, which is widely used in several seq2seq applications like machine translation, text summarization, etc. Basically, this architecture tries to recap the information from input and then produce output. How to do that? Encoder will process each token from input and distill the knowledge it learns into a context vector. This context vector will be the main source of information for the decoder to assemble the output recursively.
 
 <p align="center">
-     <img src="/image/attention/wo_attn.png" alt="" align="middle">
+     <img src="/images/attention/wo_attn.png" alt="" align="middle">
      <div align="center">
         How encoder-decoder works
     </div>
@@ -24,7 +24,7 @@ As can be seen, the context vector becomes the bottleneck, especially when the i
 How to resolve this issue? An obvious solution is that instead of using the last hidden state from encoder as context vector, we employ hidden states from intermediate stages too. Furthermore, we also have a mechanism to choose the ones which is more relevant to the current output. And it is the core of Attention mechanism.
 
 <p align="center">
-     <img src="/image/attention/attention.png" alt="" align="middle">
+     <img src="/images/attention/attention.png" alt="" align="middle">
      <div align="center">
         How attention works?
     </div>
@@ -47,29 +47,29 @@ That's the high level. Now I will go through every step with the help of some im
 1. Firstly, each embedding vector is multiplied with three sets of weight in order to create its `query`, `value`, `key`.
 
     <p align="center">
-        <img src="/image/attention/qkv.gif" alt="" align="middle">
+        <img src="/images/attention/qkv.gif" alt="" align="middle">
     </p>
 
 2. Attention score for each position is computed by multiplying the current query with all the `key` in the sequence.
 
     <p align="center">
-        <img src="/image/attention/score.gif" alt="" align="middle">
+        <img src="/images/attention/score.gif" alt="" align="middle">
     </p>
 
 3. These scores will be processed by softmax in order to have the sum of 1.0
     <p align="center">
-        <img src="/image/attention/softmax.gif" alt="" align="middle">
+        <img src="/images/attention/softmax.gif" alt="" align="middle">
     </p>
 
 4. We multiply each softmax score with the `value` vector in order to obtain the influence of each input to the current output.
 
     <p align="center">
-        <img src="/image/attention/weight.gif" alt="" align="middle">
+        <img src="/images/attention/weight.gif" alt="" align="middle">
     </p>
 
 5. Every above component will be summed in order to get the actual output for the current position.
     <p align="center">
-        <img src="/image/attention/output.gif" alt="" align="middle">
+        <img src="/images/attention/output.gif" alt="" align="middle">
     </p>
 
 It seems a lot of computations have to me made in order to make it happen, however, it is truly computationally efficient with the help of vectorization.

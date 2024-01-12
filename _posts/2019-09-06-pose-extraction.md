@@ -18,7 +18,7 @@ There are two approaches to solve this problem: top-down and bottom-up. In top-d
 A representative architecture of this method is HourGlass. This network design is motivated by the need of coherent understanding of body and scale invariance. This architecture consists of two main elements: backbone block and refinement blocks:
 
 <p align="center">
- <img src="/image/pose/hourglass.png" alt="" align="middle">
+ <img src="/images/pose/hourglass.png" alt="" align="middle">
  <div align="center">HourGlass architecture</div>
 </p>
 
@@ -157,7 +157,7 @@ Bottom-up architecture shares the same iterative idea of top-down approach when 
 - Grouping keypoints of same person to each other to acquire the initial prediction. This prediction will be refined over successive stages.
 
 <p align="center">
- <img src="/image/pose/openpose.png" alt="" align="middle">
+ <img src="/images/pose/openpose.png" alt="" align="middle">
  <div align="center"> Challenging topologies</div>
 </p>
 

@@ -19,7 +19,6 @@ Both YOLO and SSD take a 4D tensor (with batch dimension) during training and 3D
 SSD embraces the idea of multiscale detection, hence, at each of last layers, it produces a set of prediction. Given an image of input `1 x 300 x 300 x 3`, this creates a set of outputs:
 
 ```
-
 Say for example, at Conv4_3, the output is 38×38×4×(c+4). 
 In terms of number of bounding boxes, there are 38×38×4 = 5776 bounding boxes.
 Similarly for other conv layers:
@@ -31,7 +30,7 @@ Conv11_2: 1×1×4 = 4 boxes (4 boxes for each location)
 ```
 
 <p align="center">
-     <img src="/image/object_detection/ssd.png" alt="" align="middle">
+     <img src="/images/object_detection/ssd.png" alt="" align="middle">
      <div align="center">
         How SSD produces its output. </div>
 </p>
@@ -39,7 +38,7 @@ Conv11_2: 1×1×4 = 4 boxes (4 boxes for each location)
 The first version of YOLO don't give a damn about multiscale. The last Conv layer produces a fixed set of outputs. there are `7×7` locations at the end with 2 bounding boxes for each location. YOLO only got 7×7×2 = 98. This is a reason why some first versions of YOLO don't work stably, especially when it comes to video stream. It can detect well object in one frame and fails at the next with almost no difference between those two. Their potential candidates are too few in comparison with SSD. The huge amount of anchor boxes in SSD contribute a lot to its stability when working with video.
 
 <p align="center">
-     <img src="/image/object_detection/yolo_v1.png" alt="" align="middle">
+     <img src="/images/object_detection/yolo_v1.png" alt="" align="middle">
      <div align="center">
         How YOLOv3 produces its output.
     </div>
@@ -55,7 +54,7 @@ Suppose for each grid cell we predict 5 bounding boxes, each bounding box has 4 
 Another thing is that while SSD considers background as a class, YOLO gives another meaning to this number, `objectness score`, which indicates the probability there is a object in this grid cell. It's more intuitive, in my opinion. Considering `background` as a class will lead to imbalance between this class and the others and this can't be remedied effectively by hard negative sampling. In short, in YOLO, it is `20 + 4 + 1`, while in SSD it's `21 + 4`.
 
 <p align="center">
-     <img src="/image/object_detection/yolo_v3.png" alt="" align="middle">
+     <img src="/images/object_detection/yolo_v3.png" alt="" align="middle">
      <div align="center">
         How YOLOv1 produces its output.
     </div>
@@ -82,7 +81,6 @@ $$ L(x, c, l, g) = \frac{1}{N}(L_{conf}(x, c) +\alpha L_{loc}(x, l, g))$$
 In short, SSD loss function is formed by 2 sub losses: location loss and classification loss. While the first one is to form the location correction, the second one is to predict the class of this box. For the first loss, the authors use L1 regression to get the optimal value and for the second one, they simply use cross-entropy with (N+1) classes. Nothing fancy here.
 
 About YOLO's loss function:
-
 
 $$ \lambda_{coord}\sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{obj} [(x_i - \hat{x_i})^2 + (y_i - \hat{y_i})^2] + \\
 \lambda_{coord}\sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{obj} [(\sqrt{w_i} - \sqrt{\hat{w_i}})^2 + (\sqrt{h_i} - \sqrt{\hat{h_i}})^2] + \\

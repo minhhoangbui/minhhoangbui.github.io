@@ -10,7 +10,7 @@ In this blog, I will dive deeper into the techniques of clustering. Clustering o
 Clustering, in general, like retrieval, is an unsupervised task. We study the features of the input and then decide which group the input belongs to. Maybe in some cases, the clustering may seem similar to the classification, but the classification has label for each input whereas the clustering doesn't.
 
 <p align="center">
- <img src="/image/clustering/goal.png" alt="" align="middle">
+ <img src="/images/clustering/goal.png" alt="" align="middle">
  <div align="center"> Clustering goal</div>
 </p>
 
@@ -19,7 +19,7 @@ So what a cluster is and what characterizes it? A cluster in space is a group of
 There are many topologies which challenges the data scientist to cluster:
 
 <p align="center">
- <img src="/image/clustering/challenge.png" alt="" align="middle">
+ <img src="/images/clustering/challenge.png" alt="" align="middle">
  <div align="center"> Challenging topologies</div>
 </p>
 
@@ -72,7 +72,7 @@ Nowadays, most parallel computing frameworks in Big Data employs the mechanism o
 In the Map phase, we distribute the data points to the mapper. The mapper now computes the distance from data points to the centroids and then do the assignment. In the Reduce phase, every data points with the same labels will go to the same reducer and each reducer will update the centroids. The above process will be repeated until convergence.
 
 <p align="center">
- <img src="/image/clustering/mapreduce.png" alt="" align="middle">
+ <img src="/images/clustering/mapreduce.png" alt="" align="middle">
  <div align="center"> MapReduce phases in K-Means</div>
 </p>
 
@@ -89,7 +89,7 @@ As stated previously, deciding the hyperparameter k is really hard to obtain the
 3. We keep the above clustering process for the points in the neighborhood of other clustered point until every point in space is marked visited.
 
 <p align="center">
- <img src="/image/clustering/dbscan.gif" alt="" align="middle">
+ <img src="/images/clustering/dbscan.gif" alt="" align="middle">
  <div align="center"> DBSCAN illustration</div>
 </p>
 

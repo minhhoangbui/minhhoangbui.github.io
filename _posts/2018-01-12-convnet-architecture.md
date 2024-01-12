@@ -18,7 +18,7 @@ Detail of AlexNet architecture used in ImageNet Challenge:
 - The kernel of the second, fourth and fifth convolutional layer are connected to the kernel from the previous layer. Local response normalization follows only the first two convolutional layer. Max pooling operation follows both normalization layer and the fifth convolution layer. ReLU non-linearity is applied to every output of convolutional layer and fully connected layer.  
 
 <p align="center">
- <img src="/image/Introduction_CNN/Figure-7-An-illustration-of-the-architecture-of-AlexNet-CNN-14.ppm" alt="" align="middle">
+ <img src="/images/Introduction_CNN/Figure-7-An-illustration-of-the-architecture-of-AlexNet-CNN-14.ppm" alt="" align="middle">
  <div align="center">AlexNet Architecture<a href="https://www.researchgate.net/profile/Walid_Aly/publication/312188377/figure/fig4/AS:448996423540740@1484060497977/Figure-7-An-illustration-of-the-architecture-of-AlexNet-CNN-14.ppm"> Source</a></div>
 </p>
 
@@ -71,7 +71,7 @@ This architecture is, from my point of view, a deeper version of AlexNet. Its ma
 Furthermore, VGG-style strategy of repeating layers of the same shape helps for isolating a few factors and extending to any large number of transformation. This strategy is inherited profoundly by ResNext.  
 
 <p align="center">
- <img src="/image/Introduction_CNN/vgg16.png" alt="" align="middle">
+ <img src="/images/Introduction_CNN/vgg16.png" alt="" align="middle">
  <div align="center">VGG-Net Architecture <a href="https://www.cs.toronto.edu/~frossard/post/vgg16/vgg16.png"> Source</a></div>
 </p>  
 
@@ -121,7 +121,7 @@ Its detailed architecture can be found in the paper [Very deep convolutional net
 Along with VGGNet, Inception is also a contestant in the 2014 ILSVRC who gained much attention from the community. While VGGNet gives us a simple way to reinforce the result by stacking more layers, Inception gives us many new notions which, in my opinion, inspires many successors. Inception architecture sticks to a very famous meme in the internet:  
 
 <p align="center">
- <img src="/image/Introduction_CNN/a88.jpg" alt="" align="middle">
+ <img src="/images/Introduction_CNN/a88.jpg" alt="" align="middle">
 </p>
 
 There are two papers about this architecture that worth noticing:  
@@ -146,7 +146,7 @@ power**: Considering adjacent layers are highly correlated, it results in much l
 In my own experience, before reading this paper, I had always had an impression that a larger filter size will lead to a faster training due to the fact that larger filter size make smaller feature maps. However, it turns out that instead of using a large filter, we should factorize it into smaller filter layers. For instance, two 3x3 layers are more preferable than a 5x5 filter.
 
 <p align="center">
- <img src="/image/Introduction_CNN/rethinking-inception-fig-1.jpeg" alt="" align="middle">
+ <img src="/images/Introduction_CNN/rethinking-inception-fig-1.jpeg" alt="" align="middle">
  <div align="center">Factorzing 5x5 filter into two 3x3 filters <a href="https://adriancolyer.files.wordpress.com/2017/03/rethinking-inception-fig-1.jpeg?w=480"> Source</a></div>
 </p>
 
@@ -158,7 +158,7 @@ Inception also introduces a new concept of auxiliary classifiers. We add some cl
 However, it is proved that their contribution is quite limited, and in most case, just a secondary classifier is sufficient.
 
 <p align="center">
- <img src="/image/Introduction_CNN/ijfis-17-026f7.gif" alt="" align="middle">
+ <img src="/images/Introduction_CNN/ijfis-17-026f7.gif" alt="" align="middle">
  <div align="center">Concept of auxiliary classifier <a href="http://www.e-sciencecentral.org/upload/ijfis/thumb/ijfis-17-026f7.gif"> Source</a></div>
 </p>
 
@@ -167,7 +167,7 @@ However, it is proved that their contribution is quite limited, and in most case
 Traditionally, to reduce the size of the feature map, we use pooling operator before entering a module, which is contrast to the principle of avoiding representational bottlenecks. We may reverse the order by executing the module first and then applying the pooling, however, it is computationally expensive.  
 
 <p align="center">
- <img src="/image/Introduction_CNN/12.png" alt="" align="middle">
+ <img src="/images/Introduction_CNN/12.png" alt="" align="middle">
  <div align="center">The left block violates the design principle, 
  while the right one is computationally expensive <a href="https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blogs2016/imgs_inception/12.png"> Source</a></div>
 </p>
@@ -175,21 +175,21 @@ Traditionally, to reduce the size of the feature map, we use pooling operator be
 The author proposed to use concatenation as a way to bypass the bottleneck but still reduce the size:  
 
 <p align="center">
- <img src="/image/Introduction_CNN/GridSizeRedcution.jpg" alt="" align="middle">
+ <img src="/images/Introduction_CNN/GridSizeRedcution.jpg" alt="" align="middle">
  <div align="center">Concatenation in Inception <a href="http://yeephycho.github.io/blog_img/GridSizeRedcution.jpg"> Source</a></div>
 </p>
 
 ### Inception Architecture
 
 <p align="center">
- <img src="/image/Introduction_CNN/googlenet_diagram.png" alt="" align="middle">
+ <img src="/images/Introduction_CNN/googlenet_diagram.png" alt="" align="middle">
  <div align="center"> <a href="http://joelouismarino.github.io/images/blog_images/blog_googlenet_keras/googlenet_diagram.png"> Source</a></div>
 </p>
 
 Its core element is Inception module. In this module, we use different filter size to the same input and combine the feature map using concatenation. In the module, we also implement some above tricks to improve the training process.
 
 <p align="center">
- <img src="/image/Introduction_CNN/inception.jpg" alt="" align="middle">
+ <img src="/images/Introduction_CNN/inception.jpg" alt="" align="middle">
  <div align="center">Inception block <a href="https://cpmajgaard.com/blog/assets/images/parking/inception.jpg"> Source</a></div>
 </p>
 
@@ -226,14 +226,14 @@ the approximation $$\hat{h}$$, we could easily add I back to get the representat
 function $$f(x)$$.
 
 <p align="center">
- <img src="/image/Introduction_CNN/1_pUyst_ciesOz_LUg0HocYg.png" alt="" align="middle">
+ <img src="/images/Introduction_CNN/1_pUyst_ciesOz_LUg0HocYg.png" alt="" align="middle">
  <div align="center">Residual Block <a href="https://cdn-images-1.medium.com/max/1600/1*pUyst_ciesOz_LUg0HocYg.png"> Source</a></div>
 </p>  
 
 To be more precise, in the original paper, the authors indicated that it exists the degradation in performance when we deepen the network. Overfitting is not the cause since the training error is also higher in case of deeper network.
 
 <p align="center">
- <img src="/image/Introduction_CNN/Figure 1.bmp" alt="" align="middle">
+ <img src="/images/Introduction_CNN/Figure 1.bmp" alt="" align="middle">
  <div align="center">Error rate between the 20-layer network and 56-layer network 
  <a href="https://wiki.tum.de/download/attachments/22578294/Figure%201.bmp?version=1&modificationDate=1485208088253&api=v2"> Source</a></div>
 </p>
@@ -314,7 +314,7 @@ As ResNet performance in 2015 ILSVRC blew people's mind, its architecture is get
 Its core element is called ResNext building block:  
 
 <p align="center">
- <img src="/image/Introduction_CNN/1_7JzJ1RGh1Y4VoG1M4dseTw.png" alt="" align="middle">
+ <img src="/images/Introduction_CNN/1_7JzJ1RGh1Y4VoG1M4dseTw.png" alt="" align="middle">
  <div align="center"> Comparison between ResNet block and ResNeXt block
  <a href="http://img.blog.csdn.net/20170614224816128"> Source</a></div>
 </p>
@@ -388,7 +388,7 @@ The authors of DenseNet pushed the idea of ResNet to its limit. To maximize the 
 As I have stated above, Dense Block is the core element of Dense Convolution Network.  
 
 <p align="center">
- <img src="/image/Introduction_CNN/1_KOjUX1ST5RnDOZWWLWRGkw.png" alt="" align="middle">
+ <img src="/images/Introduction_CNN/1_KOjUX1ST5RnDOZWWLWRGkw.png" alt="" align="middle">
  <div align="center"> Dense connection in Dense Block
  <a href="https://cdn-images-1.medium.com/max/1600/1*KOjUX1ST5RnDOZWWLWRGkw.png"> Source</a></div>
 </p>  

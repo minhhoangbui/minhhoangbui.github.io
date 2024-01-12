@@ -6,13 +6,13 @@ title: Compute similarity score with Deep Learning
 In [OtoNhanh.vn](https://www.otonhanh.vn/), there is a section which allows the users to compare one model versus another in the aspect of specifications and the exterior as well as interior views. Normally, we will grab randomly 2 images of 2 models from the same category. Nevertheless, we observe that this approach doesn't work well: Some images, in spite of belonging to the same category, cannot be compared to each other since the viewpoint, the pose, the scale of the car in the images, etc. are not matching. The origin of this disagreement is about [the difference between semantic representation and visual representation](http://www.thomas.deselaers.de/publications/papers/deselaers_cvpr11.pdf). Therefore, we come up with the idea of establishing an indicator to compare the visual similarity between two images. In this blog, we will present our work towards that target.  
 
 <p align="center">
- <img src="/image/similarity/1f76062dc6c3fd07043aaa2fe6bdf22a.jpg" alt="" width="600" height="400" align="middle">
+ <img src="/images/similarity/1f76062dc6c3fd07043aaa2fe6bdf22a.jpg" alt="" width="600" height="400" align="middle">
 </p>  
 <p align="center">
- <img src="/image/similarity/1fcf5b7e69e8c2738e1572efee251018.jpg" alt="" width="600" height="400" align="middle">
+ <img src="/images/similarity/1fcf5b7e69e8c2738e1572efee251018.jpg" alt="" width="600" height="400" align="middle">
 </p>  
 <p align="center">
- <img src="/image/similarity/2afa9cbd65bcf84661b20baec5754feb.jpg" alt="" width="600" height="400" align="middle">
+ <img src="/images/similarity/2afa9cbd65bcf84661b20baec5754feb.jpg" alt="" width="600" height="400" align="middle">
  <div align="center"> Some examples about the dissimilarity between the images from the same category </div>
 </p>  
 
@@ -21,7 +21,7 @@ In [OtoNhanh.vn](https://www.otonhanh.vn/), there is a section which allows the 
 Considering that we work with the images of $$(\sqrt{d},\sqrt{d}$$), so each image will be a point in the $$ R_d $$ space, K-Means will help to assign the similar points into the same cluster. How to define similar images? We will compute the *Euclidean distance* in the $$R_d$$ space for example. Each above cluster will be represented by its centroid.
 
 <p align="center">
- <img src="/image/similarity/das.jpg" alt="" align="middle">
+ <img src="/images/similarity/das.jpg" alt="" align="middle">
  <div align="center"> Centroids of the cluster found by K-Means Clustering
  <a href="https://www.commonlounge.com/discussion/665476f64e574b0fa259a15423ba69cc">Source</a> </div>
 </p>
@@ -41,6 +41,7 @@ This method belongs to a class of *Mixture Model*. Details of this model is beyo
 To be short, the formulas for these above steps are:  
 
 - E step:
+
 $$ r_{nk} = \begin{cases}
         1 & \mbox{if } k = \underset{j}{\operatorname{argmin}}\|x_n - \mu_j\|^2 \\
         0 &\mbox{otherwise}
@@ -52,7 +53,7 @@ $$ r_{nk} = \begin{cases}
 $$ \mu_k = \frac{\sum_{n} r_{nk}x_n}{\sum_{n} r_{nk}}$$
 
 <p align="center">
- <img src="/image/similarity/kmeans11.gif" alt="" align="middle">
+ <img src="/images/similarity/kmeans11.gif" alt="" align="middle">
  <div align="center"> Illustration of K-Means clustering
  <a href="https://machinelearningcoban.com/assets/kmeans/kmeans11.gif">Source</a> </div>
 </p>
@@ -79,7 +80,7 @@ So we could find the centroids in d_dims space, then we could query two images f
 Siamese network is a special type of convolutional network. It is not used for classifying images, it is for learning the similarity between images. In this architecture, two images will be fed into two identical convolutional networks, then the two output will be inputs of a special loss function called *Contrastive Loss Function* for the purpose of differentiating two images. The ultimate goal of Siamese Network is to construct an embedding representation for the images in the form of vector. With the vectorized representation, we can use L2-distance or whatever other metrics to compute the similarity score between images.  
 
 <p align="center">
- <img src="/image/similarity/1_XzVUiq-3lYFtZEW3XfmKqg.jpeg" alt="" width="500" height="700" align="middle">
+ <img src="/images/similarity/1_XzVUiq-3lYFtZEW3XfmKqg.jpeg" alt="" width="500" height="700" align="middle">
  <div align="center"> Siamese Network Architecture
  <a href="https://cdn-images-1.medium.com/max/1200/1*XzVUiq-3lYFtZEW3XfmKqg.jpeg">Source</a> </div>
 </p>
@@ -89,7 +90,7 @@ In this section, we will focus on a variant of Siamese Network called Deep Ranki
 In Deep Ranking, each sample consists of three images: anchor image, positive image which is akin to the anchor image and the negative image which is not in the same category with the anchor one. We call a group of three images like that a triplet.
 
 <p align="center">
- <img src="/image/similarity/0_vw4M7uZ5exyLZfLv.png" alt="" align="middle">
+ <img src="/images/similarity/0_vw4M7uZ5exyLZfLv.png" alt="" align="middle">
  <div align="center"> Illustration of triplet of images
  <a href="https://cdn-images-1.medium.com/max/1600/0*vw4M7uZ5exyLZfLv.">Source</a> </div>
 </p>  
@@ -97,7 +98,7 @@ In Deep Ranking, each sample consists of three images: anchor image, positive im
 Three images will be again fed into three convolutional neural networks. The output will be given to a loss function called *Triplet Loss Function* to learn the similarities and the differences between the images.  
 
 <p align="center">
- <img src="/image/similarity/optimization-before.png" alt="" align="middle">
+ <img src="/images/similarity/optimization-before.png" alt="" align="middle">
  <div align="center"> Deep Ranking Model
  <a href="http://bamos.github.io/2016/01/19/openface-0.2.0/">Source</a> </div>
 </p>  
@@ -110,7 +111,7 @@ According to the author:
 > We design a novel multi-scale deep neural network architecture that employs different levels of invariance at different scales.  
 
 <p align="center">
- <img src="/image/similarity/similarity.png" alt="" align="middle">
+ <img src="/images/similarity/similarity.png" alt="" align="middle">
  <div align="center"> Network Architecture
  <a href="http://vision.caltech.edu/~bchen3/_site2/">Source</a> </div>
 </p>  
@@ -120,7 +121,7 @@ In this architecture, the ConvNet can be any kind of convolutional neural networ
 ### Triplet Loss Function
 
 <p align="center">
- <img src="/image/similarity/download.png" alt="" width="300" height="200" align="middle">
+ <img src="/images/similarity/download.png" alt="" width="300" height="200" align="middle">
  <div align="center"> Effect of minimizing triplet loss
  <a href="http://www.paperweekly.site/papers/notes/125">Source</a> </div>
 </p>  
@@ -132,8 +133,7 @@ $$D(f(p_i, p_i^+)) < D(f(p_i, p_i^-))$$
 To realize that target, the author suggest using *Hinge Loss*:  
 $$ l(p_i, p_i^+, p_i^-) = max\{0, g + D(f(p_i, p_i^+)) - D(f(p_i, p_i^-))\}$$
 
-Minimizing this loss function encourages the distance between the $$(p_i, p_i^+)$$ is less that between $$(p_i, p_i^+)$$ 
-by a value of $$g$$.  
+Minimizing this loss function encourages the distance between the $$(p_i, p_i^+)$$ is less that between $$(p_i, p_i^+)$$ by a value of $$g$$.  
 
 ### Triplet Sampling
 
@@ -145,23 +145,19 @@ How to sample a batch with at least three classes with at least 2 images in each
 $$ L_{BH}(f, X) = \overbrace{\sum_{i=1}^{P}\sum_{a=1}^{K}}^{\text{all anchor}} 
 max(0, g + \overbrace{\max_{p=1..K} D(f(x_a^i), f(x_p^i))}^{\text{hardest positive}} -
 \overbrace{\min_{j=1..P,\\ n=1..K, \\j \neq i} D(f(x_a^i), f(x_n^i))}^{\text{hardest negative}})
-$$ 
+$$
 
-However, we argue that we may have to pay the price of slower training in order to realize the selection of triplet 
-during the training. So we may want to select the triplets first by ourselves for the faster training.
+However, we argue that we may have to pay the price of slower training in order to realize the selection of triplet during the training. So we may want to select the triplets first by ourselves for the faster training.
 
 ### Implementation
 
 In our implementation, we've done some modifications:
 
-- We pass the anchor image, positive image and negative image successively to a single pipeline to construct their 
-embedding representations instead of three identical networks to save memory while training on GPUs.
+- We pass the anchor image, positive image and negative image successively to a single pipeline to construct their embedding representations instead of three identical networks to save memory while training on GPUs.
 
 - We will define the triplets manually or by boot-straping before training and write the triplet path to a text file.
 
-- In the original paper, they employed 4000-dims embedding vector. However, we observe that during our training 
-128-dims vector outperforms 4000-dims one. This is super queer to us as it seems intuitive that vector with bigger 
-dimension must capture more features. This issue will be investigated carefully during our deployment.  
+- In the original paper, they employed 4000-dims embedding vector. However, we observe that during our training 128-dims vector outperforms 4000-dims one. This is super queer to us as it seems intuitive that vector with bigger dimension must capture more features. This issue will be investigated carefully during our deployment.  
 
 Source code for model network:  
 
@@ -248,12 +244,12 @@ def _calc_triplet_loss(self, a_embedding, p_embedding, n_embedding, margin, epsi
 We are still in the first phase of deploying this model into production. However, the result is very promising: This model can produce a very high margin between the positive pair and negative pair:  
 
 <p align="center">
- <img src="/image/similarity/Screenshot from 2018-03-17 14-46-38.png" alt="" align="middle">
+ <img src="/images/similarity/Screenshot from 2018-03-17 14-46-38.png" alt="" align="middle">
  <div align="center"> L2 Distance: 0.50403917 </div>
 </p>  
 
 <p align="center">
- <img src="/image/similarity/Screenshot from 2018-03-17 14-50-29.png" alt="" align="middle">
+ <img src="/images/similarity/Screenshot from 2018-03-17 14-50-29.png" alt="" align="middle">
  <div align="center"> L2 Distance:  9.133037 </div>
 </p>
 
