@@ -1,17 +1,13 @@
-I don't know about other Deep Learning practitioner, but for me personally, two most important factors in Deep Learning
-is *Loss Function* and *Data Format*. Deep Learning architecture, at its core, is only a layer which transform a 4-D
-Tensor to another 4-D Tensor. Evidently, if you have a nice design, the performance as a whole will be phenomenal.
-However, for me, it isn't essential to understand why we use ResNet instead of DenseNet; in fact, I don't think it is
-event possible to grok that choice in most cases.
+---
+layout: post
+title: Object Detection Loss
+---
 
-In contrast, the two above elements aren't found arbitrarily. They are often designed to serve the specific purpose of
-that model. Today, I will dive into the loss functions of `SSD` and `YOLO`, two most popular object detection in the
-industry at the moment
+I can't speak for other Deep Learning practitioners, but for me personally, the two most important factors in Deep Learning are the *Loss Function* and the *Data Format*. At its core, a Deep Learning architecture is simply a mechanism that transforms a 4-D Tensor into another 4-D Tensor. While a well-designed architecture undoubtedly contributes to phenomenal performance, I find the choice of loss function and data representation to be far more critical than debating the merits of ResNet versus DenseNet. The differences between model architectures are often incremental; aside from occasional major breakthroughs, subsequent variations tend to be less significant.
 
-Please note that I'm no expert in Object Detection. If you find something wrong with this, please leave a comment below.
-Thank you very much.
+In contrast, the loss function and data format are rarely chosen arbitrarily. They are meticulously designed to serve the specific purpose of the model. Today, I will dive into the loss functions of `SSD` and `YOLO`, two of the most popular object detection frameworks in the industry at the moment.
 
-# I. YOLOv3
+## I. YOLOv3
 
 The reason why I choose specifically this version of YOLO in this blog is that its architecture and loss function can
 represent the whole line of YOLO.
