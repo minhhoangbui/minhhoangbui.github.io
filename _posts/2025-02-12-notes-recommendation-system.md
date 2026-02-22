@@ -1,7 +1,7 @@
 ---
 layout: post
-title: From Retrieval to Re-ranking: A Practical Recommendation System Pipeline
-image: /images/rec_system/recsys.png
+title: A Practical Recommendation System Pipeline
+author: hoangbm
 ---
 
 In a recommendation system, there are typically three stages:
