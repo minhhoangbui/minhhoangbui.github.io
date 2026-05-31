@@ -2,6 +2,9 @@
 layout: post
 title: NER-Tagger with BiLSTM
 author: hoangbm
+subtitle: Building a named entity recognition system from scratch
+tags: [nlp, deep-learning]
+social-share: true
 ---
 In the process of building news distribution platform for 24h News, we realize the importance of a Named-entity Recognition (NER) Model. It helps us to identify the user's preferences, then we could amplify the effectiveness of the platform. In this blog, we will explain our approach in more details.  
 

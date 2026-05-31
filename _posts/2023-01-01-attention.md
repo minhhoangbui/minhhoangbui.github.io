@@ -1,12 +1,17 @@
 ---
 layout: post
 title: Attention and self-attention
+subtitle: "Understanding the attention mechanism in transformers"
 author: hoangbm
+tags: [nlp, deep-learning]
+social-share: true
 ---
 
-Another post insprired by an interview failure. During a chat about a position in speech processing area, interviewer asked me about the differences between attention and self attention. I, at that time, who only have a vague understanding about these two, started to invent something about these two to make up for the lack of knowledge. That's the reason why we have this blog.
-Eventhough the names are quite alike, they are not really much in common, except for the fact that they are used intensively in NLP and speech processing. Without further ado, let's jump right to it.
-Please notice that this blog is only to indicate the difference in high level. I won't dive too deep into them.
+Another post inspired by an interview failure. During a chat about a position in speech processing, the interviewer asked me about the differences between attention and self-attention. At that time I only had a vague understanding of the two, so I started inventing things to cover the gaps — which is why this post exists.
+
+The core problem that motivated both mechanisms is the same: early sequence-to-sequence models (RNNs) had to compress the entire input into a single fixed-size vector before the decoder could begin generating output. For long inputs, that one vector simply cannot hold everything the decoder needs. Attention and self-attention are two different solutions to that bottleneck.
+
+Even though the names are alike, they have little in common beyond heavy use in NLP and speech. This post covers the distinction at a high level — no deep dives.
 
 ## Attention
 
@@ -72,7 +77,17 @@ That's the high level. Now I will go through every step with the help of some im
         <img src="/images/attention/output.gif" alt="" align="middle">
     </p>
 
-It seems a lot of computations have to me made in order to make it happen, however, it is truly computationally efficient with the help of vectorization.
+It seems a lot of computations have to be made in order to make it happen, however, it is truly computationally efficient with the help of vectorization.
+
+Here is the scaled dot-product attention in compact form:
+
+```python
+# Scaled dot-product attention (simplified)
+def attention(Q, K, V):
+    scores = Q @ K.T / sqrt(d_k)   # similarity between query and each key
+    weights = softmax(scores)        # normalise to a probability distribution
+    return weights @ V              # weighted sum of values
+```
 
 <!-- A few points must be mentioned explicitly:
 
@@ -82,4 +97,8 @@ It seems a lot of computations have to me made in order to make it happen, howev
 
 ## Conclusion
 
-As you can see, attention and self-attention have little to do with each other. While the former tackles with the bottleneck of information between encoder and decoder in seq2seq architecture, the latter provides a scalable way to process sequential data parallelly. In the next blog, I would love to talk more about `Transformer`, which is one of the most phenomenal architectures in the history of Deep Learning.
+As you can see, attention and self-attention have little to do with each other. While the former tackles the bottleneck of information between encoder and decoder in seq2seq architecture, the latter provides a scalable way to process sequential data in parallel. In the next blog, I would love to talk more about `Transformer`, which is one of the most phenomenal architectures in the history of Deep Learning.
+
+## Where to go next
+
+The attention mechanism described here is the core of the transformer. Once you're comfortable with it, the next natural step is understanding how it scales: multi-head attention runs several attention operations in parallel, each learning to focus on different aspects of the input. From there, the architecture of BERT (encoder-only) and GPT (decoder-only) falls into place naturally — both are just transformers with different masking strategies.

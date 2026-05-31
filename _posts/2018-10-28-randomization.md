@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Randomization in Programming
+subtitle: Why randomization matters for valid experiment design
+author: hoangbm
+tags: [statistics]
+social-share: true
 ---
 
 Randomization is always an important techniques in programming and deep learning pratiques in more specific. It sometimes plays the secondary role as solution initialization, the other times as a tool to solve the problems directly. In this blog, I will collect all of my knowledge about this sub-domain and present it to you.

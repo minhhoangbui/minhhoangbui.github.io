@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Clustering and Retrieval (Part 2)
+subtitle: "From K-Means to DBSCAN: clustering algorithms compared"
+author: hoangbm
+tags: [statistics, deep-learning]
+social-share: true
 ---
 
 In this blog, I will dive deeper into the techniques of clustering. Clustering or segmentation has wide applications, particularly in RecSys, when you can have the insight about users's preferences given their activities. For examples, assuming that we have a list of articles that user A reads everyday, we can extract his favorite topics and then give him what he likes.

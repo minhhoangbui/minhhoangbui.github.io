@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Mixture Models in Clustering
+subtitle: "Gaussian mixture models and the EM algorithm"
+author: hoangbm
+tags: [statistics]
+social-share: true
 ---
 
 In the most recent post, I talked about some famous clustering algorithms and they work well in reality. However, we the data scientists don't really like these methods because of one thing: they are deterministic and nothing in data science have that deterministic, especially in unsupervised learning: we don't have the label so we can't be so sure about our solution. Hence we are still trying to find some ways to encode the probability in our decision and one way to do this in the problem of clustering is using _Mixture Models_.

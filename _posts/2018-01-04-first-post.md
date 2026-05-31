@@ -2,6 +2,9 @@
 layout: post
 title: First post!
 image: /images/hello_world.jpeg
+subtitle: Why I started writing about machine learning
+author: hoangbm
+social-share: true
 ---
 
 This is my first post of my personal blog. This site is created by the inspiration of many engineering blog nowadays.

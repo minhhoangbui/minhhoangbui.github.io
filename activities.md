@@ -1,40 +1,56 @@
 ---
 layout: page
 title: Activities
-subtitle: My life as a ML/DL engineer so far
+subtitle: Work, education, and skills
 ---
 
-## From 12/2022 to 11/2023: Machine Learning Engineer at Noze
+## Experience
 
-My first job in Canada is to build machine platform to automate training and deployment. The system is highly resilient and scalable, which is crucial since we want to play a key player in medical industry. I also play a leading role in leveraging unlabelled data to improve our current ML system.
+### Axon — Software Engineer
+**Feb 2025 – Present · Toronto, Canada**
 
+Platform engineering on a multi-region Kubernetes cluster serving 10k+ RPS. Reduced MTTR by 17% via multi-zone deployment (Kargo) and cut deployment failures by 14% with CI validation for rate-limiting services. Migrated ALPR inference from TorchServe to Triton, reducing end-to-end latency by 37% and GPU utilization by 25% across 1k RPS global traffic.
 
-## From 01/2021 to 10/2022: Machine Learning Engineer at Zalo
+### Shakudo — Machine Learning Engineer
+**Jan 2024 – Jan 2025 · Toronto, Canada**
 
-My third job is with Zalo, which operates the most popular social platform in Vietnam. I was in charge of User Verification service which is to prevent fraud and criminal activities on the platform. I was working on redesign and optimize the system pipeline to improve its accuracy and throughput/latency. Moreover, I helped to leverage speech data from Zalo to build TTS model and provide API as a product for users who like this feature.
+Built on-demand compute orchestration on Kubernetes for distributed training and scheduled inference across enterprise teams. Designed and shipped production RAG pipelines and NLP-to-SQL systems integrating commercial and open-source LLMs; fine-tuned open-source models on task-specific datasets using LoRA.
 
-## From 03/2019 to 01/2021: Machine Learning Engineer at AWL Vietnam
+### Noze — Machine Learning Engineer
+**Dec 2022 – Nov 2023 · Montreal, Canada**
 
-My second job was with AWL Vietnam. This company were building self-checkout system for retail industry in Japan. In order to realize that ambition, we focused on developing Computer Vision models for person re-identification and object detection tasks. These models will be deployed on edge devices in favour of cost, hence, I had to hone my skills in embedded programming and model optimization as well.
+End-to-end time-series ML on aroma sensor data: data exploration, training, and deployment with Triton and TensorFlow Serving. Introduced MLflow and Ray for experiment tracking and hyperparameter tuning, reducing model development time by 18%. Built a FastAPI internal platform for preprocessing, visualization, and experiment management.
 
-Also during this time, I contributed to first version of data platform, which we decided to build for data analysis.
+### Zalo — Machine Learning Engineer
+**Jan 2021 – Oct 2022 · Ho Chi Minh City, Vietnam**
 
-## From 10/2017 to 02/2019: Machine Learning Engineer at Chappiebot
+Owned the OCR service and input validation pipeline supporting identity verification for 70M users — improved accuracy by 23% and tripled throughput. Designed and deployed VoiceID and TTS models for eKYC, achieving 0.01 RTF latency and a CMOS score of 4.3/5.
 
-After graduating from Master course, I returned to Vietnam and joined this startup ever since.
+### AWL Vietnam — Machine Learning Engineer
+**Mar 2019 – Jan 2021 · Hanoi, Vietnam**
 
-Chappiebot provided a platform for automobile where users can come and ask questions about their favorite cars. Along with 2 other engineers, we were in charge of the whole pipeline, from data collection, model training to deployment/monitoring.
+Developed a real-time self-checkout system on edge devices using Person Re-ID, optimizing for low-latency inference. Led R&D on pose estimation, attention, and action recognition for computer vision PoC delivery.
 
-In order to fulfill that mission, we need a pool of vision models like: image classification, segmentation and object detection. Furthermore, NLP models like text classification, entity tagging were also leveraged to understand users's querries better. Our machine learning pipeline was entirely on AWS.
+### Chappiebot — Machine Learning Engineer
+**Oct 2017 – Feb 2019 · Ho Chi Minh City, Vietnam**
 
-## 01/2017 - 09/2017: Research Intern at CEA-LETI
+Built computer vision and NLP features for a social platform; a production feature increased user engagement by 21%. Managed model training and serving on AWS (S3, ECS, SageMaker).
 
-After the theoretical semester at engineering school in France, I started to search for some places for hosting me as an intern, maybe in a lab or a company. Then, I was chosen by CEA-LETI, which is  synonymous for developing breakthrough inventions in nanotechnology and microelectronics.
+---
 
-During this time at CEA-LETI, I was assigned to develop and implement an edge detection technique named _Active Contour_ to a special SEM images which is popular in micro-electronics. Furthermore, another intern worked with Neural Network with the same purpose, and we will compare two approaches with each other.
+## Education
 
-## 06/2016 - 08/2016: Internship at Sirindhorn International Institute of Technology
+**Master of Science, Optimization and Statistics** — UTT, Troyes, France (2016–2017)
+*French Ministry of Foreign Affairs Excellence Scholarship*
 
-I applied for this internship at the last semester in Vietnam to know more about research activities in foreign countries. Only two students was selected for this fully covered program and this was my second international internship in Thailand.
+**Bachelor of Engineering, Electronics and Computer Engineering** — HCMUT, Ho Chi Minh City, Vietnam (2012–2016)
 
-I worked for professor Suchada Rianmore with the topic of image processing and 3D reconstruction. During this time, I started to step into image world with the help of OpenCV in C++ to deal with some simple task like edge detection, image filtering etc.
+---
+
+## Technical Skills
+
+**ML Systems:** Triton, TensorFlow Serving, MLflow, Ray, RAG pipelines, LLM fine-tuning (LoRA), NLP-to-SQL, OCR, inference optimization
+
+**Infrastructure:** Kubernetes, Helm, Docker, multi-region deployment, autoscaling, API gateways, SLO/SLI, Grafana
+
+**Backend & Data:** FastAPI, Flask, NestJS, PostgreSQL, Redis, Python

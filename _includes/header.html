@@ -36,7 +36,9 @@
 		  {% endif %}
 		  
 		  {% if include.type == "post" %}
-		  <span class="post-meta">Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
+		  {% assign words = page.content | number_of_words %}
+		  {% assign read_time = words | divided_by: 200 | plus: 1 %}
+		  <span class="post-meta">Posted on {{ page.date | date: "%B %-d, %Y" }} &nbsp;&middot;&nbsp; {{ read_time }} min read</span>
 		  {% endif %}
         </div>
       </div>
@@ -59,9 +61,11 @@
 			<h2 class="{{ include.type }}-subheading">{{ page.subtitle }}</h2>
 			{% endif %}
 		  {% endif %}
-		  
+
 		  {% if include.type == "post" %}
-		  <span class="post-meta">Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
+		  {% assign words = page.content | number_of_words %}
+		  {% assign read_time = words | divided_by: 200 | plus: 1 %}
+		  <span class="post-meta">Posted on {{ page.date | date: "%B %-d, %Y" }} &nbsp;&middot;&nbsp; {{ read_time }} min read</span>
 		  {% endif %}
         </div>
       </div>

@@ -15,6 +15,21 @@ var main = {
             $(".navbar").removeClass("top-nav-short");
             $(".navbar-custom .avatar-container").fadeIn(500);
         }
+
+        // Reading progress bar (post pages only)
+        if ($('.blog-post').length > 0) {
+          var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+          var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          var scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+          $('#reading-progress-bar').css('width', scrolled + '%');
+        }
+
+        // Back to top button visibility
+        if ($(window).scrollTop() > 300) {
+          $('#back-to-top').addClass('visible');
+        } else {
+          $('#back-to-top').removeClass('visible');
+        }
     });
 
     // On mobile, hide the avatar when expanding the navbar menu
@@ -64,8 +79,27 @@ var main = {
       fakeMenu.remove();
     }
 
+    // Code block language badges
+    $('pre code[class*="language-"]').each(function() {
+      var match = $(this).attr('class').match(/language-(\w+)/);
+      if (match) {
+        $(this).closest('pre').attr('data-lang', match[1]);
+      }
+    });
+
+    // Show reading progress bar on post pages
+    if ($('.blog-post').length > 0) {
+      $('#reading-progress-bar').css('display', 'block');
+    }
+
+    // Back to top click handler
+    $('#back-to-top').on('click', function() {
+      $('html, body').animate({ scrollTop: 0 }, 400);
+    });
+
     // show the big header image
     main.initImgs();
+    main.initTOC();
   },
 
   initImgs : function() {
@@ -132,6 +166,50 @@ var main = {
 	} else {
 	  $(".img-desc").hide();
 	}
+  },
+
+  initTOC: function() {
+    if ($('.blog-post').length === 0) return;
+    var headings = $('.blog-post').find('h2, h3');
+    if (headings.length < 2) return;
+
+    var nav = $('<nav id="toc"><div class="toc-label">Contents</div><ul class="toc-list"></ul></nav>');
+    var list = nav.find('.toc-list');
+
+    headings.each(function() {
+      var $h = $(this);
+      var tag = this.tagName.toLowerCase();
+      var text = $h.text();
+      if (!$h.attr('id')) {
+        var id = text.toLowerCase()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .trim();
+        $h.attr('id', id);
+      }
+      var li = $('<li><a href="#' + $h.attr('id') + '">' + text + '</a></li>');
+      if (tag === 'h3') li.addClass('toc-l2');
+      list.append(li);
+    });
+
+    $('body').append(nav);
+
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = nav.find('a');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var id = '#' + entry.target.getAttribute('id');
+          tocLinks.removeClass('toc-active');
+          nav.find('a[href="' + id + '"]').addClass('toc-active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+
+    headings.each(function() {
+      if (this.id) observer.observe(this);
+    });
   }
 };
 

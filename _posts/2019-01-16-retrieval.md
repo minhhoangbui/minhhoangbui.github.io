@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Clustering and Retrieval (Part 1)
+subtitle: "Candidate retrieval in large-scale recommendation systems"
+author: hoangbm
+tags: [nlp, recsys]
+social-share: true
 ---
 
 At the moment, we are working in a big project of personalized news distribution for 24h News. In this project, we assume that each reader of this page has their own taste, so we can't deliver the same content to them: we have to explore their favorite and then deliver news based on that observation. However, at the production scale, suppose we have millions of clients, the generation of millions of different content seems extreme expensive. So we have the idea of clustering our customers into N clusters, then generate N different contents for the cluster centroids. This idea seems plausible to us. In this blog, I want to tell you about the journey of finding the best clustering algorithm.

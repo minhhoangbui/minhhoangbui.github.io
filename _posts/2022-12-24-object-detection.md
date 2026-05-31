@@ -1,7 +1,10 @@
 ---
 layout: post
 title: SSD vs YOLO
+subtitle: "A personal guide to modern object detection"
 author: hoangbm
+tags: [computer-vision, deep-learning]
+social-share: true
 ---
 
 To be honest, I'm truly fed up with revising knowledge before an interview, especially object detection algorithms like SSD and YOLO. Every time I prepare for an interview in computer vision, I read about these two architectures and I still can't articulate the exact differences between them. So today, I decided to put an end to this, so that I can move on with a smile.
@@ -10,7 +13,7 @@ Obviously, you may say that SSD is relatively obsolete nowadays. At the time of 
 
 So why the heck spend time on this blog when YOLO is arguably the winner in this area? Well, I write this blog (as I said) to draw a clear boundary between SSD and YOLO and put my mind at ease. Also, for future interviews: people in the industry still like to ask about these topics. My next topic will be about Batch Norm.
 
-Since there are many versions of YOLO, I will choose YOLOv1 and YOLOv3 to talk about. And I focus only on 2 aspects: architecture input/output and loss function.
+Since there are many versions of YOLO, I will choose YOLOv1 and YOLOv3 to talk about. And I focus only on 2 aspects: architecture input/output and loss function. This post covers both SSD and YOLO (v1 and v3) as representative anchor-based single-stage detectors, examining how each frames its output and trains its weights.
 
 ## I. Architecture Output
 
@@ -72,7 +75,11 @@ Up until now, you can see that when we compute the forward-pass, we keep mention
 
 The answer is: we use them during loss computation and inference. Basically, an object detector doesn't predict the bounding boxes directly like most people assume; instead it predicts (1) whether an anchor/slot is responsible for an object, and (2) offsets that transform an anchor box into the final bounding box. That's why we only need the anchor box information when computing loss and during inference. Remember: `anchor box + prediction = bounding box`.
 
-From the annotation, SSD and YOLO build their ground-truth labels. A label tends to have 5 values: 4 coordinates + class info. They also share the idea of matching anchor boxes to ground-truth boxes. Roughly speaking, the anchor boxes are divided into 2 groups: positive and negative. The positive group includes boxes that have IoU with ground truth bigger than a specified threshold (and vice versa). Each anchor box is typically associated with only one ground-truth box or nothing at all (background). And the model predicts the *correction* (offsets) of coordinates and the class label for each anchor box. I call it `correction` because the model doesn't predict the coordinates directly, but the differences between an anchor box and its corresponding ground-truth box.
+From the annotation, SSD and YOLO build their ground-truth labels. A label tends to have 5 values: 4 coordinates + class info. They also share the idea of matching anchor boxes to ground-truth boxes.
+
+Roughly speaking, the anchor boxes are divided into 2 groups: positive and negative. The positive group includes boxes that have IoU with ground truth bigger than a specified threshold (and vice versa). Each anchor box is typically associated with only one ground-truth box or nothing at all (background).
+
+The model predicts the *correction* (offsets) of coordinates and the class label for each anchor box. I call it `correction` because the model doesn't predict the coordinates directly, but the differences between an anchor box and its corresponding ground-truth box.
 
 Furthermore, as you can see, YOLO and SSD interpret objectness score differently, hence, the loss function will be different too.
 
@@ -149,3 +156,7 @@ That's basically it. In my opinion, these points are the main differences betwee
 Furthermore, they also try to leverage other techniques like data augmentation to boost the performance of YOLO.
 
 Other than that, I haven't seen any improvement of architecture for the last couple of years. Let's see any progresses to be made in this area in the future. I've heard about `Nano-Dets` and the use of `Transformer` but it's for another day.
+
+## In practice
+
+Choosing a detector depends more on your constraints than on benchmark numbers. If you need real-time inference on edge hardware, a single-stage anchor-free model like YOLOX or FCOS is a strong starting point. If accuracy matters more than speed and you have GPU headroom, a two-stage detector like Faster R-CNN with a strong backbone will serve you well. Either way, the concepts here — anchor design, feature pyramids, NMS — will reappear in almost every modern detection system you encounter.

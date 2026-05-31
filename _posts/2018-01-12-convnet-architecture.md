@@ -1,6 +1,10 @@
 ---
 layout: post
 title: ConvNet architectures
+subtitle: A tour of landmark CNN architectures from AlexNet to ResNet
+author: hoangbm
+tags: [deep-learning, computer-vision]
+social-share: true
 ---
 
 In this part, I will discuss many famous architectures of ConvNet which are employed in image classification throughout the years.

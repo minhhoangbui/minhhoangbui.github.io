@@ -1,6 +1,10 @@
 ---
 layout: post
 title: ConvNet and its principal elements
+subtitle: The building blocks of convolutional neural networks
+author: hoangbm
+tags: [deep-learning]
+social-share: true
 ---
 
 Nowadays, Deep Learning becomes more and more popular in many domains like Finance, E-Commerce. At [OtoNhanh.vn](https://otonhanh.vn), we employ Deep Learning to tackle the problems of Natural Language Processing to deal with the requests of the user in our site or of Computer Vision in the illustration of cars. In this blog, we will focus on the network architectures that we consider to use in our Computer Vision application. There will be 3 parts in this blog:  

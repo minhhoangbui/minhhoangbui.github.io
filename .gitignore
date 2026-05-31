@@ -12,3 +12,4 @@ ehthumbs.db
 .idea/*
 
 Gemfile.lock
+.superpowers/

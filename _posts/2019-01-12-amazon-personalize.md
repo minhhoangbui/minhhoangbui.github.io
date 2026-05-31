@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Amazon Personalize
+subtitle: "Using Amazon Personalize for production recommendation"
+author: hoangbm
+tags: [aws, recsys]
+social-share: true
 ---
 
 In the re:Invent2018, CEO of Amazon Web Service has introduced Amazon Personalize, a service which helps customers to initialize their own Recommend System (RecSys) without expertise. I am quite surprised that they haven't launched this service earlier when recommendation is really their strong point. I am assigned a task to research about this service and I will cover about it in this blog.

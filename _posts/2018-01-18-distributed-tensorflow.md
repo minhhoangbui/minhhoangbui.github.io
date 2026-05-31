@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Distributed TensorFlow
+subtitle: Setting up distributed training with TensorFlow
+author: hoangbm
+tags: [deep-learning, infra]
+social-share: true
 ---
 
 Along with the development of [OtoNhanh.vn](https://www.otonhanh.vn/), datasets from automobile industry and users of our site become tremendous. This motivates us to find more efficient training strategies. In [OtoNhanh.vn](https://www.otonhanh.vn/), TensorFlow has become our preferable deep learning library for a variety of reasons, one of them is that TensorFlow supports strongly *Distributed Training*, which is very important in production up-scaling. In this blog, I will briefly introduce Distributed TensorFlow and the way we apply it in our business.  

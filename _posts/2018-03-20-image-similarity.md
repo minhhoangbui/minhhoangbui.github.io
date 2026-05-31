@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Compute similarity score with Deep Learning
+subtitle: Learning visual representations for similarity search
+author: hoangbm
+tags: [computer-vision, deep-learning]
+social-share: true
 ---
 
 In [OtoNhanh.vn](https://www.otonhanh.vn/), there is a section which allows the users to compare one model versus another in the aspect of specifications and the exterior as well as interior views. Normally, we will grab randomly 2 images of 2 models from the same category. Nevertheless, we observe that this approach doesn't work well: Some images, in spite of belonging to the same category, cannot be compared to each other since the viewpoint, the pose, the scale of the car in the images, etc. are not matching. The origin of this disagreement is about [the difference between semantic representation and visual representation](http://www.thomas.deselaers.de/publications/papers/deselaers_cvpr11.pdf). Therefore, we come up with the idea of establishing an indicator to compare the visual similarity between two images. In this blog, we will present our work towards that target.  

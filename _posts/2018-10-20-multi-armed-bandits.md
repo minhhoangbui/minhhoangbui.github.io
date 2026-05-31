@@ -2,6 +2,10 @@
 layout: post
 title: Multi-Armed Bandits Problems and its variances
 image: /images/multi-armed-bandits/1_FH4t-DcuKWfLYRWvd4JIjA.png
+subtitle: Balancing exploration and exploitation in recommendation
+author: hoangbm
+tags: [recsys, statistics]
+social-share: true
 ---
 
 With the growth of 24h distribution application developed by Chappiebot Inc., we are in need of an algorithm to test many models with the same purpose to see whether which one is the best. The traditional method is A/B Test. However, it is observed that this old-fashioned way becomes inefficient in this Big Data age. In this blog, I will discuss some alternative methods to it.

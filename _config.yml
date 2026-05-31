@@ -39,22 +39,21 @@ navbar-links:
 
 # Personalize the colors in your website. Colour values can be any valid CSS colour
 
-navbar-col: "#F5F5F5"
-navbar-text-col: "#404040"
-navbar-children-col: "#F5F5F5"
-page-col: "#FFFFFF"
-link-col: "#008AFF"
-hover-col: "#0085A1"
-footer-col: "#F5F5F5"
-footer-text-col: "#404040"
-footer-link-col: "#404040"
+navbar-col: "#161b22"
+navbar-text-col: "#c9d1d9"
+navbar-children-col: "#21262d"
+page-col: "#0d1117"
+link-col: "#d2a8ff"
+hover-col: "#d2a8ff"
+footer-col: "#161b22"
+footer-text-col: "#8b949e"
+footer-link-col: "#8b949e"
 
 # Alternatively, the navbar, footer, and page background can be set to use background images
 # instead of colour
 
 # navbar-img: "/img/6143.jpg"
 # footer-img: "/img/6143.jpg"
-page-img: "/image/bgimage.png"
 
 # --- Footer options --- #
 
@@ -91,7 +90,6 @@ social-network-links:
 share-links-active:
   twitter: true
   facebook: true
-  google: false
   linkedin: true
 
 # How to display the link to the website in the footer
@@ -180,6 +178,7 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
+  - vendor
   - Vagrantfile
 
 # prose.io config

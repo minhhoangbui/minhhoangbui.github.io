@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Pose Extraction in Retail Industry
+subtitle: "Estimating human pose from images"
+author: hoangbm
+tags: [computer-vision, deep-learning]
+social-share: true
 ---
 
 In the age when vision technology thrive remarkably, Computer Vision and its application become more and more rife, particularly in retail industry where a host of issues remains unsolved. In AWL Vietnam, we are concentrating on developing a system detecting wrongdoings and analyzing customers's behaviours. One of the concrete pillar of this system is the module of Pose Extraction.

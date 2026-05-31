@@ -1,10 +1,15 @@
 ---
 layout: post
 title: A Practical Recommendation System Pipeline
+subtitle: "A practical three-stage recommendation system pipeline"
 author: hoangbm
+tags: [recsys, systems]
+social-share: true
 ---
 
-In a recommendation system, there are typically three stages:
+A production recommendation system rarely lives in a single model. The standard architecture is a three-stage funnel: retrieve a broad set of candidates from millions of items, rank them with a more expensive model, then re-rank with business rules and diversity constraints. Each stage makes a different tradeoff between speed and precision. These notes cover the key ideas in each stage.
+
+The three stages are:
 
 1. **Candidate generation (retrieval)**
 2. **Ranking**
@@ -69,3 +74,7 @@ Common considerations include:
 
 1. **Freshness**: run parts of the pipeline more frequently; incrementally index new items; or boost recent items.
 2. **Diversity**: combine candidates from multiple categories/strategies and sample/allocate slots to avoid repetition.
+
+## Putting it together
+
+The three stages aren't independent — they compound. A retrieval stage that misses relevant candidates can't be rescued by ranking. A ranking model that ignores diversity will produce a list that a re-ranker can only partially fix. In practice, most of the engineering effort goes into retrieval (because it's the bottleneck on recall) and into the feedback loops that keep all three stages aligned as user behaviour shifts.

@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Challenges and Prospective
+subtitle: Common pitfalls when training deep neural networks
+author: hoangbm
+tags: [deep-learning]
+social-share: true
 ---
 
 In this last blog of the series, I am talking about the challenges I have met during the work and some way of using 
