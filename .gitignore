@@ -3,6 +3,10 @@ _site
 .sass-cache
 .vagrant
 
+# bundler
+.bundle
+vendor
+
 # general
 .DS_Store
 Thumbs.db
